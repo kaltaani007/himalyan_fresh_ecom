@@ -1,0 +1,239 @@
+{"timestamp": "2026-05-10 20:57:53,493", "level": "INFO", "module": "autoreload", "message": "Watching for file changes with StatReloader"}
+{"timestamp": "2026-05-10 20:58:31,354", "level": "INFO", "module": "autoreload", "message": "Watching for file changes with StatReloader"}
+{"timestamp": "2026-05-10 21:06:18,102", "level": "INFO", "module": "autoreload", "message": "Watching for file changes with StatReloader"}
+{"timestamp": "2026-05-10 21:08:56,143", "level": "INFO", "module": "autoreload", "message": "C:\Users\Acer\Desktop\codes\business_work\himachal\backend\apps\cart\models.py changed, reloading."}
+{"timestamp": "2026-05-10 21:08:58,312", "level": "INFO", "module": "autoreload", "message": "Watching for file changes with StatReloader"}
+{"timestamp": "2026-05-10 21:12:04,429", "level": "INFO", "module": "autoreload", "message": "Watching for file changes with StatReloader"}
+{"timestamp": "2026-05-10 21:12:22,476", "level": "INFO", "module": "autoreload", "message": "Watching for file changes with StatReloader"}
+{"timestamp": "2026-05-10 21:26:47,086", "level": "INFO", "module": "autoreload", "message": "Watching for file changes with StatReloader"}
+{"timestamp": "2026-05-10 21:38:15,906", "level": "INFO", "module": "autoreload", "message": "Watching for file changes with StatReloader"}
+{"timestamp": "2026-05-10 21:38:26,285", "level": "ERROR", "module": "log", "message": "Internal Server Error: /"}
+Traceback (most recent call last):
+  File "C:\Users\Acer\Desktop\codes\business_work\himachal\backend\.venv\Lib\site-packages\asgiref\local.py", line 19, in __getattr__
+    return storage_object[key]
+           ~~~~~~~~~~~~~~^^^^^
+KeyError: 'sessions'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Acer\Desktop\codes\business_work\himachal\backend\.venv\Lib\site-packages\django\utils\connection.py", line 58, in __getitem__
+    return getattr(self._connections, alias)
+  File "C:\Users\Acer\Desktop\codes\business_work\himachal\backend\.venv\Lib\site-packages\asgiref\local.py", line 121, in __getattr__
+    return getattr(storage, key)
+  File "C:\Users\Acer\Desktop\codes\business_work\himachal\backend\.venv\Lib\site-packages\asgiref\local.py", line 21, in __getattr__
+    raise AttributeError(f"{self!r} object has no attribute {key!r}")
+AttributeError: <asgiref.local._CVar object at 0x000001B4928865D0> object has no attribute 'sessions'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Acer\Desktop\codes\business_work\himachal\backend\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Acer\Desktop\codes\business_work\himachal\backend\.venv\Lib\site-packages\django\utils\deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+  File "C:\Users\Acer\Desktop\codes\business_work\himachal\backend\.venv\Lib\site-packages\django\contrib\sessions\middleware.py", line 20, in process_request
+    request.session = self.SessionStore(session_key)
+                      ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Acer\Desktop\codes\business_work\himachal\backend\.venv\Lib\site-packages\django\contrib\sessions\backends\cache.py", line 16, in __init__
+    self._cache = caches[settings.SESSION_CACHE_ALIAS]
+                  ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Acer\Desktop\codes\business_work\himachal\backend\.venv\Lib\site-packages\django\utils\connection.py", line 61, in __getitem__
+    raise self.exception_class(f"The connection '{alias}' doesn't exist.")
+django.core.cache.backends.base.InvalidCacheBackendError: The connection 'sessions' doesn't exist.
+{"timestamp": "2026-05-10 21:38:26,294", "level": "ERROR", "module": "basehttp", "message": ""GET / HTTP/1.1" 500 110136"}
+{"timestamp": "2026-05-10 21:38:26,449", "level": "ERROR", "module": "log", "message": "Internal Server Error: /favicon.ico"}
+Traceback (most recent call last):
+  File "C:\Users\Acer\Desktop\codes\business_work\himachal\backend\.venv\Lib\site-packages\asgiref\local.py", line 19, in __getattr__
+    return storage_object[key]
+           ~~~~~~~~~~~~~~^^^^^
+KeyError: 'sessions'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Acer\Desktop\codes\business_work\himachal\backend\.venv\Lib\site-packages\django\utils\connection.py", line 58, in __getitem__
+    return getattr(self._connections, alias)
+  File "C:\Users\Acer\Desktop\codes\business_work\himachal\backend\.venv\Lib\site-packages\asgiref\local.py", line 121, in __getattr__
+    return getattr(storage, key)
+  File "C:\Users\Acer\Desktop\codes\business_work\himachal\backend\.venv\Lib\site-packages\asgiref\local.py", line 21, in __getattr__
+    raise AttributeError(f"{self!r} object has no attribute {key!r}")
+AttributeError: <asgiref.local._CVar object at 0x000001B4928865D0> object has no attribute 'sessions'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Acer\Desktop\codes\business_work\himachal\backend\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Acer\Desktop\codes\business_work\himachal\backend\.venv\Lib\site-packages\django\utils\deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+  File "C:\Users\Acer\Desktop\codes\business_work\himachal\backend\.venv\Lib\site-packages\django\contrib\sessions\middleware.py", line 20, in process_request
+    request.session = self.SessionStore(session_key)
+                      ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Acer\Desktop\codes\business_work\himachal\backend\.venv\Lib\site-packages\django\contrib\sessions\backends\cache.py", line 16, in __init__
+    self._cache = caches[settings.SESSION_CACHE_ALIAS]
+                  ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Acer\Desktop\codes\business_work\himachal\backend\.venv\Lib\site-packages\django\utils\connection.py", line 61, in __getitem__
+    raise self.exception_class(f"The connection '{alias}' doesn't exist.")
+django.core.cache.backends.base.InvalidCacheBackendError: The connection 'sessions' doesn't exist.
+{"timestamp": "2026-05-10 21:38:26,455", "level": "ERROR", "module": "basehttp", "message": ""GET /favicon.ico HTTP/1.1" 500 110050"}
+{"timestamp": "2026-05-10 21:38:59,646", "level": "INFO", "module": "autoreload", "message": "C:\Users\Acer\Desktop\codes\business_work\himachal\backend\core\settings\development.py changed, reloading."}
+{"timestamp": "2026-05-10 21:39:02,386", "level": "INFO", "module": "autoreload", "message": "Watching for file changes with StatReloader"}
+{"timestamp": "2026-05-10 21:41:19,451", "level": "WARNING", "module": "log", "message": "Not Found: /"}
+{"timestamp": "2026-05-10 21:41:19,456", "level": "WARNING", "module": "basehttp", "message": ""GET / HTTP/1.1" 404 3718"}
+{"timestamp": "2026-05-10 21:41:19,505", "level": "WARNING", "module": "log", "message": "Not Found: /favicon.ico"}
+{"timestamp": "2026-05-10 21:41:19,507", "level": "WARNING", "module": "basehttp", "message": ""GET /favicon.ico HTTP/1.1" 404 3769"}
+{"timestamp": "2026-05-10 21:41:23,329", "level": "INFO", "module": "basehttp", "message": ""GET /admin/ HTTP/1.1" 302 0"}
+{"timestamp": "2026-05-10 21:41:23,461", "level": "INFO", "module": "basehttp", "message": ""GET /admin/login/?next=/admin/ HTTP/1.1" 200 4169"}
+{"timestamp": "2026-05-10 21:41:24,186", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/css/dark_mode.css HTTP/1.1" 200 2808"}
+{"timestamp": "2026-05-10 21:41:24,231", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/css/base.css HTTP/1.1" 200 22120"}
+{"timestamp": "2026-05-10 21:41:24,237", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/js/theme.js HTTP/1.1" 200 1653"}
+{"timestamp": "2026-05-10 21:41:24,340", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/js/nav_sidebar.js HTTP/1.1" 200 3063"}
+{"timestamp": "2026-05-10 21:41:24,585", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/css/login.css HTTP/1.1" 200 951"}
+{"timestamp": "2026-05-10 21:41:24,703", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/css/responsive.css HTTP/1.1" 200 16565"}
+{"timestamp": "2026-05-10 21:41:24,713", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/css/nav_sidebar.css HTTP/1.1" 200 2810"}
+{"timestamp": "2026-05-10 21:41:28,221", "level": "INFO", "module": "basehttp", "message": ""POST /admin/login/?next=/admin/ HTTP/1.1" 302 0"}
+{"timestamp": "2026-05-10 21:41:28,296", "level": "INFO", "module": "basehttp", "message": ""GET /admin/ HTTP/1.1" 200 32908"}
+{"timestamp": "2026-05-10 21:41:28,329", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/css/dashboard.css HTTP/1.1" 200 441"}
+{"timestamp": "2026-05-10 21:41:28,334", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/img/icon-addlink.svg HTTP/1.1" 200 331"}
+{"timestamp": "2026-05-10 21:41:28,342", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/img/icon-changelink.svg HTTP/1.1" 200 380"}
+{"timestamp": "2026-05-10 21:43:45,165", "level": "INFO", "module": "autoreload", "message": "Watching for file changes with StatReloader"}
+{"timestamp": "2026-05-10 21:43:45,795", "level": "INFO", "module": "basehttp", "message": ""GET /admin/ HTTP/1.1" 302 0"}
+{"timestamp": "2026-05-10 21:43:45,871", "level": "INFO", "module": "basehttp", "message": ""GET /admin/login/?next=/admin/ HTTP/1.1" 200 4169"}
+{"timestamp": "2026-05-10 21:43:48,659", "level": "INFO", "module": "basehttp", "message": ""POST /admin/login/?next=/admin/ HTTP/1.1" 302 0"}
+{"timestamp": "2026-05-10 21:43:48,731", "level": "INFO", "module": "basehttp", "message": ""GET /admin/ HTTP/1.1" 200 32908"}
+{"timestamp": "2026-05-10 21:45:26,922", "level": "INFO", "module": "basehttp", "message": ""GET /admin/products/category/ HTTP/1.1" 200 27663"}
+{"timestamp": "2026-05-10 21:45:26,935", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/css/base.css HTTP/1.1" 304 0"}
+{"timestamp": "2026-05-10 21:45:26,941", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/css/dark_mode.css HTTP/1.1" 304 0"}
+{"timestamp": "2026-05-10 21:45:26,947", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/css/nav_sidebar.css HTTP/1.1" 304 0"}
+{"timestamp": "2026-05-10 21:45:27,074", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/css/changelists.css HTTP/1.1" 200 6878"}
+{"timestamp": "2026-05-10 21:45:27,078", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/css/responsive.css HTTP/1.1" 304 0"}
+{"timestamp": "2026-05-10 21:45:27,081", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/js/theme.js HTTP/1.1" 304 0"}
+{"timestamp": "2026-05-10 21:45:27,089", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 200 285314"}
+{"timestamp": "2026-05-10 21:45:27,093", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/js/core.js HTTP/1.1" 200 6208"}
+{"timestamp": "2026-05-10 21:45:27,098", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 200 9777"}
+{"timestamp": "2026-05-10 21:45:27,102", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/js/actions.js HTTP/1.1" 200 8076"}
+{"timestamp": "2026-05-10 21:45:27,106", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/js/jquery.init.js HTTP/1.1" 200 347"}
+{"timestamp": "2026-05-10 21:45:27,117", "level": "INFO", "module": "basehttp", "message": ""GET /admin/jsi18n/ HTTP/1.1" 200 3342"}
+{"timestamp": "2026-05-10 21:45:27,122", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/js/urlify.js HTTP/1.1" 200 7887"}
+{"timestamp": "2026-05-10 21:45:27,126", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/js/prepopulate.js HTTP/1.1" 200 1531"}
+{"timestamp": "2026-05-10 21:45:27,134", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 200 325171"}
+{"timestamp": "2026-05-10 21:45:27,137", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/js/nav_sidebar.js HTTP/1.1" 304 0"}
+{"timestamp": "2026-05-10 21:45:27,141", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/js/filters.js HTTP/1.1" 200 978"}
+{"timestamp": "2026-05-10 21:45:27,157", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/img/tooltag-add.svg HTTP/1.1" 200 331"}
+{"timestamp": "2026-05-10 21:45:32,878", "level": "INFO", "module": "basehttp", "message": ""GET /admin/products/ HTTP/1.1" 200 9946"}
+{"timestamp": "2026-05-10 21:45:32,890", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/css/dashboard.css HTTP/1.1" 304 0"}
+{"timestamp": "2026-05-10 21:45:33,801", "level": "INFO", "module": "basehttp", "message": ""GET /admin/ HTTP/1.1" 200 32908"}
+{"timestamp": "2026-05-10 21:46:49,753", "level": "INFO", "module": "basehttp", "message": ""GET /admin/ HTTP/1.1" 200 32908"}
+{"timestamp": "2026-05-10 21:47:10,889", "level": "INFO", "module": "autoreload", "message": "Watching for file changes with StatReloader"}
+{"timestamp": "2026-05-10 21:47:12,336", "level": "INFO", "module": "basehttp", "message": ""GET /admin/ HTTP/1.1" 302 0"}
+{"timestamp": "2026-05-10 21:47:12,395", "level": "INFO", "module": "basehttp", "message": ""GET /admin/login/?next=/admin/ HTTP/1.1" 200 4169"}
+{"timestamp": "2026-05-10 21:47:12,406", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/css/login.css HTTP/1.1" 304 0"}
+{"timestamp": "2026-05-10 21:47:14,662", "level": "INFO", "module": "basehttp", "message": ""POST /admin/login/?next=/admin/ HTTP/1.1" 302 0"}
+{"timestamp": "2026-05-10 21:47:14,729", "level": "INFO", "module": "basehttp", "message": ""GET /admin/ HTTP/1.1" 200 38450"}
+{"timestamp": "2026-05-10 21:47:21,701", "level": "INFO", "module": "basehttp", "message": ""GET /admin/content/blogcategory/ HTTP/1.1" 200 32803"}
+{"timestamp": "2026-05-10 21:47:21,734", "level": "INFO", "module": "basehttp", "message": ""GET /admin/jsi18n/ HTTP/1.1" 200 3342"}
+{"timestamp": "2026-05-10 21:47:22,048", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/img/icon-viewlink.svg HTTP/1.1" 200 581"}
+{"timestamp": "2026-05-10 21:47:22,058", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/img/search.svg HTTP/1.1" 200 458"}
+{"timestamp": "2026-05-10 22:32:51,272", "level": "WARNING", "module": "log", "message": "Not Found: /api/experiences/"}
+{"timestamp": "2026-05-10 22:32:51,273", "level": "WARNING", "module": "log", "message": "Not Found: /api/education/"}
+{"timestamp": "2026-05-10 22:32:51,273", "level": "WARNING", "module": "log", "message": "Not Found: /api/portfolio/data/"}
+{"timestamp": "2026-05-10 22:32:51,273", "level": "WARNING", "module": "log", "message": "Not Found: /api/certifications/"}
+{"timestamp": "2026-05-10 22:32:51,272", "level": "WARNING", "module": "log", "message": "Not Found: /api/resumes/active/"}
+{"timestamp": "2026-05-10 22:32:51,289", "level": "WARNING", "module": "basehttp", "message": ""GET /api/experiences/ HTTP/1.1" 404 3877"}
+{"timestamp": "2026-05-10 22:32:51,290", "level": "WARNING", "module": "basehttp", "message": ""GET /api/education/ HTTP/1.1" 404 3871"}
+{"timestamp": "2026-05-10 22:32:51,290", "level": "WARNING", "module": "log", "message": "Not Found: /api/skill-categories/"}
+{"timestamp": "2026-05-10 22:32:51,291", "level": "WARNING", "module": "basehttp", "message": ""GET /api/portfolio/data/ HTTP/1.1" 404 3886"}
+{"timestamp": "2026-05-10 22:32:51,291", "level": "WARNING", "module": "basehttp", "message": ""GET /api/certifications/ HTTP/1.1" 404 3886"}
+{"timestamp": "2026-05-10 22:32:51,295", "level": "WARNING", "module": "basehttp", "message": ""GET /api/resumes/active/ HTTP/1.1" 404 3886"}
+{"timestamp": "2026-05-10 22:32:51,315", "level": "WARNING", "module": "log", "message": "Not Found: /api/projects/featured/"}
+{"timestamp": "2026-05-10 22:32:51,319", "level": "WARNING", "module": "log", "message": "Not Found: /api/testimonials/featured/"}
+{"timestamp": "2026-05-10 22:32:51,319", "level": "WARNING", "module": "basehttp", "message": ""GET /api/skill-categories/ HTTP/1.1" 404 3892"}
+{"timestamp": "2026-05-10 22:32:51,340", "level": "WARNING", "module": "log", "message": "Not Found: /api/experiences/"}
+{"timestamp": "2026-05-10 22:32:51,341", "level": "WARNING", "module": "basehttp", "message": ""GET /api/testimonials/featured/ HTTP/1.1" 404 3907"}
+{"timestamp": "2026-05-10 22:32:51,341", "level": "WARNING", "module": "basehttp", "message": ""GET /api/projects/featured/ HTTP/1.1" 404 3895"}
+{"timestamp": "2026-05-10 22:32:51,343", "level": "WARNING", "module": "log", "message": "Not Found: /api/portfolio/data/"}
+{"timestamp": "2026-05-10 22:32:51,344", "level": "WARNING", "module": "log", "message": "Not Found: /api/education/"}
+{"timestamp": "2026-05-10 22:32:51,353", "level": "WARNING", "module": "basehttp", "message": ""GET /api/experiences/ HTTP/1.1" 404 3877"}
+{"timestamp": "2026-05-10 22:32:51,385", "level": "WARNING", "module": "log", "message": "Not Found: /api/certifications/"}
+{"timestamp": "2026-05-10 22:32:51,386", "level": "WARNING", "module": "basehttp", "message": ""GET /api/education/ HTTP/1.1" 404 3871"}
+{"timestamp": "2026-05-10 22:32:51,388", "level": "WARNING", "module": "basehttp", "message": ""GET /api/portfolio/data/ HTTP/1.1" 404 3886"}
+{"timestamp": "2026-05-10 22:32:51,404", "level": "WARNING", "module": "log", "message": "Not Found: /api/resumes/active/"}
+{"timestamp": "2026-05-10 22:32:51,406", "level": "WARNING", "module": "log", "message": "Not Found: /api/skill-categories/"}
+{"timestamp": "2026-05-10 22:32:51,411", "level": "WARNING", "module": "log", "message": "Not Found: /api/testimonials/featured/"}
+{"timestamp": "2026-05-10 22:32:51,413", "level": "WARNING", "module": "basehttp", "message": ""GET /api/certifications/ HTTP/1.1" 404 3886"}
+{"timestamp": "2026-05-10 22:32:51,454", "level": "WARNING", "module": "basehttp", "message": ""GET /api/skill-categories/ HTTP/1.1" 404 3892"}
+{"timestamp": "2026-05-10 22:32:51,454", "level": "WARNING", "module": "basehttp", "message": ""GET /api/resumes/active/ HTTP/1.1" 404 3886"}
+{"timestamp": "2026-05-10 22:32:51,457", "level": "WARNING", "module": "log", "message": "Not Found: /api/projects/featured/"}
+{"timestamp": "2026-05-10 22:32:51,458", "level": "WARNING", "module": "basehttp", "message": ""GET /api/testimonials/featured/ HTTP/1.1" 404 3907"}
+{"timestamp": "2026-05-10 22:32:51,459", "level": "WARNING", "module": "log", "message": "Not Found: /api/portfolio/data/"}
+{"timestamp": "2026-05-10 22:32:51,548", "level": "WARNING", "module": "basehttp", "message": ""GET /api/projects/featured/ HTTP/1.1" 404 3895"}
+{"timestamp": "2026-05-10 22:32:51,478", "level": "WARNING", "module": "basehttp", "message": ""GET /api/portfolio/data/ HTTP/1.1" 404 3886"}
+{"timestamp": "2026-05-10 22:32:51,592", "level": "WARNING", "module": "log", "message": "Not Found: /api/portfolio/data/"}
+{"timestamp": "2026-05-10 22:32:51,597", "level": "WARNING", "module": "basehttp", "message": ""GET /api/portfolio/data/ HTTP/1.1" 404 3886"}
+{"timestamp": "2026-05-10 22:32:51,617", "level": "WARNING", "module": "log", "message": "Not Found: /api/portfolio/data/"}
+{"timestamp": "2026-05-10 22:32:51,618", "level": "WARNING", "module": "basehttp", "message": ""GET /api/portfolio/data/ HTTP/1.1" 404 3886"}
+{"timestamp": "2026-05-10 22:32:51,631", "level": "WARNING", "module": "log", "message": "Not Found: /api/portfolio/data/"}
+{"timestamp": "2026-05-10 22:32:51,633", "level": "WARNING", "module": "basehttp", "message": ""GET /api/portfolio/data/ HTTP/1.1" 404 3886"}
+{"timestamp": "2026-05-10 22:33:31,566", "level": "WARNING", "module": "log", "message": "Not Found: /api/resumes/active/"}
+{"timestamp": "2026-05-10 22:33:31,575", "level": "WARNING", "module": "log", "message": "Not Found: /api/portfolio/data/"}
+{"timestamp": "2026-05-10 22:33:31,595", "level": "WARNING", "module": "log", "message": "Not Found: /api/certifications/"}
+{"timestamp": "2026-05-10 22:33:31,603", "level": "WARNING", "module": "log", "message": "Not Found: /api/experiences/"}
+{"timestamp": "2026-05-10 22:33:31,604", "level": "WARNING", "module": "basehttp", "message": ""GET /api/resumes/active/ HTTP/1.1" 404 3886"}
+{"timestamp": "2026-05-10 22:33:31,604", "level": "WARNING", "module": "log", "message": "Not Found: /api/skill-categories/"}
+{"timestamp": "2026-05-10 22:33:31,605", "level": "WARNING", "module": "basehttp", "message": ""GET /api/portfolio/data/ HTTP/1.1" 404 3886"}
+{"timestamp": "2026-05-10 22:33:31,607", "level": "WARNING", "module": "log", "message": "Not Found: /api/education/"}
+{"timestamp": "2026-05-10 22:33:31,606", "level": "WARNING", "module": "basehttp", "message": ""GET /api/certifications/ HTTP/1.1" 404 3886"}
+{"timestamp": "2026-05-10 22:33:31,608", "level": "WARNING", "module": "basehttp", "message": ""GET /api/experiences/ HTTP/1.1" 404 3877"}
+{"timestamp": "2026-05-10 22:33:31,621", "level": "WARNING", "module": "basehttp", "message": ""GET /api/skill-categories/ HTTP/1.1" 404 3892"}
+{"timestamp": "2026-05-10 22:33:31,629", "level": "WARNING", "module": "basehttp", "message": ""GET /api/education/ HTTP/1.1" 404 3871"}
+{"timestamp": "2026-05-10 22:33:31,630", "level": "WARNING", "module": "log", "message": "Not Found: /api/projects/featured/"}
+{"timestamp": "2026-05-10 22:33:31,644", "level": "WARNING", "module": "log", "message": "Not Found: /api/testimonials/featured/"}
+{"timestamp": "2026-05-10 22:33:31,667", "level": "WARNING", "module": "log", "message": "Not Found: /api/resumes/active/"}
+{"timestamp": "2026-05-10 22:33:31,667", "level": "WARNING", "module": "log", "message": "Not Found: /api/portfolio/data/"}
+{"timestamp": "2026-05-10 22:33:31,668", "level": "WARNING", "module": "basehttp", "message": ""GET /api/projects/featured/ HTTP/1.1" 404 3895"}
+{"timestamp": "2026-05-10 22:33:31,668", "level": "WARNING", "module": "log", "message": "Not Found: /api/certifications/"}
+{"timestamp": "2026-05-10 22:33:31,669", "level": "WARNING", "module": "basehttp", "message": ""GET /api/testimonials/featured/ HTTP/1.1" 404 3907"}
+{"timestamp": "2026-05-10 22:33:31,669", "level": "WARNING", "module": "log", "message": "Not Found: /api/experiences/"}
+{"timestamp": "2026-05-10 22:33:31,671", "level": "WARNING", "module": "basehttp", "message": ""GET /api/resumes/active/ HTTP/1.1" 404 3886"}
+{"timestamp": "2026-05-10 22:33:31,671", "level": "WARNING", "module": "basehttp", "message": ""GET /api/portfolio/data/ HTTP/1.1" 404 3886"}
+{"timestamp": "2026-05-10 22:33:31,680", "level": "WARNING", "module": "basehttp", "message": ""GET /api/certifications/ HTTP/1.1" 404 3886"}
+{"timestamp": "2026-05-10 22:33:31,689", "level": "WARNING", "module": "log", "message": "Not Found: /api/skill-categories/"}
+{"timestamp": "2026-05-10 22:33:31,690", "level": "WARNING", "module": "basehttp", "message": ""GET /api/experiences/ HTTP/1.1" 404 3877"}
+{"timestamp": "2026-05-10 22:33:31,698", "level": "WARNING", "module": "log", "message": "Not Found: /api/education/"}
+{"timestamp": "2026-05-10 22:33:31,706", "level": "WARNING", "module": "basehttp", "message": ""GET /api/skill-categories/ HTTP/1.1" 404 3892"}
+{"timestamp": "2026-05-10 22:33:31,721", "level": "WARNING", "module": "log", "message": "Not Found: /api/projects/featured/"}
+{"timestamp": "2026-05-10 22:33:31,722", "level": "WARNING", "module": "basehttp", "message": ""GET /api/education/ HTTP/1.1" 404 3871"}
+{"timestamp": "2026-05-10 22:33:31,722", "level": "WARNING", "module": "log", "message": "Not Found: /api/testimonials/featured/"}
+{"timestamp": "2026-05-10 22:33:31,723", "level": "WARNING", "module": "log", "message": "Not Found: /api/portfolio/data/"}
+{"timestamp": "2026-05-10 22:33:31,724", "level": "WARNING", "module": "basehttp", "message": ""GET /api/projects/featured/ HTTP/1.1" 404 3895"}
+{"timestamp": "2026-05-10 22:33:31,726", "level": "WARNING", "module": "basehttp", "message": ""GET /api/testimonials/featured/ HTTP/1.1" 404 3907"}
+{"timestamp": "2026-05-10 22:33:31,726", "level": "WARNING", "module": "basehttp", "message": ""GET /api/portfolio/data/ HTTP/1.1" 404 3886"}
+{"timestamp": "2026-05-10 22:33:31,740", "level": "WARNING", "module": "log", "message": "Not Found: /api/portfolio/data/"}
+{"timestamp": "2026-05-10 22:33:31,742", "level": "WARNING", "module": "basehttp", "message": ""GET /api/portfolio/data/ HTTP/1.1" 404 3886"}
+{"timestamp": "2026-05-10 22:33:31,760", "level": "WARNING", "module": "log", "message": "Not Found: /api/portfolio/data/"}
+{"timestamp": "2026-05-10 22:33:31,761", "level": "WARNING", "module": "basehttp", "message": ""GET /api/portfolio/data/ HTTP/1.1" 404 3886"}
+{"timestamp": "2026-05-10 22:33:31,771", "level": "WARNING", "module": "log", "message": "Not Found: /api/portfolio/data/"}
+{"timestamp": "2026-05-10 22:33:31,772", "level": "WARNING", "module": "basehttp", "message": ""GET /api/portfolio/data/ HTTP/1.1" 404 3886"}
+{"timestamp": "2026-11-01 14:33:12,194", "level": "INFO", "module": "autoreload", "message": "Watching for file changes with StatReloader"}
+{"timestamp": "2026-11-01 14:34:38,098", "level": "WARNING", "module": "log", "message": "Not Found: /"}
+{"timestamp": "2026-11-01 14:34:38,100", "level": "WARNING", "module": "basehttp", "message": ""GET / HTTP/1.1" 404 3718"}
+{"timestamp": "2026-11-01 14:34:38,141", "level": "WARNING", "module": "log", "message": "Not Found: /favicon.ico"}
+{"timestamp": "2026-11-01 14:34:38,142", "level": "WARNING", "module": "basehttp", "message": ""GET /favicon.ico HTTP/1.1" 404 3769"}
+{"timestamp": "2026-11-01 14:34:41,564", "level": "INFO", "module": "basehttp", "message": ""GET /admin HTTP/1.1" 301 0"}
+{"timestamp": "2026-11-01 14:34:41,649", "level": "INFO", "module": "basehttp", "message": ""GET /admin/ HTTP/1.1" 302 0"}
+{"timestamp": "2026-11-01 14:34:41,716", "level": "INFO", "module": "basehttp", "message": ""GET /admin/login/?next=/admin/ HTTP/1.1" 200 4169"}
+{"timestamp": "2026-11-01 14:34:41,920", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/css/dark_mode.css HTTP/1.1" 200 2808"}
+{"timestamp": "2026-11-01 14:34:41,926", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/css/login.css HTTP/1.1" 200 951"}
+{"timestamp": "2026-11-01 14:34:41,928", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/css/nav_sidebar.css HTTP/1.1" 200 2810"}
+{"timestamp": "2026-11-01 14:34:41,931", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/js/theme.js HTTP/1.1" 200 1653"}
+{"timestamp": "2026-11-01 14:34:41,931", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/css/base.css HTTP/1.1" 200 22120"}
+{"timestamp": "2026-11-01 14:34:41,933", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/css/responsive.css HTTP/1.1" 200 16565"}
+{"timestamp": "2026-11-01 14:34:41,941", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/js/nav_sidebar.js HTTP/1.1" 200 3063"}
+{"timestamp": "2026-11-01 14:34:45,305", "level": "INFO", "module": "basehttp", "message": ""POST /admin/login/?next=/admin/ HTTP/1.1" 302 0"}
+{"timestamp": "2026-11-01 14:34:45,350", "level": "INFO", "module": "basehttp", "message": ""GET /admin/ HTTP/1.1" 200 38450"}
+{"timestamp": "2026-11-01 14:34:45,359", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/css/dashboard.css HTTP/1.1" 200 441"}
+{"timestamp": "2026-11-01 14:34:45,362", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/img/icon-addlink.svg HTTP/1.1" 200 331"}
+{"timestamp": "2026-11-01 14:34:45,363", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/img/icon-changelink.svg HTTP/1.1" 200 380"}
+{"timestamp": "2026-11-01 14:34:47,797", "level": "INFO", "module": "basehttp", "message": ""GET /admin/login/?next=/admin/ HTTP/1.1" 302 0"}
+{"timestamp": "2026-11-01 14:34:47,830", "level": "INFO", "module": "basehttp", "message": ""GET /admin/ HTTP/1.1" 200 38450"}

@@ -1,0 +1,11 @@
+### COMMON 
+upgrade.txt
+SPEC.md
+app_doc.txt
+
+### backend 
+backend/.env 
+
+## frontend 
+frontend/.env
+frontend/node_modules
