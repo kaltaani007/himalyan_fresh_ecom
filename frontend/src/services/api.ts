@@ -109,6 +109,8 @@ export const authApi = {
   updateProfile: (data: any) => api.patch('/auth/me/', data),
   changePassword: (oldPassword: string, newPassword: string) =>
     api.post('/auth/change-password/', { old_password: oldPassword, new_password: newPassword }),
+  googleLogin: (accessToken: string) =>
+    api.post('/auth/google/', { access_token: accessToken }),
 };
 
 // Orders API

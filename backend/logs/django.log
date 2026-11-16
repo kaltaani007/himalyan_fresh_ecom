@@ -237,3 +237,36 @@ django.core.cache.backends.base.InvalidCacheBackendError: The connection 'sessio
 {"timestamp": "2026-11-01 14:34:45,363", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/img/icon-changelink.svg HTTP/1.1" 200 380"}
 {"timestamp": "2026-11-01 14:34:47,797", "level": "INFO", "module": "basehttp", "message": ""GET /admin/login/?next=/admin/ HTTP/1.1" 302 0"}
 {"timestamp": "2026-11-01 14:34:47,830", "level": "INFO", "module": "basehttp", "message": ""GET /admin/ HTTP/1.1" 200 38450"}
+{"timestamp": "2026-11-16 19:10:12,771", "level": "INFO", "module": "autoreload", "message": "Watching for file changes with StatReloader"}
+{"timestamp": "2026-11-16 19:14:06,740", "level": "INFO", "module": "autoreload", "message": "Watching for file changes with StatReloader"}
+{"timestamp": "2026-11-16 19:14:32,294", "level": "INFO", "module": "autoreload", "message": "Watching for file changes with StatReloader"}
+{"timestamp": "2026-11-16 19:14:42,323", "level": "WARNING", "module": "log", "message": "Not Found: /"}
+{"timestamp": "2026-11-16 19:14:42,324", "level": "WARNING", "module": "basehttp", "message": ""GET / HTTP/1.1" 404 3718"}
+{"timestamp": "2026-11-16 19:14:42,453", "level": "WARNING", "module": "log", "message": "Not Found: /favicon.ico"}
+{"timestamp": "2026-11-16 19:14:42,454", "level": "WARNING", "module": "basehttp", "message": ""GET /favicon.ico HTTP/1.1" 404 3769"}
+{"timestamp": "2026-11-16 19:14:46,895", "level": "INFO", "module": "basehttp", "message": ""GET /admin HTTP/1.1" 301 0"}
+{"timestamp": "2026-11-16 19:14:46,968", "level": "INFO", "module": "basehttp", "message": ""GET /admin/ HTTP/1.1" 302 0"}
+{"timestamp": "2026-11-16 19:14:47,000", "level": "INFO", "module": "basehttp", "message": ""GET /admin/login/?next=/admin/ HTTP/1.1" 200 4169"}
+{"timestamp": "2026-11-16 19:14:48,964", "level": "INFO", "module": "basehttp", "message": ""POST /admin/login/?next=/admin/ HTTP/1.1" 302 0"}
+{"timestamp": "2026-11-16 19:14:49,000", "level": "INFO", "module": "basehttp", "message": ""GET /admin/ HTTP/1.1" 200 38450"}
+{"timestamp": "2026-11-16 19:14:51,802", "level": "INFO", "module": "basehttp", "message": ""GET /admin/promotions/coupon/ HTTP/1.1" 200 33073"}
+{"timestamp": "2026-11-16 19:14:51,816", "level": "INFO", "module": "basehttp", "message": ""GET /admin/jsi18n/ HTTP/1.1" 200 3342"}
+{"timestamp": "2026-11-16 19:14:52,024", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 200 9777"}
+{"timestamp": "2026-11-16 19:14:52,026", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/js/urlify.js HTTP/1.1" 200 7887"}
+{"timestamp": "2026-11-16 19:14:52,027", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/js/prepopulate.js HTTP/1.1" 200 1531"}
+{"timestamp": "2026-11-16 19:14:52,031", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 200 325171"}
+{"timestamp": "2026-11-16 19:14:52,052", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/js/actions.js HTTP/1.1" 200 8076"}
+{"timestamp": "2026-11-16 19:14:52,053", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/js/core.js HTTP/1.1" 200 6208"}
+{"timestamp": "2026-11-16 19:14:52,055", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/css/changelists.css HTTP/1.1" 200 6878"}
+{"timestamp": "2026-11-16 19:14:52,055", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/js/jquery.init.js HTTP/1.1" 200 347"}
+{"timestamp": "2026-11-16 19:14:52,056", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 200 285314"}
+{"timestamp": "2026-11-16 19:14:52,057", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/img/search.svg HTTP/1.1" 200 458"}
+{"timestamp": "2026-11-16 19:14:52,059", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/js/filters.js HTTP/1.1" 200 978"}
+{"timestamp": "2026-11-16 19:14:52,074", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/img/tooltag-add.svg HTTP/1.1" 200 331"}
+{"timestamp": "2026-11-16 19:14:52,074", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/img/icon-viewlink.svg HTTP/1.1" 200 581"}
+{"timestamp": "2026-11-16 19:14:53,679", "level": "INFO", "module": "basehttp", "message": ""GET /admin/accounts/address/ HTTP/1.1" 200 32760"}
+{"timestamp": "2026-11-16 19:14:53,689", "level": "INFO", "module": "basehttp", "message": ""GET /admin/jsi18n/ HTTP/1.1" 200 3342"}
+{"timestamp": "2026-11-16 20:01:45,017", "level": "INFO", "module": "autoreload", "message": "Watching for file changes with StatReloader"}
+{"timestamp": "2026-11-16 20:17:04,257", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/auth/login/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-16 20:17:04,826", "level": "WARNING", "module": "log", "message": "Unauthorized: /api/v1/auth/login/"}
+{"timestamp": "2026-11-16 20:17:04,827", "level": "WARNING", "module": "basehttp", "message": ""POST /api/v1/auth/login/ HTTP/1.1" 401 63"}

@@ -9,6 +9,17 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
+  build: {
+    chunkSizeWarningLimit: 900,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          three: ['three', '@react-three/fiber', '@react-three/drei'],
+          vendor: ['react', 'react-dom', 'react-router-dom', 'zustand', '@tanstack/react-query', 'framer-motion'],
+        },
+      },
+    },
+  },
   server: {
     port: 5173,
     proxy: {

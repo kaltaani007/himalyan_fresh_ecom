@@ -1,19 +1,37 @@
 import { useState, useRef, useEffect } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Send, Bot, User, MessageCircle } from 'lucide-react';
+import { X, Send, Bot, User, MessageCircle, Sparkles } from 'lucide-react';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import { Toaster } from 'react-hot-toast';
+import { trackEvent } from '@/lib/analytics';
+import { LiveActivityTicker } from '@/components/ui/LiveActivityTicker';
 
 export default function Layout() {
+  const location = useLocation();
   const [isAIOpen, setIsAIOpen] = useState(false);
-  const [aiMessages, setAiMessages] = useState<{role: string, content: string}[]>([
-    { role: 'assistant', content: 'Namaste! I\'m your Himalayan shopping assistant. How can I help you today?' }
+  const [aiMessages, setAiMessages] = useState<{ role: string; content: string }[]>([
+    {
+      role: 'assistant',
+      content:
+        'Namaste! I am your Himalayan Orchard Concierge. How can I assist your selection of fresh mountain produce today?',
+    },
   ]);
   const [aiInput, setAiInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  // Track page views on location changes
+  useEffect(() => {
+    trackEvent({
+      type: 'page_view',
+      path: location.pathname,
+      title: document.title,
+      timestamp: Date.now(),
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [location.pathname]);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -21,129 +39,174 @@ export default function Layout() {
 
   const handleAISend = () => {
     if (!aiInput.trim()) return;
-    const newMessages = [...aiMessages, { role: 'user', content: aiInput }];
+    const userMsg = aiInput;
+    const newMessages = [...aiMessages, { role: 'user', content: userMsg }];
     setAiMessages(newMessages);
     setAiInput('');
     setIsTyping(true);
 
+    trackEvent({ type: 'ai_chat_interaction', message: userMsg, role: 'user' });
+
     setTimeout(() => {
-      const responses = [
-        "Our premium apples are sourced directly from Kinnaur and Shimla orchards. Would you like me to show our collection?",
-        "Yes! We have certified organic products across fruits, vegetables, and herbs. What interests you?",
-        "Each district has unique specialties! Kinnaur is famous for black walnuts, Kangra for tea, Kullu for cherries.",
-        "The best time for apples is September-November. We have fresh produce year-round with seasonal items.",
-        "We offer free delivery on orders above Rs.999. Orders delivered within 2-3 days!"
-      ];
-      const randomResponse = responses[Math.floor(Math.random() * responses.length)];
-      setAiMessages([...newMessages, { role: 'assistant', content: randomResponse }]);
+      const q = userMsg.toLowerCase();
+      let reply = '';
+
+      if (q.includes('apple') || q.includes('variety')) {
+        reply =
+          'Our signature Royal Red Delicious and Golden Delicious apples are harvested above 2,600m in Kinnaur and Shimla. They are 100% wax-free with high natural sweetness!';
+      } else if (q.includes('ship') || q.includes('deliver') || q.includes('time')) {
+        reply =
+          'We ship in temperature-controlled eco-packaging within 48 to 72 hours across India. Orders above ₹999 qualify for Free Express Shipping!';
+      } else if (q.includes('walnut') || q.includes('nut') || q.includes('dry')) {
+        reply =
+          'Our Kinnaur Black Walnuts and wild mountain almonds are cold-cracked and rich in natural omega-3 oils. You can find them in our Dry Fruits category.';
+      } else if (q.includes('district') || q.includes('origin') || q.includes('where')) {
+        reply =
+          'We source directly from 12 districts across Himachal Pradesh, including Kinnaur (Apples & Walnuts), Kullu (Cherries & Pears), and Kangra (Herbal Teas).';
+      } else {
+        reply =
+          'We harvest daily from Himachal mountain farms. Would you like to explore our Royal Apples collection or check seasonal harvest availability?';
+      }
+
+      setAiMessages([...newMessages, { role: 'assistant', content: reply }]);
       setIsTyping(false);
-    }, 1500);
+      trackEvent({ type: 'ai_chat_interaction', message: reply, role: 'assistant' });
+    }, 1200);
   };
 
   const quickQuestions = [
-    "Show me apples",
-    "Best sellers?",
-    "Organic products",
-    "Shipping info"
+    'Show me Royal Apples',
+    'Are apples wax-free?',
+    'Shipping delivery timeline',
+    'Best-selling dry fruits',
   ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-white">
+    <div className="min-h-screen flex flex-col bg-background-primary">
       <Navbar />
       <main className="flex-1 pt-16 lg:pt-20">
         <Outlet />
       </main>
       <Footer />
-      
-      {/* AI Chat Button - Fixed bottom right */}
+
+      {/* Real-time Verified Buyer Activity Ticker */}
+      <LiveActivityTicker />
+
+      {/* Floating AI Assistant Launcher Button */}
       <motion.button
         onClick={() => setIsAIOpen(true)}
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
-        whileHover={{ scale: 1.1 }}
+        whileHover={{ scale: 1.08 }}
         whileTap={{ scale: 0.95 }}
-        className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full shadow-lg flex items-center justify-center"
-        style={{ backgroundColor: '#2d5a3d', boxShadow: '0 4px 15px rgba(45, 90, 61, 0.4)' }}
+        className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-primary text-white shadow-premium flex items-center justify-center cursor-pointer border-2 border-white/80"
+        aria-label="Open Himalayan Assistant"
       >
-        <MessageCircle className="w-6 h-6 text-white" />
+        <MessageCircle className="w-6 h-6" />
+        <span className="absolute -top-1 -right-1 w-3.5 h-3.5 bg-accent rounded-full border-2 border-white" />
       </motion.button>
 
-      {/* AI Chat Panel */}
+      {/* AI Assistant Chat Modal */}
       <AnimatePresence>
         {isAIOpen && (
           <motion.div
-            initial={{ opacity: 0, y: 20, scale: 0.95 }}
+            initial={{ opacity: 0, y: 30, scale: 0.94 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-            className="fixed bottom-24 right-6 z-50 w-[380px] max-w-[calc(100vw-2rem)] md:h-[550px] bg-[#ffffff] rounded-2xl shadow-2xl flex flex-col overflow-hidden border border-[#e5e5e5]"
-            style={{ backgroundColor: '#ffffff', opacity: 1 }}
+            exit={{ opacity: 0, y: 30, scale: 0.94 }}
+            transition={{ type: 'spring', damping: 26, stiffness: 320 }}
+            className="fixed bottom-24 right-4 sm:right-6 z-50 w-[380px] max-w-[calc(100vw-2rem)] h-[540px] max-h-[80vh] bg-white rounded-3xl shadow-2xl flex flex-col overflow-hidden border border-border-light select-none"
           >
             {/* Header */}
-            <div className="flex items-center justify-between px-5 py-4 bg-[#2d5a3d] text-white" style={{ backgroundColor: '#2d5a3d' }}>
+            <div className="flex items-center justify-between px-5 py-4 bg-primary text-white">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-[#ffffff30] rounded-full flex items-center justify-center" style={{ backgroundColor: 'rgba(255,255,255,0.2)' }}>
-                  <Bot className="w-5 h-5 text-white" />
+                <div className="w-10 h-10 rounded-xl bg-white/15 flex items-center justify-center">
+                  <Bot className="w-5 h-5 text-accent" />
                 </div>
                 <div>
-                  <h3 className="font-heading font-semibold text-white">Himalaya Assistant</h3>
-                  <p className="text-xs text-white" style={{ opacity: 0.7 }}>AI Shopping Helper</p>
+                  <h3 className="font-heading font-bold text-base leading-tight text-white flex items-center gap-1.5">
+                    Himalayan Concierge <Sparkles className="w-3.5 h-3.5 text-accent" />
+                  </h3>
+                  <p className="text-[11px] text-cream-200/80">
+                    Live Harvest &amp; Terroir Assistant
+                  </p>
                 </div>
               </div>
-              <button onClick={() => setIsAIOpen(false)} className="p-2 hover:bg-[#ffffff20] rounded-xl transition-colors" style={{ backgroundColor: 'transparent' }}>
-                <X className="w-5 h-5 text-white" />
+              <button
+                type="button"
+                onClick={() => setIsAIOpen(false)}
+                className="p-1.5 rounded-lg text-white/80 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+                aria-label="Close chat"
+              >
+                <X className="w-5 h-5" />
               </button>
             </div>
 
-            {/* Messages */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-4" style={{ backgroundColor: '#f8f8f8' }}>
+            {/* Conversation Stream */}
+            <div className="flex-1 overflow-y-auto p-4 space-y-3.5 bg-background-secondary text-xs">
               {aiMessages.map((msg, i) => (
-                <div key={i} className={`flex gap-3 ${msg.role === 'user' ? 'flex-row-reverse' : ''}`}>
-                  <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${msg.role === 'assistant' ? '' : ''}`} style={{ backgroundColor: msg.role === 'assistant' ? '#2d5a3d' : '#888888' }}>
-                    {msg.role === 'assistant' ? <Bot className="w-4 h-4 text-white" /> : <User className="w-4 h-4 text-white" />}
-                  </div>
-                  <div 
-                    className="max-w-[80%] px-4 py-3 rounded-2xl" 
-                    style={{ 
-                      backgroundColor: msg.role === 'user' ? '#2d5a3d' : '#ffffff', 
-                      color: msg.role === 'user' ? '#ffffff' : '#333333',
-                      border: msg.role === 'user' ? 'none' : '1px solid #e5e5e5',
-                      boxShadow: msg.role === 'user' ? 'none' : '0 1px 2px rgba(0,0,0,0.05)'
-                    }}
+                <div
+                  key={i}
+                  className={`flex gap-2.5 ${msg.role === 'user' ? 'flex-row-reverse' : ''}`}
+                >
+                  <div
+                    className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 ${
+                      msg.role === 'assistant'
+                        ? 'bg-primary text-white'
+                        : 'bg-background-tertiary text-text-primary'
+                    }`}
                   >
-                    <p className="text-sm leading-relaxed" style={{ color: msg.role === 'user' ? '#ffffff' : '#333333' }}>{msg.content}</p>
+                    {msg.role === 'assistant' ? (
+                      <Bot className="w-3.5 h-3.5" />
+                    ) : (
+                      <User className="w-3.5 h-3.5" />
+                    )}
+                  </div>
+                  <div
+                    className={`max-w-[80%] px-4 py-2.5 rounded-2xl leading-relaxed shadow-sm ${
+                      msg.role === 'user'
+                        ? 'bg-primary text-white rounded-br-none'
+                        : 'bg-white text-text-primary border border-border-light rounded-bl-none'
+                    }`}
+                  >
+                    {msg.content}
                   </div>
                 </div>
               ))}
-              
+
               {isTyping && (
-                <div className="flex gap-3">
-                  <div className="w-8 h-8 bg-[#2d5a3d] rounded-full flex items-center justify-center">
-                    <Bot className="w-4 h-4 text-white" />
+                <div className="flex gap-2.5 items-center">
+                  <div className="w-7 h-7 rounded-full bg-primary text-white flex items-center justify-center shrink-0">
+                    <Bot className="w-3.5 h-3.5" />
                   </div>
-                  <div className="bg-white border border-[#e5e5e5] px-4 py-3 rounded-2xl" style={{ backgroundColor: '#ffffff', borderColor: '#e5e5e5' }}>
-                    <div className="flex gap-1">
-                      <span className="w-2 h-2 bg-[#2d5a3d] rounded-full animate-bounce"></span>
-                      <span className="w-2 h-2 bg-[#2d5a3d] rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></span>
-                      <span className="w-2 h-2 bg-[#2d5a3d] rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></span>
-                    </div>
+                  <div className="bg-white border border-border-light px-3.5 py-2 rounded-2xl rounded-bl-none flex gap-1">
+                    <span className="w-1.5 h-1.5 bg-primary rounded-full animate-bounce" />
+                    <span
+                      className="w-1.5 h-1.5 bg-primary rounded-full animate-bounce"
+                      style={{ animationDelay: '150ms' }}
+                    />
+                    <span
+                      className="w-1.5 h-1.5 bg-primary rounded-full animate-bounce"
+                      style={{ animationDelay: '300ms' }}
+                    />
                   </div>
                 </div>
               )}
               <div ref={messagesEndRef} />
             </div>
 
-            {/* Quick Questions */}
-            {aiMessages.length <= 1 && (
-              <div className="px-4 pb-2">
-                <p className="text-xs text-[#666666] mb-2">Quick questions:</p>
-                <div className="flex flex-wrap gap-2">
-                  {quickQuestions.map((q, i) => (
+            {/* Quick Prompts */}
+            {aiMessages.length <= 2 && (
+              <div className="p-3 bg-white border-t border-border-light">
+                <p className="text-[11px] font-semibold text-text-tertiary mb-1.5">
+                  Suggested Questions:
+                </p>
+                <div className="flex flex-wrap gap-1.5">
+                  {quickQuestions.map((q, idx) => (
                     <button
-                      key={i}
+                      key={idx}
+                      type="button"
                       onClick={() => setAiInput(q)}
-                      className="text-xs px-3 py-1.5 rounded-full transition-colors"
-                      style={{ backgroundColor: '#eeeeee', color: '#333333' }}
+                      className="text-[11px] px-2.5 py-1 rounded-full bg-background-tertiary text-text-secondary hover:bg-primary hover:text-white transition-colors cursor-pointer"
                     >
                       {q}
                     </button>
@@ -152,39 +215,38 @@ export default function Layout() {
               </div>
             )}
 
-            {/* Input */}
-            <div className="p-4 border-t" style={{ backgroundColor: '#ffffff', borderColor: '#e5e5e5' }}>
-              <div className="flex gap-2">
-                <input
-                  type="text"
-                  value={aiInput}
-                  onChange={(e) => setAiInput(e.target.value)}
-                  onKeyDown={(e) => e.key === 'Enter' && handleAISend()}
-                  placeholder="Type your message..."
-                  className="flex-1 px-4 py-3 rounded-xl text-sm"
-                  style={{ backgroundColor: '#f5f5f5', border: 'none', color: '#333333', outline: 'none' }}
-                />
-                <button 
-                  onClick={handleAISend} 
-                  disabled={!aiInput.trim()} 
-                  className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 transition-colors"
-                  style={{ backgroundColor: '#2d5a3d', color: '#ffffff', opacity: aiInput.trim() ? 1 : 0.5 }}
-                >
-                  <Send className="w-5 h-5" />
-                </button>
-              </div>
+            {/* Input Bar */}
+            <div className="p-3.5 bg-white border-t border-border-light flex gap-2">
+              <input
+                type="text"
+                value={aiInput}
+                onChange={(e) => setAiInput(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && handleAISend()}
+                placeholder="Ask about apples, delivery, terroir..."
+                className="input-field text-xs py-2.5 px-3 flex-1"
+              />
+              <button
+                type="button"
+                onClick={handleAISend}
+                disabled={!aiInput.trim()}
+                className="w-10 h-10 rounded-xl bg-primary text-white flex items-center justify-center disabled:opacity-40 hover:bg-primary-dark transition-all cursor-pointer shrink-0 shadow-sm"
+              >
+                <Send className="w-4 h-4" />
+              </button>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
 
-      <Toaster 
+      <Toaster
         position="bottom-right"
         toastOptions={{
           style: {
-            background: '#2d5a3d',
-            color: '#fff',
+            background: '#1e4631',
+            color: '#ffffff',
             borderRadius: '12px',
+            fontSize: '14px',
+            fontWeight: '500',
           },
         }}
       />

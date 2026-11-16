@@ -1,65 +1,81 @@
-// Theme Configuration - Single Source of Truth for All UI
-// Reference: ambertalefarms.com - Clean, elegant, nature-focused
+// Theme Configuration - Single Source of Truth for Himalayan Fresh UI
+// Aesthetic: Mountain Luxury Organic (Reference: Amber Tale Farms & High-End Terroir Estate)
 
 export const theme = {
-  // Primary Colors - Nature/Forest Green Theme
+  // Primary Colors - Deep Mountain Forest Green
   colors: {
     primary: {
-      main: '#2d5a3d',        // Forest green - main brand color
-      light: '#3d7a52',       // Lighter green
-      dark: '#1a3d28',         // Darker green
-      accent: '#4a9063',       // Accent green
+      DEFAULT: '#1e4631',    // Rich orchard pine / forest green
+      main: '#1e4631',
+      light: '#2d6b46',       // Morning sun on pine needles
+      dark: '#0f2619',        // Deep forest shadow
+      accent: '#439162',      // Fresh sprout green
+      50: '#f0f6f2',
+      100: '#ddece2',
+      200: '#bedbc8',
+      300: '#94c2a4',
+      400: '#64a27a',
+      500: '#1e4631',
+      600: '#173b28',
+      700: '#123020',
+      800: '#0c2216',
+      900: '#06130b',
     },
-    // Secondary - Warm Earth Tones
+    // Secondary - Himalayan Bark & Warm Earth
     secondary: {
-      main: '#8b5a2b',        // Warm brown
-      light: '#a67c52',       // Light brown
-      dark: '#5d3d1f',        // Dark brown
-      accent: '#cd7d54',       // Terracotta accent
+      DEFAULT: '#4a2e1a',     // Deep Himalayan pine bark
+      main: '#4a2e1a',
+      light: '#70482b',       // Warm orchard timber
+      dark: '#2e1c0f',        // Rich mountain loam soil
+      accent: '#c97d54',      // Terracotta harvest clay
     },
-    // Accent - Golden/Saffron
+    // Accent - Golden Harvest & Amber
     accent: {
-      main: '#d4a84b',        // Golden amber
-      light: '#e8c97a',       // Light gold
-      dark: '#b8860b',        // Dark gold
-      yellow: '#e89c14',      // Saffron yellow
+      DEFAULT: '#c8962c',     // Warm autumnal gold
+      main: '#c8962c',
+      light: '#e2b34f',       // Afternoon orchard sun
+      dark: '#9a7019',        // Aged mountain honey
+      yellow: '#f0ab20',      // High-visibility ripe fruit tag
     },
-    // Backgrounds
+    // Backgrounds - Clean Warm Parchments & Deep Atmospheric Dark
     background: {
-      primary: '#ffffff',      // Pure white
-      secondary: '#fdfcfa',   // Warm white/cream
-      tertiary: '#f8f6f2',    // Light cream
-      dark: '#1a1a1a',        // Dark background
-      darkSecondary: '#2d2d2d', // Dark secondary
+      primary: '#ffffff',      // Pure clean white
+      secondary: '#fbf8f3',    // Warm alabaster parchment
+      tertiary: '#f3ede2',     // Mountain mist linen
+      dark: '#0f1a12',         // Deep dusk forest
+      darkSecondary: '#192b1e',// Mountain twilight
+      mist: '#e8ede9',         // Morning alpine mist
     },
-    // Text Colors
+    // Text Colors - High Readability
     text: {
-      primary: '#1a1a1a',     // Near black
-      secondary: '#4a4a4a',   // Dark gray
-      tertiary: '#6b6b6b',    // Medium gray
-      light: '#9ca3af',       // Light gray
-      white: '#ffffff',       // White
-      muted: '#6b7280',       // Muted text
+      primary: '#141c16',      // Near black with soft forest undertone
+      secondary: '#424f46',    // Slate moss for descriptions
+      tertiary: '#6f7e73',     // Muted specifications
+      light: '#9daaa1',        // Disabled / struck-through
+      white: '#ffffff',        // Contrast text
+      cream: '#fbf8f3',        // Warm text on dark backgrounds
     },
     // Status Colors
     status: {
-      success: '#059669',     // Green
-      warning: '#d97706',     // Amber
-      error: '#dc2626',       // Red
-      info: '#0284c7',        // Blue
+      success: '#1b7a43',      // Verified / in-stock
+      warning: '#c88612',      // Low stock / seasonal
+      error: '#c0392b',        // Alert / out of stock
+      info: '#20639b',         // Information
     },
     // Borders
     border: {
-      light: '#e5e5e5',
-      medium: '#d4d4d4',
-      dark: '#404040',
+      light: '#e8e5dc',
+      medium: '#d8d3c5',
+      dark: '#2d3d32',
     }
   },
 
   // Typography
   typography: {
     heading: "'Playfair Display', Georgia, serif",
-    body: "'Inter', system-ui, sans-serif",
+    display: "'Cormorant Garamond', Georgia, serif",
+    body: "'Inter', system-ui, -apple-system, sans-serif",
+    mono: "'DM Mono', monospace",
     sizes: {
       xs: '0.75rem',
       sm: '0.875rem',
@@ -71,6 +87,7 @@ export const theme = {
       '4xl': '2.25rem',
       '5xl': '3rem',
       '6xl': '3.75rem',
+      '7xl': '4.5rem',
     },
     weights: {
       normal: 400,
@@ -80,7 +97,7 @@ export const theme = {
     }
   },
 
-  // Spacing
+  // Spacing & Layout
   spacing: {
     xs: '0.25rem',
     sm: '0.5rem',
@@ -89,11 +106,12 @@ export const theme = {
     xl: '2rem',
     '2xl': '3rem',
     '3xl': '4rem',
+    '4xl': '6rem',
   },
 
   // Border Radius
   radius: {
-    sm: '0.25rem',
+    sm: '0.375rem',
     md: '0.5rem',
     lg: '0.75rem',
     xl: '1rem',
@@ -104,23 +122,28 @@ export const theme = {
 
   // Shadows
   shadows: {
-    sm: '0 1px 2px rgba(0, 0, 0, 0.05)',
-    md: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
-    lg: '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
-    xl: '0 20px 25px -5px rgba(0, 0, 0, 0.1)',
-    '2xl': '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
+    sm: '0 1px 3px rgba(15, 26, 18, 0.06)',
+    md: '0 4px 10px -2px rgba(15, 26, 18, 0.08)',
+    lg: '0 12px 24px -4px rgba(15, 26, 18, 0.1)',
+    xl: '0 20px 32px -6px rgba(15, 26, 18, 0.12)',
+    '2xl': '0 30px 60px -12px rgba(15, 26, 18, 0.2)',
+    premium: '0 25px 50px -12px rgba(15, 26, 18, 0.18)',
+    'premium-sm': '0 10px 30px -5px rgba(15, 26, 18, 0.1)',
+    glow: '0 0 35px rgba(200, 150, 44, 0.35)',
   },
 
   // Transitions
   transitions: {
-    fast: '150ms ease',
-    normal: '300ms ease',
-    slow: '500ms ease',
+    fast: '150ms cubic-bezier(0.4, 0, 0.2, 1)',
+    normal: '300ms cubic-bezier(0.4, 0, 0.2, 1)',
+    slow: '500ms cubic-bezier(0.16, 1, 0.3, 1)',
   },
 
   // Z-Index
   zIndex: {
     base: 0,
+    canvas: 10,
+    content: 20,
     dropdown: 1000,
     sticky: 1020,
     fixed: 1030,
@@ -129,71 +152,6 @@ export const theme = {
     tooltip: 1060,
     toast: 1070,
   }
-};
-
-// CSS Variables for global use
-export const cssVariables = `
-  :root {
-    /* Primary - Forest Green */
-    --color-primary: ${theme.colors.primary.main};
-    --color-primary-light: ${theme.colors.primary.light};
-    --color-primary-dark: ${theme.colors.primary.dark};
-    --color-primary-accent: ${theme.colors.primary.accent};
-
-    /* Secondary - Earth Tones */
-    --color-secondary: ${theme.colors.secondary.main};
-    --color-secondary-light: ${theme.colors.secondary.light};
-    --color-secondary-dark: ${theme.colors.secondary.dark};
-
-    /* Accent - Golden */
-    --color-accent: ${theme.colors.accent.main};
-    --color-accent-light: ${theme.colors.accent.light};
-    --color-accent-dark: ${theme.colors.accent.dark};
-    --color-accent-yellow: ${theme.colors.accent.yellow};
-
-    /* Backgrounds */
-    --bg-primary: ${theme.colors.background.primary};
-    --bg-secondary: ${theme.colors.background.secondary};
-    --bg-tertiary: ${theme.colors.background.tertiary};
-    --bg-dark: ${theme.colors.background.dark};
-    --bg-dark-secondary: ${theme.colors.background.darkSecondary};
-
-    /* Text */
-    --text-primary: ${theme.colors.text.primary};
-    --text-secondary: ${theme.colors.text.secondary};
-    --text-tertiary: ${theme.colors.text.tertiary};
-    --text-light: ${theme.colors.text.light};
-    --text-white: ${theme.colors.text.white};
-
-    /* Typography */
-    --font-heading: ${theme.typography.heading};
-    --font-body: ${theme.typography.body};
-
-    /* Shadows */
-    --shadow-sm: ${theme.shadows.sm};
-    --shadow-md: ${theme.shadows.md};
-    --shadow-lg: ${theme.shadows.lg};
-    --shadow-xl: ${theme.shadows.xl};
-    --shadow-2xl: ${theme.shadows['2xl']};
-
-    /* Radius */
-    --radius-sm: ${theme.radius.sm};
-    --radius-md: ${theme.radius.md};
-    --radius-lg: ${theme.radius.lg};
-    --radius-xl: ${theme.radius.xl};
-    --radius-2xl: ${theme.radius['2xl']};
-    --radius-full: ${theme.radius.full};
-  }
-`;
-
-// Helper function to get theme value
-export const getTheme = (path: string) => {
-  const keys = path.split('.');
-  let value: any = theme;
-  for (const key of keys) {
-    value = value[key];
-  }
-  return value;
 };
 
 export default theme;

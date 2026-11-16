@@ -1,4 +1,5 @@
 import type { Product, Category, District, Blog, Review, User, ChatMessage } from '@/types';
+import kinnaurShowcaseImg from '@/assets/images/Kinnaur Royal Red Apple Showcase.png';
 
 export const categories: Category[] = [
   { id: 1, name: 'Royal Apples', slug: 'apples', description: 'Premium apples from Kinnaur and Shimla orchards', image: 'https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?w=800&q=80', product_count: 24 },
@@ -12,9 +13,12 @@ export const categories: Category[] = [
 export const products: Product[] = [
   {
     id: 1, name: 'Royal Red Delicious Apples', slug: 'royal-red-delicious', description: 'Exceptionally sweet and crispy apples from Kinnaur valley.',
-    full_description: 'Premium Red Delicious apples from Kinnaur.',
+    full_description: 'Premium Red Delicious apples from Kinnaur. Handpicked at peak crispness with 100% natural wax-free skin.',
     price: 599, original_price: 749,
-    images: [{ id: 1, image: 'https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?w=800&q=80', alt_text: 'Red Delicious', is_primary: true }],
+    images: [
+      { id: 1, image: kinnaurShowcaseImg, alt_text: 'Kinnaur Royal Red Apple Showcase Studio', is_primary: true },
+      { id: 2, image: 'https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?w=800&q=80', alt_text: 'Red Delicious Orchard Fresh', is_primary: false },
+    ],
     category: categories[0], category_slug: 'apples',
     rating: 4.9, review_count: 328, in_stock: true, is_featured: true, is_bestseller: true, is_seasonal: true,
     badges: ['Farm Fresh', 'Handpicked'], origin: 'Kinnaur', weight: '1 kg', tags: ['apples'],

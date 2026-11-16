@@ -9,3 +9,8 @@ backend/.env
 ## frontend 
 frontend/.env
 frontend/node_modules
+frontend/src/assets/images
+
+
+## dist assets 
+frontend/dist/assets
