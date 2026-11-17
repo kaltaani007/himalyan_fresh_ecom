@@ -1,6 +1,16 @@
 import axios from 'axios';
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api/v1';
+export const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api/v1';
+export const MEDIA_BASE_URL = import.meta.env.VITE_MEDIA_URL || 'http://localhost:8000';
+
+export const resolveMediaUrl = (url?: string | null): string => {
+  if (!url) return '';
+  if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('data:') || url.startsWith('blob:')) {
+    return url;
+  }
+  const cleanPath = url.startsWith('/') ? url : `/${url}`;
+  return `${MEDIA_BASE_URL}${cleanPath}`;
+};
 
 export const api = axios.create({
   baseURL: API_BASE_URL,
@@ -13,6 +23,10 @@ api.interceptors.request.use((config) => {
   const token = localStorage.getItem('access_token');
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
+  }
+  // Let browser set boundary automatically for multipart FormData uploads
+  if (config.data instanceof FormData) {
+    delete config.headers['Content-Type'];
   }
   return config;
 });
@@ -29,14 +43,19 @@ api.interceptors.response.use(
           const response = await axios.post(`${API_BASE_URL}/auth/refresh/`, {
             refresh: refreshToken,
           });
-          localStorage.setItem('access_token', response.data.access);
-          originalRequest.headers.Authorization = `Bearer ${response.data.access}`;
-          return api(originalRequest);
-        } catch (refreshError) {
+          const newAccess = response.data?.access;
+          if (newAccess) {
+            localStorage.setItem('access_token', newAccess);
+            originalRequest.headers.Authorization = `Bearer ${newAccess}`;
+            return api(originalRequest);
+          }
+        } catch {
           localStorage.removeItem('access_token');
           localStorage.removeItem('refresh_token');
-          window.location.href = '/login';
         }
+      } else {
+        localStorage.removeItem('access_token');
+        localStorage.removeItem('refresh_token');
       }
     }
     return Promise.reject(error);
@@ -45,12 +64,17 @@ api.interceptors.response.use(
 
 // Products API
 export const productsApi = {
-  getAll: (params?: { category?: string; search?: string; sort?: string; page?: number }) =>
+  getAll: (params?: { category?: string; district?: string; search?: string; sort?: string; page?: number; is_featured?: boolean }) =>
     api.get('/products/', { params }),
   getFeatured: () => api.get('/products/featured/'),
   getBySlug: (slug: string) => api.get(`/products/${slug}/`),
-  getById: (id: number) => api.get(`/products/${id}/`),
   getRelated: (slug: string) => api.get(`/products/${slug}/related/`),
+  create: (formData: FormData) => api.post('/products/', formData),
+  update: (slug: string, data: Record<string, any> | FormData) => api.patch(`/products/${slug}/`, data),
+  delete: (slug: string) => api.delete(`/products/${slug}/`),
+  uploadImage: (slug: string, formData: FormData) => api.post(`/products/${slug}/upload-image/`, formData),
+  setPrimaryImage: (imageId: number) => api.patch(`/products/images/${imageId}/`, { is_primary: true }),
+  deleteImage: (imageId: number) => api.delete(`/products/images/${imageId}/`),
 };
 
 // Categories API
@@ -59,6 +83,12 @@ export const categoriesApi = {
   getBySlug: (slug: string) => api.get(`/categories/${slug}/`),
   getProducts: (slug: string, params?: { page?: number; sort?: string }) =>
     api.get(`/categories/${slug}/products/`, { params }),
+  create: (formData: FormData) => api.post('/categories/', formData),
+  updateImage: (slug: string, file: File) => {
+    const formData = new FormData();
+    formData.append('image', file);
+    return api.patch(`/categories/${slug}/`, formData);
+  },
 };
 
 // Districts API
@@ -67,16 +97,40 @@ export const districtsApi = {
   getBySlug: (slug: string) => api.get(`/districts/${slug}/`),
   getProducts: (slug: string) => api.get(`/districts/${slug}/products/`),
   getBlogs: (slug: string) => api.get(`/districts/${slug}/blogs/`),
+  updateImage: (slug: string, file: File) => {
+    const formData = new FormData();
+    formData.append('image', file);
+    return api.patch(`/districts/${slug}/`, formData);
+  },
 };
 
 // Blogs API
 export const blogsApi = {
-  getAll: (params?: { category?: string; search?: string; page?: number }) =>
+  getAll: (params?: { category?: string; district?: string; search?: string; page?: number }) =>
     api.get('/blogs/', { params }),
   getFeatured: () => api.get('/blogs/featured/'),
+  getCategories: () => api.get('/blogs/categories/'),
   getBySlug: (slug: string) => api.get(`/blogs/${slug}/`),
-  getByCategory: (category: string) => api.get(`/blogs/category/${category}/`),
   getRelated: (slug: string) => api.get(`/blogs/${slug}/related/`),
+  updateImage: (slug: string, file: File) => {
+    const formData = new FormData();
+    formData.append('featured_image', file);
+    return api.patch(`/blogs/${slug}/`, formData);
+  },
+};
+
+// Testimonials & Newsletter API
+export const testimonialsApi = {
+  getAll: () => api.get('/testimonials/'),
+};
+
+export const newsletterApi = {
+  subscribe: (email: string) => api.post('/newsletter/subscribe/', { email }),
+};
+
+// Banners API
+export const bannersApi = {
+  getAll: () => api.get('/banners/'),
 };
 
 // Cart API
@@ -95,7 +149,6 @@ export const wishlistApi = {
   get: () => api.get('/wishlist/'),
   add: (productId: number) => api.post('/wishlist/', { product_id: productId }),
   remove: (productId: number) => api.delete(`/wishlist/${productId}/`),
-  check: (productId: number) => api.get(`/wishlist/check/${productId}/`),
 };
 
 // Auth API
@@ -126,11 +179,8 @@ export const ordersApi = {
 export const reviewsApi = {
   getByProduct: (productId: number, params?: { page?: number }) =>
     api.get(`/products/${productId}/reviews/`, { params }),
-  create: (productId: number, data: { rating: number; comment: string }) =>
+  create: (productId: number, data: { rating: number; title?: string; comment: string }) =>
     api.post(`/products/${productId}/reviews/`, data),
-  update: (reviewId: number, data: { rating?: number; comment?: string }) =>
-    api.patch(`/reviews/${reviewId}/`, data),
-  delete: (reviewId: number) => api.delete(`/reviews/${reviewId}/`),
 };
 
 // Search API
@@ -138,16 +188,6 @@ export const searchApi = {
   search: (query: string, params?: { type?: string; category?: string; district?: string }) =>
     api.get('/search/', { params: { q: query, ...params } }),
   suggestions: (query: string) => api.get('/search/suggestions/', { params: { q: query } }),
-};
-
-// AI Assistant API (mock for now)
-export const aiApi = {
-  chat: (message: string, context?: any) =>
-    api.post('/ai/chat/', { message, context }),
-  getRecommendations: (productId?: number) =>
-    api.get('/ai/recommendations/', { params: { product_id: productId } }),
-  getDistrictGuide: (district: string) =>
-    api.get('/ai/district-guide/', { params: { district } }),
 };
 
 export default api;

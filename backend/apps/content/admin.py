@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import (
     BlogCategory, BlogTag, BlogPost, 
     BlogComment, BlogLike, BlogShare,
-    Newsletter, NewsletterCampaign
+    Newsletter, NewsletterCampaign, Testimonial
 )
 
 
@@ -66,3 +66,10 @@ class NewsletterCampaignAdmin(admin.ModelAdmin):
     list_filter = ["status", "created_at"]
     search_fields = ["subject", "content"]
     date_hierarchy = "created_at"
+
+
+@admin.register(Testimonial)
+class TestimonialAdmin(admin.ModelAdmin):
+    list_display = ["name", "location", "rating", "product_name", "is_active", "order"]
+    list_filter = ["rating", "is_active"]
+    search_fields = ["name", "location", "text", "product_name"]

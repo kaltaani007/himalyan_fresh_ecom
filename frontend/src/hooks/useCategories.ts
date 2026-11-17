@@ -1,20 +1,28 @@
 import { useQuery } from '@tanstack/react-query';
 import { categoriesApi } from '@/services/api';
-import { categories as mockCategories } from '@/data';
 import type { Category } from '@/types';
 
 export function useCategories() {
   return useQuery<Category[]>({
     queryKey: ['categories'],
     queryFn: async () => {
-      try {
-        const response = await categoriesApi.getAll();
-        return Array.isArray(response.data) ? response.data : mockCategories;
-      } catch {
-        return mockCategories;
-      }
+      const response = await categoriesApi.getAll();
+      if (Array.isArray(response.data)) return response.data;
+      if (Array.isArray(response.data?.results)) return response.data.results;
+      return [];
     },
-    staleTime: 1000 * 60 * 15,
+    staleTime: 1000 * 60 * 5,
+  });
+}
+
+export function useCategoryBySlug(slug: string) {
+  return useQuery<Category>({
+    queryKey: ['category', slug],
+    queryFn: async () => {
+      const response = await categoriesApi.getBySlug(slug);
+      return response.data;
+    },
+    enabled: !!slug,
   });
 }
 

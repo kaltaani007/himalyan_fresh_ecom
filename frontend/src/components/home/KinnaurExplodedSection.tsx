@@ -10,7 +10,7 @@ import {
 } from 'lucide-react';
 import { KinnaurCanvas } from '@/pages/experience/KinnaurCanvas';
 import { TOTAL_FRAMES } from '@/utils/frameSequence';
-import { products } from '@/data';
+import { useProductBySlug } from '@/hooks/useProducts';
 import { useCartStore } from '@/store';
 import toast from 'react-hot-toast';
 
@@ -23,7 +23,7 @@ export const KinnaurExplodedSection: React.FC = () => {
   const gainNodeRef = useRef<GainNode | null>(null);
 
   const { addItem: addToCart } = useCartStore();
-  const flagshipProduct = products[0]; // Royal Red Delicious Apples
+  const { data: flagshipProduct } = useProductBySlug('royal-red-delicious');
 
   // Calculate scroll progress within this dedicated 280vh section
   const handleScroll = useCallback(() => {
@@ -112,6 +112,7 @@ export const KinnaurExplodedSection: React.FC = () => {
   };
 
   const handleReserve = () => {
+    if (!flagshipProduct) return;
     addToCart(flagshipProduct, 1);
     toast.success('🍎 Added Kinnaur Royal Red Harvest Box to Cart!', {
       style: {

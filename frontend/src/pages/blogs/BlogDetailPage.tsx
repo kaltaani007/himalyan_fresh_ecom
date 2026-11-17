@@ -1,12 +1,29 @@
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Clock, Calendar, ArrowLeft, Share2 } from 'lucide-react';
-import { blogs } from '@/data';
+import { useBlogBySlug, useRelatedBlogs } from '@/hooks/useBlogs';
 
 export default function BlogDetailPage() {
-  const { slug } = useParams();
-  const blog = blogs.find(b => b.slug === slug) || blogs[0];
-  const relatedBlogs = blogs.filter(b => b.id !== blog.id && b.category.id === blog.category.id).slice(0, 3);
+  const { slug = '' } = useParams();
+  const { data: blog, isLoading, isError } = useBlogBySlug(slug);
+  const { data: relatedBlogs = [] } = useRelatedBlogs(slug);
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-cream-50 py-20 text-center text-charcoal-500">
+        Loading article...
+      </div>
+    );
+  }
+
+  if (isError || !blog) {
+    return (
+      <div className="min-h-screen bg-cream-50 py-20 text-center">
+        <h2 className="font-heading text-2xl font-bold text-charcoal-900 mb-4">Article not found</h2>
+        <Link to="/blogs" className="btn-primary inline-flex">Back to Blogs</Link>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-cream-50 py-12">

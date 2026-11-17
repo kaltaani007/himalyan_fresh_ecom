@@ -25,16 +25,16 @@ class RequestLoggingMiddleware(MiddlewareMixin):
             }
 
             if request.method in ["POST", "PUT", "PATCH"]:
-                if hasattr(request, "body") and request.body:
+                content_type = request.META.get("CONTENT_TYPE", "")
+                if "multipart/form-data" in content_type:
+                    log_data["body_size"] = int(request.META.get("CONTENT_LENGTH") or 0)
+                else:
                     try:
-                        body = json.loads(request.body)
-                        if "password" in str(body):
-                            body.pop("password", None)
-                            body.pop("password1", None)
-                            body.pop("password2", None)
-                        log_data["body_size"] = len(request.body)
-                    except:
-                        log_data["body_size"] = len(request.body)
+                        raw_body = request.body
+                        if raw_body:
+                            log_data["body_size"] = len(raw_body)
+                    except Exception:
+                        log_data["body_size"] = int(request.META.get("CONTENT_LENGTH") or 0)
 
             if response.status_code >= 500:
                 logger.error(json.dumps(log_data))

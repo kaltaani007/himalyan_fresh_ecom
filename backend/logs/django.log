@@ -270,3 +270,568 @@ django.core.cache.backends.base.InvalidCacheBackendError: The connection 'sessio
 {"timestamp": "2026-11-16 20:17:04,257", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/auth/login/ HTTP/1.1" 200 0"}
 {"timestamp": "2026-11-16 20:17:04,826", "level": "WARNING", "module": "log", "message": "Unauthorized: /api/v1/auth/login/"}
 {"timestamp": "2026-11-16 20:17:04,827", "level": "WARNING", "module": "basehttp", "message": ""POST /api/v1/auth/login/ HTTP/1.1" 401 63"}
+{"timestamp": "2026-11-17 23:16:25,115", "level": "INFO", "module": "autoreload", "message": "Watching for file changes with StatReloader"}
+{"timestamp": "2026-11-17 23:18:15,550", "level": "WARNING", "module": "log", "message": "Not Found: /"}
+{"timestamp": "2026-11-17 23:18:15,550", "level": "WARNING", "module": "basehttp", "message": ""GET / HTTP/1.1" 404 3718"}
+{"timestamp": "2026-11-17 23:18:15,581", "level": "WARNING", "module": "log", "message": "Not Found: /favicon.ico"}
+{"timestamp": "2026-11-17 23:18:15,582", "level": "WARNING", "module": "basehttp", "message": ""GET /favicon.ico HTTP/1.1" 404 3769"}
+{"timestamp": "2026-11-17 23:18:19,057", "level": "INFO", "module": "basehttp", "message": ""GET /admin HTTP/1.1" 301 0"}
+{"timestamp": "2026-11-17 23:18:19,121", "level": "INFO", "module": "basehttp", "message": ""GET /admin/ HTTP/1.1" 302 0"}
+{"timestamp": "2026-11-17 23:18:19,294", "level": "INFO", "module": "basehttp", "message": ""GET /admin/login/?next=/admin/ HTTP/1.1" 200 4169"}
+{"timestamp": "2026-11-17 23:18:19,486", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/css/nav_sidebar.css HTTP/1.1" 200 2810"}
+{"timestamp": "2026-11-17 23:18:19,489", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/css/login.css HTTP/1.1" 200 951"}
+{"timestamp": "2026-11-17 23:18:19,493", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/css/base.css HTTP/1.1" 200 22120"}
+{"timestamp": "2026-11-17 23:18:19,495", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/css/dark_mode.css HTTP/1.1" 200 2808"}
+{"timestamp": "2026-11-17 23:18:19,496", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/css/responsive.css HTTP/1.1" 200 16565"}
+{"timestamp": "2026-11-17 23:18:19,503", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/js/theme.js HTTP/1.1" 200 1653"}
+{"timestamp": "2026-11-17 23:18:19,510", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/js/nav_sidebar.js HTTP/1.1" 200 3063"}
+{"timestamp": "2026-11-17 23:18:47,247", "level": "WARNING", "module": "log", "message": "Not Found: /"}
+{"timestamp": "2026-11-17 23:18:47,247", "level": "WARNING", "module": "basehttp", "message": ""GET / HTTP/1.1" 404 3718"}
+{"timestamp": "2026-11-17 23:18:47,282", "level": "WARNING", "module": "log", "message": "Not Found: /favicon.ico"}
+{"timestamp": "2026-11-17 23:18:47,282", "level": "WARNING", "module": "basehttp", "message": ""GET /favicon.ico HTTP/1.1" 404 3769"}
+{"timestamp": "2026-11-17 23:18:50,084", "level": "INFO", "module": "basehttp", "message": ""GET /admin HTTP/1.1" 301 0"}
+{"timestamp": "2026-11-17 23:18:50,089", "level": "INFO", "module": "basehttp", "message": ""GET /admin/ HTTP/1.1" 302 0"}
+{"timestamp": "2026-11-17 23:18:50,096", "level": "INFO", "module": "basehttp", "message": ""GET /admin/login/?next=/admin/ HTTP/1.1" 200 4169"}
+{"timestamp": "2026-11-17 23:18:50,108", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/css/nav_sidebar.css HTTP/1.1" 200 2810"}
+{"timestamp": "2026-11-17 23:18:50,109", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/css/dark_mode.css HTTP/1.1" 200 2808"}
+{"timestamp": "2026-11-17 23:18:50,110", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/css/base.css HTTP/1.1" 200 22120"}
+{"timestamp": "2026-11-17 23:18:50,110", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/js/theme.js HTTP/1.1" 200 1653"}
+{"timestamp": "2026-11-17 23:18:50,111", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/css/login.css HTTP/1.1" 200 951"}
+{"timestamp": "2026-11-17 23:18:50,111", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/css/responsive.css HTTP/1.1" 200 16565"}
+{"timestamp": "2026-11-17 23:18:50,113", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/js/nav_sidebar.js HTTP/1.1" 200 3063"}
+{"timestamp": "2026-11-17 23:19:05,901", "level": "INFO", "module": "basehttp", "message": ""POST /admin/login/?next=/admin/ HTTP/1.1" 200 4350"}
+{"timestamp": "2026-11-17 23:19:15,706", "level": "INFO", "module": "basehttp", "message": ""POST /admin/login/?next=/admin/ HTTP/1.1" 302 0"}
+{"timestamp": "2026-11-17 23:19:15,771", "level": "INFO", "module": "basehttp", "message": ""GET /admin/ HTTP/1.1" 200 38450"}
+{"timestamp": "2026-11-17 23:19:15,784", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/css/dashboard.css HTTP/1.1" 200 441"}
+{"timestamp": "2026-11-17 23:19:15,787", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/img/icon-changelink.svg HTTP/1.1" 200 380"}
+{"timestamp": "2026-11-17 23:19:15,787", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/img/icon-addlink.svg HTTP/1.1" 200 331"}
+{"timestamp": "2026-11-17 23:19:20,254", "level": "INFO", "module": "basehttp", "message": ""GET /admin/accounts/user/ HTTP/1.1" 200 36178"}
+{"timestamp": "2026-11-17 23:19:20,269", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/css/changelists.css HTTP/1.1" 200 6878"}
+{"timestamp": "2026-11-17 23:19:20,272", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/js/jquery.init.js HTTP/1.1" 200 347"}
+{"timestamp": "2026-11-17 23:19:20,281", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/js/core.js HTTP/1.1" 200 6208"}
+{"timestamp": "2026-11-17 23:19:20,286", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 200 9777"}
+{"timestamp": "2026-11-17 23:19:20,295", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/js/urlify.js HTTP/1.1" 200 7887"}
+{"timestamp": "2026-11-17 23:19:20,298", "level": "INFO", "module": "basehttp", "message": ""GET /admin/jsi18n/ HTTP/1.1" 200 3342"}
+{"timestamp": "2026-11-17 23:19:20,302", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/js/actions.js HTTP/1.1" 200 8076"}
+{"timestamp": "2026-11-17 23:19:20,306", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/js/prepopulate.js HTTP/1.1" 200 1531"}
+{"timestamp": "2026-11-17 23:19:20,318", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/img/search.svg HTTP/1.1" 200 458"}
+{"timestamp": "2026-11-17 23:19:20,325", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 200 285314"}
+{"timestamp": "2026-11-17 23:19:20,338", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/img/icon-yes.svg HTTP/1.1" 200 436"}
+{"timestamp": "2026-11-17 23:19:20,353", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/js/filters.js HTTP/1.1" 200 978"}
+{"timestamp": "2026-11-17 23:19:20,367", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 200 325171"}
+{"timestamp": "2026-11-17 23:19:20,384", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/img/icon-viewlink.svg HTTP/1.1" 200 581"}
+{"timestamp": "2026-11-17 23:19:20,385", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/img/tooltag-add.svg HTTP/1.1" 200 331"}
+{"timestamp": "2026-11-17 23:19:23,447", "level": "INFO", "module": "basehttp", "message": ""GET /admin/accounts/userprofile/ HTTP/1.1" 200 32100"}
+{"timestamp": "2026-11-17 23:19:23,455", "level": "INFO", "module": "basehttp", "message": ""GET /admin/jsi18n/ HTTP/1.1" 200 3342"}
+{"timestamp": "2026-11-17 23:19:24,485", "level": "INFO", "module": "basehttp", "message": ""GET /admin/accounts/notification/ HTTP/1.1" 200 32874"}
+{"timestamp": "2026-11-17 23:19:24,493", "level": "INFO", "module": "basehttp", "message": ""GET /admin/jsi18n/ HTTP/1.1" 200 3342"}
+{"timestamp": "2026-11-17 23:19:26,019", "level": "INFO", "module": "basehttp", "message": ""GET /admin/accounts/address/ HTTP/1.1" 200 32760"}
+{"timestamp": "2026-11-17 23:19:26,027", "level": "INFO", "module": "basehttp", "message": ""GET /admin/jsi18n/ HTTP/1.1" 200 3342"}
+{"timestamp": "2026-11-17 23:19:37,314", "level": "INFO", "module": "basehttp", "message": ""GET /admin/auth/group/ HTTP/1.1" 200 32065"}
+{"timestamp": "2026-11-17 23:19:37,322", "level": "INFO", "module": "basehttp", "message": ""GET /admin/jsi18n/ HTTP/1.1" 200 3342"}
+{"timestamp": "2026-11-17 23:19:38,763", "level": "ERROR", "module": "log", "message": "Internal Server Error: /admin/cart/cartitem/"}
+Traceback (most recent call last):
+  File "C:\Users\Acer\Desktop\serious_codes\old_work\business_work\himalyan_fresh\himalyan_fresh_ecom\backend\.venv\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Acer\Desktop\serious_codes\old_work\business_work\himalyan_fresh\himalyan_fresh_ecom\backend\.venv\Lib\site-packages\django\db\backends\sqlite3\base.py", line 360, in execute
+    return super().execute(query, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such column: cart_items.price_locked_at
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Acer\Desktop\serious_codes\old_work\business_work\himalyan_fresh\himalyan_fresh_ecom\backend\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Acer\Desktop\serious_codes\old_work\business_work\himalyan_fresh\himalyan_fresh_ecom\backend\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Acer\Desktop\serious_codes\old_work\business_work\himalyan_fresh\himalyan_fresh_ecom\backend\.venv\Lib\site-packages\django\contrib\admin\options.py", line 720, in wrapper
+    return self.admin_site.admin_view(view)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\Acer\Desktop\serious_codes\old_work\business_work\himalyan_fresh\himalyan_fresh_ecom\backend\.venv\Lib\site-packages\django\utils\decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+  File "C:\Users\Acer\Desktop\serious_codes\old_work\business_work\himalyan_fresh\himalyan_fresh_ecom\backend\.venv\Lib\site-packages\django\utils\decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\Acer\Desktop\serious_codes\old_work\business_work\himalyan_fresh\himalyan_fresh_ecom\backend\.venv\Lib\site-packages\django\views\decorators\cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\Acer\Desktop\serious_codes\old_work\business_work\himalyan_fresh\himalyan_fresh_ecom\backend\.venv\Lib\site-packages\django\contrib\admin\sites.py", line 246, in inner
+    return view(request, *args, **kwargs)
+  File "C:\Users\Acer\Desktop\serious_codes\old_work\business_work\himalyan_fresh\himalyan_fresh_ecom\backend\.venv\Lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\Acer\Desktop\serious_codes\old_work\business_work\himalyan_fresh\himalyan_fresh_ecom\backend\.venv\Lib\site-packages\django\utils\decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+  File "C:\Users\Acer\Desktop\serious_codes\old_work\business_work\himalyan_fresh\himalyan_fresh_ecom\backend\.venv\Lib\site-packages\django\utils\decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\Acer\Desktop\serious_codes\old_work\business_work\himalyan_fresh\himalyan_fresh_ecom\backend\.venv\Lib\site-packages\django\contrib\admin\options.py", line 2166, in changelist_view
+    "selection_note": _("0 of %(cnt)s selected") % {"cnt": len(cl.result_list)},
+                                                           ~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\Acer\Desktop\serious_codes\old_work\business_work\himalyan_fresh\himalyan_fresh_ecom\backend\.venv\Lib\site-packages\django\db\models\query.py", line 368, in __len__
+    self._fetch_all()
+    ~~~~~~~~~~~~~~~^^
+  File "C:\Users\Acer\Desktop\serious_codes\old_work\business_work\himalyan_fresh\himalyan_fresh_ecom\backend\.venv\Lib\site-packages\django\db\models\query.py", line 1954, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Acer\Desktop\serious_codes\old_work\business_work\himalyan_fresh\himalyan_fresh_ecom\backend\.venv\Lib\site-packages\django\db\models\query.py", line 93, in __iter__
+    results = compiler.execute_sql(
+        chunked_fetch=self.chunked_fetch, chunk_size=self.chunk_size
+    )
+  File "C:\Users\Acer\Desktop\serious_codes\old_work\business_work\himalyan_fresh\himalyan_fresh_ecom\backend\.venv\Lib\site-packages\django\db\models\sql\compiler.py", line 1623, in execute_sql
+    cursor.execute(sql, params)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Acer\Desktop\serious_codes\old_work\business_work\himalyan_fresh\himalyan_fresh_ecom\backend\.venv\Lib\site-packages\django\db\backends\utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Acer\Desktop\serious_codes\old_work\business_work\himalyan_fresh\himalyan_fresh_ecom\backend\.venv\Lib\site-packages\django\db\backends\utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        sql, params, many=False, executor=self._execute
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Acer\Desktop\serious_codes\old_work\business_work\himalyan_fresh\himalyan_fresh_ecom\backend\.venv\Lib\site-packages\django\db\backends\utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\Users\Acer\Desktop\serious_codes\old_work\business_work\himalyan_fresh\himalyan_fresh_ecom\backend\.venv\Lib\site-packages\django\db\backends\utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Acer\Desktop\serious_codes\old_work\business_work\himalyan_fresh\himalyan_fresh_ecom\backend\.venv\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\Acer\Desktop\serious_codes\old_work\business_work\himalyan_fresh\himalyan_fresh_ecom\backend\.venv\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Acer\Desktop\serious_codes\old_work\business_work\himalyan_fresh\himalyan_fresh_ecom\backend\.venv\Lib\site-packages\django\db\backends\sqlite3\base.py", line 360, in execute
+    return super().execute(query, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+django.db.utils.OperationalError: no such column: cart_items.price_locked_at
+{"timestamp": "2026-11-17 23:19:38,773", "level": "ERROR", "module": "basehttp", "message": ""GET /admin/cart/cartitem/ HTTP/1.1" 500 216117"}
+{"timestamp": "2026-11-17 23:19:46,391", "level": "ERROR", "module": "log", "message": "Internal Server Error: /admin/cart/cart/"}
+Traceback (most recent call last):
+  File "C:\Users\Acer\Desktop\serious_codes\old_work\business_work\himalyan_fresh\himalyan_fresh_ecom\backend\.venv\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Acer\Desktop\serious_codes\old_work\business_work\himalyan_fresh\himalyan_fresh_ecom\backend\.venv\Lib\site-packages\django\db\backends\sqlite3\base.py", line 360, in execute
+    return super().execute(query, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such column: carts.status
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Acer\Desktop\serious_codes\old_work\business_work\himalyan_fresh\himalyan_fresh_ecom\backend\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Acer\Desktop\serious_codes\old_work\business_work\himalyan_fresh\himalyan_fresh_ecom\backend\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Acer\Desktop\serious_codes\old_work\business_work\himalyan_fresh\himalyan_fresh_ecom\backend\.venv\Lib\site-packages\django\contrib\admin\options.py", line 720, in wrapper
+    return self.admin_site.admin_view(view)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\Acer\Desktop\serious_codes\old_work\business_work\himalyan_fresh\himalyan_fresh_ecom\backend\.venv\Lib\site-packages\django\utils\decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+  File "C:\Users\Acer\Desktop\serious_codes\old_work\business_work\himalyan_fresh\himalyan_fresh_ecom\backend\.venv\Lib\site-packages\django\utils\decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\Acer\Desktop\serious_codes\old_work\business_work\himalyan_fresh\himalyan_fresh_ecom\backend\.venv\Lib\site-packages\django\views\decorators\cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\Acer\Desktop\serious_codes\old_work\business_work\himalyan_fresh\himalyan_fresh_ecom\backend\.venv\Lib\site-packages\django\contrib\admin\sites.py", line 246, in inner
+    return view(request, *args, **kwargs)
+  File "C:\Users\Acer\Desktop\serious_codes\old_work\business_work\himalyan_fresh\himalyan_fresh_ecom\backend\.venv\Lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\Acer\Desktop\serious_codes\old_work\business_work\himalyan_fresh\himalyan_fresh_ecom\backend\.venv\Lib\site-packages\django\utils\decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+  File "C:\Users\Acer\Desktop\serious_codes\old_work\business_work\himalyan_fresh\himalyan_fresh_ecom\backend\.venv\Lib\site-packages\django\utils\decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\Acer\Desktop\serious_codes\old_work\business_work\himalyan_fresh\himalyan_fresh_ecom\backend\.venv\Lib\site-packages\django\contrib\admin\options.py", line 2166, in changelist_view
+    "selection_note": _("0 of %(cnt)s selected") % {"cnt": len(cl.result_list)},
+                                                           ~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\Acer\Desktop\serious_codes\old_work\business_work\himalyan_fresh\himalyan_fresh_ecom\backend\.venv\Lib\site-packages\django\db\models\query.py", line 368, in __len__
+    self._fetch_all()
+    ~~~~~~~~~~~~~~~^^
+  File "C:\Users\Acer\Desktop\serious_codes\old_work\business_work\himalyan_fresh\himalyan_fresh_ecom\backend\.venv\Lib\site-packages\django\db\models\query.py", line 1954, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Acer\Desktop\serious_codes\old_work\business_work\himalyan_fresh\himalyan_fresh_ecom\backend\.venv\Lib\site-packages\django\db\models\query.py", line 93, in __iter__
+    results = compiler.execute_sql(
+        chunked_fetch=self.chunked_fetch, chunk_size=self.chunk_size
+    )
+  File "C:\Users\Acer\Desktop\serious_codes\old_work\business_work\himalyan_fresh\himalyan_fresh_ecom\backend\.venv\Lib\site-packages\django\db\models\sql\compiler.py", line 1623, in execute_sql
+    cursor.execute(sql, params)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Acer\Desktop\serious_codes\old_work\business_work\himalyan_fresh\himalyan_fresh_ecom\backend\.venv\Lib\site-packages\django\db\backends\utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Acer\Desktop\serious_codes\old_work\business_work\himalyan_fresh\himalyan_fresh_ecom\backend\.venv\Lib\site-packages\django\db\backends\utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        sql, params, many=False, executor=self._execute
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Acer\Desktop\serious_codes\old_work\business_work\himalyan_fresh\himalyan_fresh_ecom\backend\.venv\Lib\site-packages\django\db\backends\utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\Users\Acer\Desktop\serious_codes\old_work\business_work\himalyan_fresh\himalyan_fresh_ecom\backend\.venv\Lib\site-packages\django\db\backends\utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Acer\Desktop\serious_codes\old_work\business_work\himalyan_fresh\himalyan_fresh_ecom\backend\.venv\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\Acer\Desktop\serious_codes\old_work\business_work\himalyan_fresh\himalyan_fresh_ecom\backend\.venv\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Acer\Desktop\serious_codes\old_work\business_work\himalyan_fresh\himalyan_fresh_ecom\backend\.venv\Lib\site-packages\django\db\backends\sqlite3\base.py", line 360, in execute
+    return super().execute(query, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+django.db.utils.OperationalError: no such column: carts.status
+{"timestamp": "2026-11-17 23:19:46,396", "level": "ERROR", "module": "basehttp", "message": ""GET /admin/cart/cart/ HTTP/1.1" 500 202166"}
+{"timestamp": "2026-11-18 00:11:29,905", "level": "INFO", "module": "autoreload", "message": "C:\Users\Acer\Desktop\serious_codes\old_work\business_work\himalyan_fresh\himalyan_fresh_ecom\backend\apps\products\models.py changed, reloading."}
+{"timestamp": "2026-11-18 00:11:32,117", "level": "INFO", "module": "autoreload", "message": "Watching for file changes with StatReloader"}
+{"timestamp": "2026-11-18 00:11:39,840", "level": "INFO", "module": "autoreload", "message": "C:\Users\Acer\Desktop\serious_codes\old_work\business_work\himalyan_fresh\himalyan_fresh_ecom\backend\apps\content\models.py changed, reloading."}
+{"timestamp": "2026-11-18 00:11:41,220", "level": "INFO", "module": "autoreload", "message": "Watching for file changes with StatReloader"}
+{"timestamp": "2026-11-18 00:11:46,149", "level": "INFO", "module": "autoreload", "message": "C:\Users\Acer\Desktop\serious_codes\old_work\business_work\himalyan_fresh\himalyan_fresh_ecom\backend\apps\content\models.py changed, reloading."}
+{"timestamp": "2026-11-18 00:11:47,415", "level": "INFO", "module": "autoreload", "message": "Watching for file changes with StatReloader"}
+{"timestamp": "2026-11-18 00:12:01,453", "level": "INFO", "module": "autoreload", "message": "C:\Users\Acer\Desktop\serious_codes\old_work\business_work\himalyan_fresh\himalyan_fresh_ecom\backend\apps\products\admin.py changed, reloading."}
+{"timestamp": "2026-11-18 00:12:02,821", "level": "INFO", "module": "autoreload", "message": "Watching for file changes with StatReloader"}
+{"timestamp": "2026-11-18 00:12:09,100", "level": "INFO", "module": "autoreload", "message": "C:\Users\Acer\Desktop\serious_codes\old_work\business_work\himalyan_fresh\himalyan_fresh_ecom\backend\apps\content\admin.py changed, reloading."}
+{"timestamp": "2026-11-18 00:12:10,345", "level": "INFO", "module": "autoreload", "message": "Watching for file changes with StatReloader"}
+{"timestamp": "2026-11-18 00:12:15,241", "level": "INFO", "module": "autoreload", "message": "C:\Users\Acer\Desktop\serious_codes\old_work\business_work\himalyan_fresh\himalyan_fresh_ecom\backend\apps\content\admin.py changed, reloading."}
+{"timestamp": "2026-11-18 00:12:16,839", "level": "INFO", "module": "autoreload", "message": "Watching for file changes with StatReloader"}
+{"timestamp": "2026-11-18 00:13:03,654", "level": "INFO", "module": "autoreload", "message": "C:\Users\Acer\Desktop\serious_codes\old_work\business_work\himalyan_fresh\himalyan_fresh_ecom\backend\apps\products\serializers.py changed, reloading."}
+{"timestamp": "2026-11-18 00:13:05,100", "level": "INFO", "module": "autoreload", "message": "Watching for file changes with StatReloader"}
+{"timestamp": "2026-11-18 00:13:35,203", "level": "INFO", "module": "autoreload", "message": "C:\Users\Acer\Desktop\serious_codes\old_work\business_work\himalyan_fresh\himalyan_fresh_ecom\backend\apps\products\views.py changed, reloading."}
+{"timestamp": "2026-11-18 00:13:36,629", "level": "INFO", "module": "autoreload", "message": "Watching for file changes with StatReloader"}
+{"timestamp": "2026-11-18 00:14:08,519", "level": "INFO", "module": "autoreload", "message": "C:\Users\Acer\Desktop\serious_codes\old_work\business_work\himalyan_fresh\himalyan_fresh_ecom\backend\apps\products\urls.py changed, reloading."}
+{"timestamp": "2026-11-18 00:14:09,748", "level": "INFO", "module": "autoreload", "message": "Watching for file changes with StatReloader"}
+{"timestamp": "2026-11-18 00:14:31,652", "level": "INFO", "module": "autoreload", "message": "C:\Users\Acer\Desktop\serious_codes\old_work\business_work\himalyan_fresh\himalyan_fresh_ecom\backend\apps\api\v1\urls.py changed, reloading."}
+{"timestamp": "2026-11-18 00:14:33,284", "level": "INFO", "module": "autoreload", "message": "Watching for file changes with StatReloader"}
+{"timestamp": "2026-11-18 00:27:41,310", "level": "INFO", "module": "autoreload", "message": "C:\Users\Acer\Desktop\serious_codes\old_work\business_work\himalyan_fresh\himalyan_fresh_ecom\backend\core\settings\development.py changed, reloading."}
+{"timestamp": "2026-11-18 00:27:44,831", "level": "INFO", "module": "autoreload", "message": "Watching for file changes with StatReloader"}
+{"timestamp": "2026-11-18 00:28:20,535", "level": "ERROR", "module": "log", "message": "Invalid HTTP_HOST header: 'testserver'. You may need to add 'testserver' to ALLOWED_HOSTS."}
+Traceback (most recent call last):
+  File "C:\Users\Acer\Desktop\serious_codes\old_work\business_work\himalyan_fresh\himalyan_fresh_ecom\backend\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Acer\Desktop\serious_codes\old_work\business_work\himalyan_fresh\himalyan_fresh_ecom\backend\.venv\Lib\site-packages\django\utils\deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+  File "C:\Users\Acer\Desktop\serious_codes\old_work\business_work\himalyan_fresh\himalyan_fresh_ecom\backend\.venv\Lib\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+  File "C:\Users\Acer\Desktop\serious_codes\old_work\business_work\himalyan_fresh\himalyan_fresh_ecom\backend\.venv\Lib\site-packages\django\http\request.py", line 203, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: 'testserver'. You may need to add 'testserver' to ALLOWED_HOSTS.
+{"timestamp": "2026-11-18 00:34:09,965", "level": "ERROR", "module": "log", "message": "Internal Server Error: /api/v1/products/royal-red-delicious/upload-image/"}
+Traceback (most recent call last):
+  File "C:\Users\Acer\Desktop\serious_codes\old_work\business_work\himalyan_fresh\himalyan_fresh_ecom\backend\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Acer\Desktop\serious_codes\old_work\business_work\himalyan_fresh\himalyan_fresh_ecom\backend\.venv\Lib\site-packages\django\utils\deprecation.py", line 122, in __call__
+    response = self.process_response(request, response)
+  File "C:\Users\Acer\Desktop\serious_codes\old_work\business_work\himalyan_fresh\himalyan_fresh_ecom\backend\apps\api\middleware.py", line 28, in process_response
+    if hasattr(request, "body") and request.body:
+       ~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\Acer\Desktop\serious_codes\old_work\business_work\himalyan_fresh\himalyan_fresh_ecom\backend\.venv\Lib\site-packages\django\http\request.py", line 380, in body
+    raise RawPostDataException(
+        "You cannot access body after reading from request's data stream"
+    )
+django.http.request.RawPostDataException: You cannot access body after reading from request's data stream
+{"timestamp": "2026-11-18 00:34:18,971", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/categories/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:34:18,972", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/districts/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:34:18,975", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/products/featured/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:34:18,975", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/testimonials/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:34:19,009", "level": "WARNING", "module": "log", "message": "Unauthorized: /api/v1/categories/"}
+{"timestamp": "2026-11-18 00:34:19,009", "level": "WARNING", "module": "log", "message": "Unauthorized: /api/v1/products/featured/"}
+{"timestamp": "2026-11-18 00:34:19,010", "level": "WARNING", "module": "log", "message": "Unauthorized: /api/v1/districts/"}
+{"timestamp": "2026-11-18 00:34:19,011", "level": "WARNING", "module": "log", "message": "Unauthorized: /api/v1/testimonials/"}
+{"timestamp": "2026-11-18 00:34:19,011", "level": "WARNING", "module": "basehttp", "message": ""GET /api/v1/categories/ HTTP/1.1" 401 172"}
+{"timestamp": "2026-11-18 00:34:19,012", "level": "WARNING", "module": "basehttp", "message": ""GET /api/v1/products/featured/ HTTP/1.1" 401 172"}
+{"timestamp": "2026-11-18 00:34:19,013", "level": "WARNING", "module": "basehttp", "message": ""GET /api/v1/districts/ HTTP/1.1" 401 172"}
+{"timestamp": "2026-11-18 00:34:19,013", "level": "WARNING", "module": "basehttp", "message": ""GET /api/v1/testimonials/ HTTP/1.1" 401 172"}
+{"timestamp": "2026-11-18 00:34:20,035", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/testimonials/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:34:20,036", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/products/featured/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:34:20,036", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/categories/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:34:20,039", "level": "WARNING", "module": "log", "message": "Unauthorized: /api/v1/testimonials/"}
+{"timestamp": "2026-11-18 00:34:20,038", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/districts/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:34:20,040", "level": "WARNING", "module": "log", "message": "Unauthorized: /api/v1/products/featured/"}
+{"timestamp": "2026-11-18 00:34:20,040", "level": "WARNING", "module": "basehttp", "message": ""GET /api/v1/testimonials/ HTTP/1.1" 401 172"}
+{"timestamp": "2026-11-18 00:34:20,041", "level": "WARNING", "module": "log", "message": "Unauthorized: /api/v1/categories/"}
+{"timestamp": "2026-11-18 00:34:20,042", "level": "WARNING", "module": "basehttp", "message": ""GET /api/v1/products/featured/ HTTP/1.1" 401 172"}
+{"timestamp": "2026-11-18 00:34:20,043", "level": "WARNING", "module": "basehttp", "message": ""GET /api/v1/categories/ HTTP/1.1" 401 172"}
+{"timestamp": "2026-11-18 00:34:20,043", "level": "WARNING", "module": "log", "message": "Unauthorized: /api/v1/districts/"}
+{"timestamp": "2026-11-18 00:34:20,045", "level": "WARNING", "module": "basehttp", "message": ""GET /api/v1/districts/ HTTP/1.1" 401 172"}
+{"timestamp": "2026-11-18 00:34:22,044", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/testimonials/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:34:22,046", "level": "WARNING", "module": "log", "message": "Unauthorized: /api/v1/testimonials/"}
+{"timestamp": "2026-11-18 00:34:22,047", "level": "WARNING", "module": "basehttp", "message": ""GET /api/v1/testimonials/ HTTP/1.1" 401 172"}
+{"timestamp": "2026-11-18 00:34:22,050", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/products/featured/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:34:22,050", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/categories/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:34:22,050", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/districts/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:34:22,055", "level": "WARNING", "module": "log", "message": "Unauthorized: /api/v1/categories/"}
+{"timestamp": "2026-11-18 00:34:22,055", "level": "WARNING", "module": "log", "message": "Unauthorized: /api/v1/products/featured/"}
+{"timestamp": "2026-11-18 00:34:22,056", "level": "WARNING", "module": "log", "message": "Unauthorized: /api/v1/districts/"}
+{"timestamp": "2026-11-18 00:34:22,056", "level": "WARNING", "module": "basehttp", "message": ""GET /api/v1/categories/ HTTP/1.1" 401 172"}
+{"timestamp": "2026-11-18 00:34:22,057", "level": "WARNING", "module": "basehttp", "message": ""GET /api/v1/products/featured/ HTTP/1.1" 401 172"}
+{"timestamp": "2026-11-18 00:34:22,058", "level": "WARNING", "module": "basehttp", "message": ""GET /api/v1/districts/ HTTP/1.1" 401 172"}
+{"timestamp": "2026-11-18 00:34:25,095", "level": "INFO", "module": "autoreload", "message": "C:\Users\Acer\Desktop\serious_codes\old_work\business_work\himalyan_fresh\himalyan_fresh_ecom\backend\apps\api\middleware.py changed, reloading."}
+{"timestamp": "2026-11-18 00:34:27,099", "level": "INFO", "module": "autoreload", "message": "Watching for file changes with StatReloader"}
+{"timestamp": "2026-11-18 00:34:28,045", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/products/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:34:28,046", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/categories/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:34:28,055", "level": "WARNING", "module": "log", "message": "Unauthorized: /api/v1/products/"}
+{"timestamp": "2026-11-18 00:34:28,055", "level": "WARNING", "module": "log", "message": "Unauthorized: /api/v1/categories/"}
+{"timestamp": "2026-11-18 00:34:28,056", "level": "WARNING", "module": "basehttp", "message": ""GET /api/v1/products/ HTTP/1.1" 401 172"}
+{"timestamp": "2026-11-18 00:34:28,056", "level": "WARNING", "module": "basehttp", "message": ""GET /api/v1/categories/ HTTP/1.1" 401 172"}
+{"timestamp": "2026-11-18 00:34:29,061", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/categories/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:34:29,061", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/products/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:34:29,064", "level": "WARNING", "module": "log", "message": "Unauthorized: /api/v1/products/"}
+{"timestamp": "2026-11-18 00:34:29,064", "level": "WARNING", "module": "log", "message": "Unauthorized: /api/v1/categories/"}
+{"timestamp": "2026-11-18 00:34:29,065", "level": "WARNING", "module": "basehttp", "message": ""GET /api/v1/products/ HTTP/1.1" 401 172"}
+{"timestamp": "2026-11-18 00:34:29,066", "level": "WARNING", "module": "basehttp", "message": ""GET /api/v1/categories/ HTTP/1.1" 401 172"}
+{"timestamp": "2026-11-18 00:34:31,074", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/categories/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:34:31,074", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/products/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:34:31,078", "level": "WARNING", "module": "log", "message": "Unauthorized: /api/v1/products/"}
+{"timestamp": "2026-11-18 00:34:31,079", "level": "WARNING", "module": "log", "message": "Unauthorized: /api/v1/categories/"}
+{"timestamp": "2026-11-18 00:34:31,080", "level": "WARNING", "module": "basehttp", "message": ""GET /api/v1/products/ HTTP/1.1" 401 172"}
+{"timestamp": "2026-11-18 00:34:31,081", "level": "WARNING", "module": "basehttp", "message": ""GET /api/v1/categories/ HTTP/1.1" 401 172"}
+{"timestamp": "2026-11-18 00:35:00,525", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/categories/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:35:00,525", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/products/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:35:00,531", "level": "WARNING", "module": "log", "message": "Unauthorized: /api/v1/categories/"}
+{"timestamp": "2026-11-18 00:35:00,532", "level": "WARNING", "module": "log", "message": "Unauthorized: /api/v1/products/"}
+{"timestamp": "2026-11-18 00:35:00,533", "level": "WARNING", "module": "basehttp", "message": ""GET /api/v1/products/ HTTP/1.1" 401 172"}
+{"timestamp": "2026-11-18 00:35:00,533", "level": "WARNING", "module": "basehttp", "message": ""GET /api/v1/categories/ HTTP/1.1" 401 172"}
+{"timestamp": "2026-11-18 00:35:03,299", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/categories/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:35:03,300", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/districts/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:35:03,305", "level": "WARNING", "module": "log", "message": "Unauthorized: /api/v1/categories/"}
+{"timestamp": "2026-11-18 00:35:03,306", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/products/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:35:03,306", "level": "WARNING", "module": "log", "message": "Unauthorized: /api/v1/districts/"}
+{"timestamp": "2026-11-18 00:35:03,309", "level": "WARNING", "module": "log", "message": "Unauthorized: /api/v1/products/"}
+{"timestamp": "2026-11-18 00:35:03,310", "level": "WARNING", "module": "basehttp", "message": ""GET /api/v1/categories/ HTTP/1.1" 401 172"}
+{"timestamp": "2026-11-18 00:35:03,311", "level": "WARNING", "module": "basehttp", "message": ""GET /api/v1/products/ HTTP/1.1" 401 172"}
+{"timestamp": "2026-11-18 00:35:03,311", "level": "WARNING", "module": "basehttp", "message": ""GET /api/v1/districts/ HTTP/1.1" 401 172"}
+{"timestamp": "2026-11-18 00:35:04,327", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/products/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:35:04,328", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/districts/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:35:04,328", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/categories/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:35:04,331", "level": "WARNING", "module": "log", "message": "Unauthorized: /api/v1/products/"}
+{"timestamp": "2026-11-18 00:35:04,331", "level": "WARNING", "module": "log", "message": "Unauthorized: /api/v1/districts/"}
+{"timestamp": "2026-11-18 00:35:04,332", "level": "WARNING", "module": "log", "message": "Unauthorized: /api/v1/categories/"}
+{"timestamp": "2026-11-18 00:35:04,333", "level": "WARNING", "module": "basehttp", "message": ""GET /api/v1/products/ HTTP/1.1" 401 172"}
+{"timestamp": "2026-11-18 00:35:04,333", "level": "WARNING", "module": "basehttp", "message": ""GET /api/v1/categories/ HTTP/1.1" 401 172"}
+{"timestamp": "2026-11-18 00:35:04,334", "level": "WARNING", "module": "basehttp", "message": ""GET /api/v1/districts/ HTTP/1.1" 401 172"}
+{"timestamp": "2026-11-18 00:35:06,339", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/districts/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:35:06,340", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/products/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:35:06,342", "level": "WARNING", "module": "log", "message": "Unauthorized: /api/v1/districts/"}
+{"timestamp": "2026-11-18 00:35:06,341", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/categories/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:35:06,343", "level": "WARNING", "module": "log", "message": "Unauthorized: /api/v1/products/"}
+{"timestamp": "2026-11-18 00:35:06,343", "level": "WARNING", "module": "basehttp", "message": ""GET /api/v1/districts/ HTTP/1.1" 401 172"}
+{"timestamp": "2026-11-18 00:35:06,345", "level": "WARNING", "module": "basehttp", "message": ""GET /api/v1/products/ HTTP/1.1" 401 172"}
+{"timestamp": "2026-11-18 00:35:06,346", "level": "WARNING", "module": "log", "message": "Unauthorized: /api/v1/categories/"}
+{"timestamp": "2026-11-18 00:35:06,347", "level": "WARNING", "module": "basehttp", "message": ""GET /api/v1/categories/ HTTP/1.1" 401 172"}
+{"timestamp": "2026-11-18 00:35:10,353", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/districts/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:35:10,353", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/categories/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:35:10,354", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/products/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:35:10,359", "level": "WARNING", "module": "log", "message": "Unauthorized: /api/v1/products/"}
+{"timestamp": "2026-11-18 00:35:10,359", "level": "WARNING", "module": "log", "message": "Unauthorized: /api/v1/categories/"}
+{"timestamp": "2026-11-18 00:35:10,360", "level": "WARNING", "module": "log", "message": "Unauthorized: /api/v1/districts/"}
+{"timestamp": "2026-11-18 00:35:10,361", "level": "WARNING", "module": "basehttp", "message": ""GET /api/v1/products/ HTTP/1.1" 401 172"}
+{"timestamp": "2026-11-18 00:35:10,362", "level": "WARNING", "module": "basehttp", "message": ""GET /api/v1/categories/ HTTP/1.1" 401 172"}
+{"timestamp": "2026-11-18 00:35:10,362", "level": "WARNING", "module": "basehttp", "message": ""GET /api/v1/districts/ HTTP/1.1" 401 172"}
+{"timestamp": "2026-11-18 00:35:13,123", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/categories/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:35:13,124", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/products/featured/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:35:13,125", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/districts/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:35:13,127", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/testimonials/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:35:13,128", "level": "WARNING", "module": "log", "message": "Unauthorized: /api/v1/categories/"}
+{"timestamp": "2026-11-18 00:35:13,132", "level": "WARNING", "module": "log", "message": "Unauthorized: /api/v1/products/featured/"}
+{"timestamp": "2026-11-18 00:35:13,133", "level": "WARNING", "module": "log", "message": "Unauthorized: /api/v1/testimonials/"}
+{"timestamp": "2026-11-18 00:35:13,133", "level": "WARNING", "module": "log", "message": "Unauthorized: /api/v1/districts/"}
+{"timestamp": "2026-11-18 00:35:13,133", "level": "WARNING", "module": "basehttp", "message": ""GET /api/v1/categories/ HTTP/1.1" 401 172"}
+{"timestamp": "2026-11-18 00:35:13,134", "level": "WARNING", "module": "basehttp", "message": ""GET /api/v1/testimonials/ HTTP/1.1" 401 172"}
+{"timestamp": "2026-11-18 00:35:13,135", "level": "WARNING", "module": "basehttp", "message": ""GET /api/v1/products/featured/ HTTP/1.1" 401 172"}
+{"timestamp": "2026-11-18 00:35:13,136", "level": "WARNING", "module": "basehttp", "message": ""GET /api/v1/districts/ HTTP/1.1" 401 172"}
+{"timestamp": "2026-11-18 00:35:14,242", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/testimonials/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:35:14,242", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/products/featured/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:35:14,242", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/categories/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:35:14,243", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/districts/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:35:14,249", "level": "WARNING", "module": "log", "message": "Unauthorized: /api/v1/products/featured/"}
+{"timestamp": "2026-11-18 00:35:14,248", "level": "WARNING", "module": "log", "message": "Unauthorized: /api/v1/districts/"}
+{"timestamp": "2026-11-18 00:35:14,249", "level": "WARNING", "module": "log", "message": "Unauthorized: /api/v1/categories/"}
+{"timestamp": "2026-11-18 00:35:14,250", "level": "WARNING", "module": "basehttp", "message": ""GET /api/v1/products/featured/ HTTP/1.1" 401 172"}
+{"timestamp": "2026-11-18 00:35:14,250", "level": "WARNING", "module": "log", "message": "Unauthorized: /api/v1/testimonials/"}
+{"timestamp": "2026-11-18 00:35:14,250", "level": "WARNING", "module": "basehttp", "message": ""GET /api/v1/districts/ HTTP/1.1" 401 172"}
+{"timestamp": "2026-11-18 00:35:14,251", "level": "WARNING", "module": "basehttp", "message": ""GET /api/v1/categories/ HTTP/1.1" 401 172"}
+{"timestamp": "2026-11-18 00:35:14,252", "level": "WARNING", "module": "basehttp", "message": ""GET /api/v1/testimonials/ HTTP/1.1" 401 172"}
+{"timestamp": "2026-11-18 00:35:16,260", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/products/featured/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:35:16,260", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/testimonials/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:35:16,260", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/districts/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:35:16,261", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/categories/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:35:16,265", "level": "WARNING", "module": "log", "message": "Unauthorized: /api/v1/testimonials/"}
+{"timestamp": "2026-11-18 00:35:16,266", "level": "WARNING", "module": "log", "message": "Unauthorized: /api/v1/categories/"}
+{"timestamp": "2026-11-18 00:35:16,266", "level": "WARNING", "module": "log", "message": "Unauthorized: /api/v1/products/featured/"}
+{"timestamp": "2026-11-18 00:35:16,266", "level": "WARNING", "module": "basehttp", "message": ""GET /api/v1/testimonials/ HTTP/1.1" 401 172"}
+{"timestamp": "2026-11-18 00:35:16,268", "level": "WARNING", "module": "log", "message": "Unauthorized: /api/v1/districts/"}
+{"timestamp": "2026-11-18 00:35:16,269", "level": "WARNING", "module": "basehttp", "message": ""GET /api/v1/categories/ HTTP/1.1" 401 172"}
+{"timestamp": "2026-11-18 00:35:16,269", "level": "WARNING", "module": "basehttp", "message": ""GET /api/v1/products/featured/ HTTP/1.1" 401 172"}
+{"timestamp": "2026-11-18 00:35:16,270", "level": "WARNING", "module": "basehttp", "message": ""GET /api/v1/districts/ HTTP/1.1" 401 172"}
+{"timestamp": "2026-11-18 00:35:20,278", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/categories/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:35:20,278", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/districts/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:35:20,278", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/testimonials/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:35:20,279", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/products/featured/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:35:20,286", "level": "WARNING", "module": "log", "message": "Unauthorized: /api/v1/testimonials/"}
+{"timestamp": "2026-11-18 00:35:20,286", "level": "WARNING", "module": "log", "message": "Unauthorized: /api/v1/products/featured/"}
+{"timestamp": "2026-11-18 00:35:20,286", "level": "WARNING", "module": "log", "message": "Unauthorized: /api/v1/districts/"}
+{"timestamp": "2026-11-18 00:35:20,287", "level": "WARNING", "module": "log", "message": "Unauthorized: /api/v1/categories/"}
+{"timestamp": "2026-11-18 00:35:20,289", "level": "WARNING", "module": "basehttp", "message": ""GET /api/v1/testimonials/ HTTP/1.1" 401 172"}
+{"timestamp": "2026-11-18 00:35:20,289", "level": "WARNING", "module": "basehttp", "message": ""GET /api/v1/districts/ HTTP/1.1" 401 172"}
+{"timestamp": "2026-11-18 00:35:20,289", "level": "WARNING", "module": "basehttp", "message": ""GET /api/v1/products/featured/ HTTP/1.1" 401 172"}
+{"timestamp": "2026-11-18 00:35:20,290", "level": "WARNING", "module": "basehttp", "message": ""GET /api/v1/categories/ HTTP/1.1" 401 172"}
+{"timestamp": "2026-11-18 00:35:32,783", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/districts/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:35:32,784", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/categories/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:35:32,788", "level": "WARNING", "module": "log", "message": "Unauthorized: /api/v1/districts/"}
+{"timestamp": "2026-11-18 00:35:32,788", "level": "WARNING", "module": "log", "message": "Unauthorized: /api/v1/categories/"}
+{"timestamp": "2026-11-18 00:35:32,790", "level": "WARNING", "module": "basehttp", "message": ""GET /api/v1/districts/ HTTP/1.1" 401 172"}
+{"timestamp": "2026-11-18 00:35:32,790", "level": "WARNING", "module": "basehttp", "message": ""GET /api/v1/categories/ HTTP/1.1" 401 172"}
+{"timestamp": "2026-11-18 00:35:32,793", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/testimonials/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:35:32,794", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/products/featured/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:35:32,798", "level": "WARNING", "module": "log", "message": "Unauthorized: /api/v1/testimonials/"}
+{"timestamp": "2026-11-18 00:35:32,799", "level": "WARNING", "module": "log", "message": "Unauthorized: /api/v1/products/featured/"}
+{"timestamp": "2026-11-18 00:35:32,800", "level": "WARNING", "module": "basehttp", "message": ""GET /api/v1/products/featured/ HTTP/1.1" 401 172"}
+{"timestamp": "2026-11-18 00:35:32,800", "level": "WARNING", "module": "basehttp", "message": ""GET /api/v1/testimonials/ HTTP/1.1" 401 172"}
+{"timestamp": "2026-11-18 00:35:33,914", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/districts/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:35:33,915", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/categories/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:35:33,915", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/products/featured/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:35:33,915", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/testimonials/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:35:33,923", "level": "WARNING", "module": "log", "message": "Unauthorized: /api/v1/categories/"}
+{"timestamp": "2026-11-18 00:35:33,923", "level": "WARNING", "module": "log", "message": "Unauthorized: /api/v1/testimonials/"}
+{"timestamp": "2026-11-18 00:35:33,924", "level": "WARNING", "module": "log", "message": "Unauthorized: /api/v1/products/featured/"}
+{"timestamp": "2026-11-18 00:35:33,924", "level": "WARNING", "module": "log", "message": "Unauthorized: /api/v1/districts/"}
+{"timestamp": "2026-11-18 00:35:33,927", "level": "WARNING", "module": "basehttp", "message": ""GET /api/v1/categories/ HTTP/1.1" 401 172"}
+{"timestamp": "2026-11-18 00:35:33,927", "level": "WARNING", "module": "basehttp", "message": ""GET /api/v1/testimonials/ HTTP/1.1" 401 172"}
+{"timestamp": "2026-11-18 00:35:33,928", "level": "WARNING", "module": "basehttp", "message": ""GET /api/v1/products/featured/ HTTP/1.1" 401 172"}
+{"timestamp": "2026-11-18 00:35:33,929", "level": "WARNING", "module": "basehttp", "message": ""GET /api/v1/districts/ HTTP/1.1" 401 172"}
+{"timestamp": "2026-11-18 00:35:35,938", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/categories/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:35:35,938", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/districts/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:35:35,938", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/products/featured/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:35:35,939", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/testimonials/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:35:35,945", "level": "WARNING", "module": "log", "message": "Unauthorized: /api/v1/categories/"}
+{"timestamp": "2026-11-18 00:35:35,947", "level": "WARNING", "module": "log", "message": "Unauthorized: /api/v1/districts/"}
+{"timestamp": "2026-11-18 00:35:35,947", "level": "WARNING", "module": "log", "message": "Unauthorized: /api/v1/testimonials/"}
+{"timestamp": "2026-11-18 00:35:35,948", "level": "WARNING", "module": "log", "message": "Unauthorized: /api/v1/products/featured/"}
+{"timestamp": "2026-11-18 00:35:35,949", "level": "WARNING", "module": "basehttp", "message": ""GET /api/v1/testimonials/ HTTP/1.1" 401 172"}
+{"timestamp": "2026-11-18 00:35:35,950", "level": "WARNING", "module": "basehttp", "message": ""GET /api/v1/categories/ HTTP/1.1" 401 172"}
+{"timestamp": "2026-11-18 00:35:35,950", "level": "WARNING", "module": "basehttp", "message": ""GET /api/v1/products/featured/ HTTP/1.1" 401 172"}
+{"timestamp": "2026-11-18 00:35:35,950", "level": "WARNING", "module": "basehttp", "message": ""GET /api/v1/districts/ HTTP/1.1" 401 172"}
+{"timestamp": "2026-11-18 00:35:39,963", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/categories/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:35:39,964", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/districts/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:35:39,964", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/testimonials/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:35:39,964", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/products/featured/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:35:39,971", "level": "WARNING", "module": "log", "message": "Unauthorized: /api/v1/categories/"}
+{"timestamp": "2026-11-18 00:35:39,971", "level": "WARNING", "module": "log", "message": "Unauthorized: /api/v1/testimonials/"}
+{"timestamp": "2026-11-18 00:35:39,972", "level": "WARNING", "module": "log", "message": "Unauthorized: /api/v1/products/featured/"}
+{"timestamp": "2026-11-18 00:35:39,973", "level": "WARNING", "module": "log", "message": "Unauthorized: /api/v1/districts/"}
+{"timestamp": "2026-11-18 00:35:39,975", "level": "WARNING", "module": "basehttp", "message": ""GET /api/v1/categories/ HTTP/1.1" 401 172"}
+{"timestamp": "2026-11-18 00:35:39,976", "level": "WARNING", "module": "basehttp", "message": ""GET /api/v1/testimonials/ HTTP/1.1" 401 172"}
+{"timestamp": "2026-11-18 00:35:39,976", "level": "WARNING", "module": "basehttp", "message": ""GET /api/v1/products/featured/ HTTP/1.1" 401 172"}
+{"timestamp": "2026-11-18 00:35:39,977", "level": "WARNING", "module": "basehttp", "message": ""GET /api/v1/districts/ HTTP/1.1" 401 172"}
+{"timestamp": "2026-11-18 00:36:12,999", "level": "WARNING", "module": "log", "message": "Unauthorized: /api/v1/categories/"}
+{"timestamp": "2026-11-18 00:36:48,799", "level": "INFO", "module": "autoreload", "message": "C:\Users\Acer\Desktop\serious_codes\old_work\business_work\himalyan_fresh\himalyan_fresh_ecom\backend\core\settings\base.py changed, reloading."}
+{"timestamp": "2026-11-18 00:36:51,507", "level": "INFO", "module": "autoreload", "message": "Watching for file changes with StatReloader"}
+{"timestamp": "2026-11-18 00:37:09,577", "level": "WARNING", "module": "log", "message": "Unauthorized: /api/v1/wishlist/"}
+{"timestamp": "2026-11-18 00:37:27,880", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/categories/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:37:27,883", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/districts/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:37:27,883", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/products/featured/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:37:27,883", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/testimonials/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:37:27,907", "level": "INFO", "module": "basehttp", "message": ""GET /api/v1/testimonials/ HTTP/1.1" 200 1138"}
+{"timestamp": "2026-11-18 00:37:27,923", "level": "INFO", "module": "basehttp", "message": ""GET /api/v1/categories/ HTTP/1.1" 200 1828"}
+{"timestamp": "2026-11-18 00:37:27,943", "level": "INFO", "module": "basehttp", "message": ""GET /api/v1/districts/ HTTP/1.1" 200 6513"}
+{"timestamp": "2026-11-18 00:37:27,965", "level": "INFO", "module": "basehttp", "message": ""GET /api/v1/products/featured/ HTTP/1.1" 200 14497"}
+{"timestamp": "2026-11-18 00:37:28,092", "level": "INFO", "module": "basehttp", "message": ""GET /media/categories/dry-fruits-nuts.jpg HTTP/1.1" 200 774223"}
+{"timestamp": "2026-11-18 00:37:28,093", "level": "INFO", "module": "basehttp", "message": ""GET /media/categories/royal-apples.jpg HTTP/1.1" 200 676375"}
+{"timestamp": "2026-11-18 00:37:28,094", "level": "INFO", "module": "basehttp", "message": ""GET /media/categories/organic-fruits.jpg HTTP/1.1" 200 766010"}
+{"timestamp": "2026-11-18 00:37:28,143", "level": "INFO", "module": "basehttp", "message": ""GET /media/categories/mountain-vegetables.jpg HTTP/1.1" 200 819062"}
+{"timestamp": "2026-11-18 00:37:28,144", "level": "INFO", "module": "basehttp", "message": ""GET /media/categories/honey-preserves.jpg HTTP/1.1" 200 699715"}
+{"timestamp": "2026-11-18 00:37:28,176", "level": "INFO", "module": "basehttp", "message": ""GET /media/categories/herbal-medicinal.jpg HTTP/1.1" 200 810876"}
+{"timestamp": "2026-11-18 00:37:28,198", "level": "INFO", "module": "basehttp", "message": ""GET /media/products/mountain-green-tea.jpg HTTP/1.1" 200 679191"}
+{"timestamp": "2026-11-18 00:37:28,199", "level": "INFO", "module": "basehttp", "message": ""GET /media/products/red-delicious-box.jpg HTTP/1.1" 200 904258"}
+{"timestamp": "2026-11-18 00:37:28,224", "level": "INFO", "module": "basehttp", "message": ""GET /media/products/raw-organic-honey.jpg HTTP/1.1" 200 716279"}
+{"timestamp": "2026-11-18 00:37:28,225", "level": "INFO", "module": "basehttp", "message": ""GET /media/products/alpine-cherry.jpg HTTP/1.1" 200 684538"}
+{"timestamp": "2026-11-18 00:37:57,814", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/categories/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:37:57,821", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/districts/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:37:57,822", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/testimonials/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:37:57,822", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/products/featured/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:37:57,855", "level": "INFO", "module": "basehttp", "message": ""GET /api/v1/testimonials/ HTTP/1.1" 200 1138"}
+{"timestamp": "2026-11-18 00:37:57,883", "level": "INFO", "module": "basehttp", "message": ""GET /api/v1/categories/ HTTP/1.1" 200 1828"}
+{"timestamp": "2026-11-18 00:37:57,933", "level": "INFO", "module": "basehttp", "message": ""GET /api/v1/districts/ HTTP/1.1" 200 6513"}
+{"timestamp": "2026-11-18 00:37:57,964", "level": "INFO", "module": "basehttp", "message": ""GET /api/v1/products/featured/ HTTP/1.1" 200 14497"}
+{"timestamp": "2026-11-18 00:38:16,771", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/blogs/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:38:16,803", "level": "INFO", "module": "basehttp", "message": ""GET /api/v1/blogs/ HTTP/1.1" 200 8809"}
+{"timestamp": "2026-11-18 00:38:16,855", "level": "INFO", "module": "basehttp", "message": ""GET /media/blog_posts/blog-art-apple-growing-kinnaur.jpg HTTP/1.1" 200 676375"}
+{"timestamp": "2026-11-18 00:38:16,857", "level": "INFO", "module": "basehttp", "message": ""GET /media/blog_posts/blog-farm-to-table-himachal-honey.jpg HTTP/1.1" 200 716279"}
+{"timestamp": "2026-11-18 00:38:16,860", "level": "INFO", "module": "basehttp", "message": ""GET /media/blog_posts/blog-kangra-tea-legacy.jpg HTTP/1.1" 200 679191"}
+{"timestamp": "2026-11-18 00:38:16,861", "level": "INFO", "module": "basehttp", "message": ""GET /media/blog_posts/blog-seasonal-fruit-guide-himachal.jpg HTTP/1.1" 200 766010"}
+{"timestamp": "2026-11-18 00:38:16,861", "level": "INFO", "module": "basehttp", "message": ""GET /media/blog_posts/blog-apple-preserves-himachali.jpg HTTP/1.1" 200 699715"}
+{"timestamp": "2026-11-18 00:38:16,864", "level": "INFO", "module": "basehttp", "message": ""GET /media/blog_posts/blog-sustainable-farming-himachal.jpg HTTP/1.1" 200 819062"}
+{"timestamp": "2026-11-18 00:38:25,673", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/products/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:38:25,754", "level": "INFO", "module": "basehttp", "message": ""GET /api/v1/products/ HTTP/1.1" 200 21615"}
+{"timestamp": "2026-11-18 00:38:25,770", "level": "INFO", "module": "basehttp", "message": ""GET /media/products/alpine-cherry.jpg HTTP/1.1" 304 0"}
+{"timestamp": "2026-11-18 00:38:25,771", "level": "INFO", "module": "basehttp", "message": ""GET /media/products/raw-organic-honey.jpg HTTP/1.1" 304 0"}
+{"timestamp": "2026-11-18 00:38:25,772", "level": "INFO", "module": "basehttp", "message": ""GET /media/products/red-delicious-box.jpg HTTP/1.1" 304 0"}
+{"timestamp": "2026-11-18 00:38:25,772", "level": "INFO", "module": "basehttp", "message": ""GET /media/products/mountain-green-tea.jpg HTTP/1.1" 304 0"}
+{"timestamp": "2026-11-18 00:38:25,797", "level": "INFO", "module": "basehttp", "message": ""GET /media/products/kinnaur-black-walnuts.jpg HTTP/1.1" 200 809101"}
+{"timestamp": "2026-11-18 00:38:25,801", "level": "INFO", "module": "basehttp", "message": ""GET /media/products/organic-strawberries.jpg HTTP/1.1" 200 766010"}
+{"timestamp": "2026-11-18 00:38:25,839", "level": "INFO", "module": "basehttp", "message": ""GET /media/products/mixed-berry-preserve.jpg HTTP/1.1" 200 699715"}
+{"timestamp": "2026-11-18 00:38:25,840", "level": "INFO", "module": "basehttp", "message": ""GET /media/products/alpine-plums.jpg HTTP/1.1" 200 766010"}
+{"timestamp": "2026-11-18 00:38:25,841", "level": "INFO", "module": "basehttp", "message": ""GET /media/products/golden-delicious-premium.jpg HTTP/1.1" 200 652155"}
+{"timestamp": "2026-11-18 00:38:25,852", "level": "INFO", "module": "basehttp", "message": ""GET /media/products/kangra-green-almonds.jpg HTTP/1.1" 200 774223"}
+{"timestamp": "2026-11-18 00:38:25,866", "level": "INFO", "module": "basehttp", "message": ""GET /media/products/mountain-potatoes.jpg HTTP/1.1" 200 819062"}
+{"timestamp": "2026-11-18 00:38:25,896", "level": "INFO", "module": "basehttp", "message": ""GET /media/products/royal-red-delicious.png HTTP/1.1" 200 2456973"}
+{"timestamp": "2026-11-18 00:38:32,432", "level": "INFO", "module": "basehttp", "message": ""GET /media/categories/royal-apples.jpg HTTP/1.1" 200 676375"}
+{"timestamp": "2026-11-18 00:38:32,433", "level": "INFO", "module": "basehttp", "message": ""GET /media/categories/organic-fruits.jpg HTTP/1.1" 200 766010"}
+{"timestamp": "2026-11-18 00:38:32,438", "level": "INFO", "module": "basehttp", "message": ""GET /media/categories/dry-fruits-nuts.jpg HTTP/1.1" 200 774223"}
+{"timestamp": "2026-11-18 00:38:40,010", "level": "INFO", "module": "basehttp", "message": ""GET /admin HTTP/1.1" 301 0"}
+{"timestamp": "2026-11-18 00:38:40,107", "level": "INFO", "module": "basehttp", "message": ""GET /admin/ HTTP/1.1" 302 0"}
+{"timestamp": "2026-11-18 00:38:40,230", "level": "INFO", "module": "basehttp", "message": ""GET /admin/login/?next=/admin/ HTTP/1.1" 200 4169"}
+{"timestamp": "2026-11-18 00:38:40,240", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/css/nav_sidebar.css HTTP/1.1" 200 2810"}
+{"timestamp": "2026-11-18 00:38:40,247", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/css/login.css HTTP/1.1" 200 951"}
+{"timestamp": "2026-11-18 00:38:40,248", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/css/dark_mode.css HTTP/1.1" 200 2808"}
+{"timestamp": "2026-11-18 00:38:40,248", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/css/base.css HTTP/1.1" 200 22120"}
+{"timestamp": "2026-11-18 00:38:40,249", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/css/responsive.css HTTP/1.1" 200 16565"}
+{"timestamp": "2026-11-18 00:38:40,257", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/js/theme.js HTTP/1.1" 200 1653"}
+{"timestamp": "2026-11-18 00:38:40,271", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/js/nav_sidebar.js HTTP/1.1" 200 3063"}
+{"timestamp": "2026-11-18 00:38:42,384", "level": "INFO", "module": "basehttp", "message": ""POST /admin/login/?next=/admin/ HTTP/1.1" 302 0"}
+{"timestamp": "2026-11-18 00:38:42,432", "level": "INFO", "module": "basehttp", "message": ""GET /admin/ HTTP/1.1" 200 39702"}
+{"timestamp": "2026-11-18 00:38:42,449", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/css/dashboard.css HTTP/1.1" 200 441"}
+{"timestamp": "2026-11-18 00:38:42,449", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/img/icon-addlink.svg HTTP/1.1" 200 331"}
+{"timestamp": "2026-11-18 00:38:42,455", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/img/icon-changelink.svg HTTP/1.1" 200 380"}
+{"timestamp": "2026-11-18 00:38:47,107", "level": "INFO", "module": "basehttp", "message": ""GET /admin/content/blogpost/ HTTP/1.1" 200 42537"}
+{"timestamp": "2026-11-18 00:38:47,125", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/css/changelists.css HTTP/1.1" 200 6878"}
+{"timestamp": "2026-11-18 00:38:47,130", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/js/actions.js HTTP/1.1" 200 8076"}
+{"timestamp": "2026-11-18 00:38:47,130", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/js/jquery.init.js HTTP/1.1" 200 347"}
+{"timestamp": "2026-11-18 00:38:47,138", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/js/core.js HTTP/1.1" 200 6208"}
+{"timestamp": "2026-11-18 00:38:47,139", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 200 9777"}
+{"timestamp": "2026-11-18 00:38:47,143", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/img/search.svg HTTP/1.1" 200 458"}
+{"timestamp": "2026-11-18 00:38:47,148", "level": "INFO", "module": "basehttp", "message": ""GET /admin/jsi18n/ HTTP/1.1" 200 3342"}
+{"timestamp": "2026-11-18 00:38:47,148", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/js/urlify.js HTTP/1.1" 200 7887"}
+{"timestamp": "2026-11-18 00:38:47,150", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/js/prepopulate.js HTTP/1.1" 200 1531"}
+{"timestamp": "2026-11-18 00:38:47,151", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/img/icon-yes.svg HTTP/1.1" 200 436"}
+{"timestamp": "2026-11-18 00:38:47,164", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 200 285314"}
+{"timestamp": "2026-11-18 00:38:47,165", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/img/icon-no.svg HTTP/1.1" 200 560"}
+{"timestamp": "2026-11-18 00:38:47,182", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/js/filters.js HTTP/1.1" 200 978"}
+{"timestamp": "2026-11-18 00:38:47,222", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 200 325171"}
+{"timestamp": "2026-11-18 00:38:47,239", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/img/sorting-icons.svg HTTP/1.1" 200 1097"}
+{"timestamp": "2026-11-18 00:38:47,240", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/img/icon-viewlink.svg HTTP/1.1" 200 581"}
+{"timestamp": "2026-11-18 00:38:47,249", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/img/tooltag-add.svg HTTP/1.1" 200 331"}
+{"timestamp": "2026-11-18 00:38:52,427", "level": "INFO", "module": "basehttp", "message": ""GET /admin/content/blogpost/3/change/ HTTP/1.1" 200 56905"}
+{"timestamp": "2026-11-18 00:38:52,437", "level": "INFO", "module": "basehttp", "message": ""GET /admin/jsi18n/ HTTP/1.1" 200 3342"}
+{"timestamp": "2026-11-18 00:38:52,443", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/css/forms.css HTTP/1.1" 200 8525"}
+{"timestamp": "2026-11-18 00:38:52,449", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/js/prepopulate_init.js HTTP/1.1" 200 586"}
+{"timestamp": "2026-11-18 00:38:52,452", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/js/admin/DateTimeShortcuts.js HTTP/1.1" 200 19319"}
+{"timestamp": "2026-11-18 00:38:52,452", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/js/calendar.js HTTP/1.1" 200 9141"}
+{"timestamp": "2026-11-18 00:38:52,454", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/css/widgets.css HTTP/1.1" 200 11973"}
+{"timestamp": "2026-11-18 00:38:52,461", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/img/icon-deletelink.svg HTTP/1.1" 200 392"}
+{"timestamp": "2026-11-18 00:38:52,467", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/js/change_form.js HTTP/1.1" 200 606"}
+{"timestamp": "2026-11-18 00:38:52,501", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/img/icon-calendar.svg HTTP/1.1" 200 1086"}
+{"timestamp": "2026-11-18 00:38:52,501", "level": "INFO", "module": "basehttp", "message": ""GET /static/admin/img/icon-clock.svg HTTP/1.1" 200 677"}
+{"timestamp": "2026-11-18 00:38:58,614", "level": "INFO", "module": "basehttp", "message": ""GET /admin/content/blogcomment/ HTTP/1.1" 200 34640"}
+{"timestamp": "2026-11-18 00:38:58,625", "level": "INFO", "module": "basehttp", "message": ""GET /admin/jsi18n/ HTTP/1.1" 200 3342"}
+{"timestamp": "2026-11-18 00:39:01,208", "level": "INFO", "module": "basehttp", "message": ""GET /admin/content/bloglike/ HTTP/1.1" 200 33823"}
+{"timestamp": "2026-11-18 00:39:01,218", "level": "INFO", "module": "basehttp", "message": ""GET /admin/jsi18n/ HTTP/1.1" 200 3342"}
+{"timestamp": "2026-11-18 00:39:09,181", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/blogs/art-apple-growing-kinnaur/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:39:09,181", "level": "INFO", "module": "basehttp", "message": ""OPTIONS /api/v1/blogs/art-apple-growing-kinnaur/related/ HTTP/1.1" 200 0"}
+{"timestamp": "2026-11-18 00:39:09,197", "level": "INFO", "module": "basehttp", "message": ""GET /api/v1/blogs/art-apple-growing-kinnaur/ HTTP/1.1" 200 1751"}
+{"timestamp": "2026-11-18 00:39:09,205", "level": "INFO", "module": "basehttp", "message": ""GET /api/v1/blogs/art-apple-growing-kinnaur/related/ HTTP/1.1" 200 4215"}
+{"timestamp": "2026-11-18 00:39:24,033", "level": "INFO", "module": "basehttp", "message": ""GET /media/blog_posts/blog-sustainable-farming-himachal.jpg HTTP/1.1" 200 819062"}
+{"timestamp": "2026-11-18 00:39:24,033", "level": "INFO", "module": "basehttp", "message": ""GET /media/blog_posts/blog-apple-preserves-himachali.jpg HTTP/1.1" 200 699715"}
+{"timestamp": "2026-11-18 00:39:50,105", "level": "INFO", "module": "basehttp", "message": ""GET /media/categories/dry-fruits-nuts.jpg HTTP/1.1" 200 774223"}
+{"timestamp": "2026-11-18 00:39:50,115", "level": "INFO", "module": "basehttp", "message": ""GET /media/categories/herbal-medicinal.jpg HTTP/1.1" 200 810876"}
+{"timestamp": "2026-11-18 00:39:50,119", "level": "INFO", "module": "basehttp", "message": ""GET /media/categories/royal-apples.jpg HTTP/1.1" 200 676375"}
+{"timestamp": "2026-11-18 00:39:50,119", "level": "INFO", "module": "basehttp", "message": ""GET /media/categories/honey-preserves.jpg HTTP/1.1" 200 699715"}
+{"timestamp": "2026-11-18 00:39:50,120", "level": "INFO", "module": "basehttp", "message": ""GET /media/categories/mountain-vegetables.jpg HTTP/1.1" 200 819062"}
+{"timestamp": "2026-11-18 00:39:50,123", "level": "INFO", "module": "basehttp", "message": ""GET /media/categories/organic-fruits.jpg HTTP/1.1" 200 766010"}

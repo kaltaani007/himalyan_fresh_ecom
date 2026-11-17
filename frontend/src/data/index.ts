@@ -1,13 +1,29 @@
 import type { Product, Category, District, Blog, Review, User, ChatMessage } from '@/types';
 import kinnaurShowcaseImg from '@/assets/images/Kinnaur Royal Red Apple Showcase.png';
 
+// Category Hero Assets (Generated Dark Editorial Luxury Photography)
+import royalApplesCategoryImg from '@/assets/images/categories/royal-apples.jpg';
+import organicFruitsCategoryImg from '@/assets/images/categories/organic-fruits.jpg';
+import dryFruitsNutsCategoryImg from '@/assets/images/categories/dry-fruits-nuts.jpg';
+import mountainVegCategoryImg from '@/assets/images/categories/mountain-vegetables.jpg';
+import honeyPreservesCategoryImg from '@/assets/images/categories/honey-preserves.jpg';
+import herbalMedicinalCategoryImg from '@/assets/images/categories/herbal-medicinal.jpg';
+
+// Product Catalog Assets (Generated Dark Editorial Luxury Photography)
+import goldenDeliciousImg from '@/assets/images/products/golden-delicious.jpg';
+import kinnaurBlackWalnutsImg from '@/assets/images/products/kinnaur-black-walnuts.jpg';
+import alpineCherriesImg from '@/assets/images/products/alpine-cherries.jpg';
+import rawOrganicHoneyImg from '@/assets/images/products/raw-organic-honey.jpg';
+import mountainGreenTeaImg from '@/assets/images/products/mountain-green-tea.jpg';
+import redDeliciousGiftBoxImg from '@/assets/images/products/red-delicious-gift-box.jpg';
+
 export const categories: Category[] = [
-  { id: 1, name: 'Royal Apples', slug: 'apples', description: 'Premium apples from Kinnaur and Shimla orchards', image: 'https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?w=800&q=80', product_count: 24 },
-  { id: 2, name: 'Organic Fruits', slug: 'organic', description: 'Certified organic produce from mountain farms', image: 'https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=800&q=80', product_count: 18 },
-  { id: 3, name: 'Dry Fruits & Nuts', slug: 'dry-fruits', description: 'Premium walnuts, almonds and local nuts', image: 'https://images.unsplash.com/photo-1596097635121-14b63b7f0d5c?w=800&q=80', product_count: 12 },
-  { id: 4, name: 'Mountain Vegetables', slug: 'vegetables', description: 'Fresh seasonal vegetables from high altitudes', image: 'https://images.unsplash.com/photo-1540420773420-3366772f4999?w=800&q=80', product_count: 32 },
-  { id: 5, name: 'Honey & Preserves', slug: 'honey', description: 'Natural honey and traditional preserves', image: 'https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=800&q=80', product_count: 15 },
-  { id: 6, name: 'Herbal & Medicinal', slug: 'herbal', description: 'Ayurvedic herbs and medicinal plants', image: 'https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=800&q=80', product_count: 20 },
+  { id: 1, name: 'Royal Apples', slug: 'apples', description: 'Premium apples from Kinnaur and Shimla orchards', image: royalApplesCategoryImg, product_count: 24 },
+  { id: 2, name: 'Organic Fruits', slug: 'organic', description: 'Certified organic produce from mountain farms', image: organicFruitsCategoryImg, product_count: 18 },
+  { id: 3, name: 'Dry Fruits & Nuts', slug: 'dry-fruits', description: 'Premium walnuts, almonds and local nuts', image: dryFruitsNutsCategoryImg, product_count: 12 },
+  { id: 4, name: 'Mountain Vegetables', slug: 'vegetables', description: 'Fresh seasonal vegetables from high altitudes', image: mountainVegCategoryImg, product_count: 32 },
+  { id: 5, name: 'Honey & Preserves', slug: 'honey', description: 'Natural honey and traditional preserves', image: honeyPreservesCategoryImg, product_count: 15 },
+  { id: 6, name: 'Herbal & Medicinal', slug: 'herbal', description: 'Ayurvedic herbs and medicinal plants', image: herbalMedicinalCategoryImg, product_count: 20 },
 ];
 
 export const products: Product[] = [
@@ -27,7 +43,7 @@ export const products: Product[] = [
   {
     id: 2, name: 'Golden Delicious Premium', slug: 'golden-delicious-premium', description: 'Balanced sweetness and tartness.',
     price: 449,
-    images: [{ id: 1, image: 'https://images.unsplash.com/photo-1570913149827-d2ac84ab3f9a?w=800&q=80', alt_text: 'Golden', is_primary: true }],
+    images: [{ id: 1, image: goldenDeliciousImg, alt_text: 'Golden Delicious Premium Mountain Apple', is_primary: true }],
     category: categories[0], category_slug: 'apples',
     rating: 4.8, review_count: 215, in_stock: true, is_featured: true, is_bestseller: false, is_seasonal: true,
     badges: ['Organic'], origin: 'Shimla', weight: '1 kg', tags: ['apples'],
@@ -45,7 +61,7 @@ export const products: Product[] = [
   {
     id: 4, name: 'Kinnaur Black Walnuts', slug: 'kinnaur-black-walnuts', description: 'Premium black walnuts rich in omega-3.',
     price: 899,
-    images: [{ id: 1, image: 'https://images.unsplash.com/photo-1596097635121-14b63b7f0d5c?w=800&q=80', alt_text: 'Walnuts', is_primary: true }],
+    images: [{ id: 1, image: kinnaurBlackWalnutsImg, alt_text: 'Kinnaur Black Walnuts and Kernels', is_primary: true }],
     category: categories[2], category_slug: 'dry-fruits',
     rating: 4.9, review_count: 89, in_stock: true, is_featured: true, is_bestseller: false, is_seasonal: false,
     badges: ['Handpicked'], origin: 'Kinnaur', weight: '250g', tags: ['nuts'],
@@ -54,7 +70,7 @@ export const products: Product[] = [
   {
     id: 5, name: 'Alpine Cherry Premium', slug: 'alpine-cherry', description: 'Sweet cherries from Kullu valleys.',
     price: 699, original_price: 899,
-    images: [{ id: 1, image: 'https://images.unsplash.com/photo-1528821128474-27f963b062bf?w=800&q=80', alt_text: 'Cherries', is_primary: true }],
+    images: [{ id: 1, image: alpineCherriesImg, alt_text: 'Kullu Alpine Cherries Fresh', is_primary: true }],
     category: categories[1], category_slug: 'organic',
     rating: 4.8, review_count: 124, in_stock: true, is_featured: true, is_bestseller: true, is_seasonal: true,
     badges: ['Seasonal'], origin: 'Kullu', weight: '500g', tags: ['fruits'],
@@ -72,7 +88,7 @@ export const products: Product[] = [
   {
     id: 7, name: 'Raw Organic Honey', slug: 'raw-organic-honey', description: 'Pure honey from mountain apiaries.',
     price: 499, original_price: 599,
-    images: [{ id: 1, image: 'https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=800&q=80', alt_text: 'Honey', is_primary: true }],
+    images: [{ id: 1, image: rawOrganicHoneyImg, alt_text: 'Pure Mountain Raw Organic Honey', is_primary: true }],
     category: categories[4], category_slug: 'honey',
     rating: 4.9, review_count: 178, in_stock: true, is_featured: true, is_bestseller: true, is_seasonal: false,
     badges: ['100% Pure'], origin: 'Kangra', weight: '500ml', tags: ['honey'],
@@ -99,7 +115,7 @@ export const products: Product[] = [
   {
     id: 10, name: 'Mountain Green Tea', slug: 'mountain-green-tea', description: 'Premium green tea from Kangra.',
     price: 399,
-    images: [{ id: 1, image: 'https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=800&q=80', alt_text: 'Green Tea', is_primary: true }],
+    images: [{ id: 1, image: mountainGreenTeaImg, alt_text: 'Whole Leaf Kangra Mountain Green Tea', is_primary: true }],
     category: categories[5], category_slug: 'herbal',
     rating: 4.8, review_count: 145, in_stock: true, is_featured: true, is_bestseller: true, is_seasonal: false,
     badges: ['Organic'], origin: 'Kangra', weight: '100g', tags: ['tea'],
@@ -108,7 +124,7 @@ export const products: Product[] = [
   {
     id: 11, name: 'Red Delicious Premium Box', slug: 'red-delicious-box', description: 'Gift box of premium apples.',
     price: 1299, original_price: 1599,
-    images: [{ id: 1, image: 'https://images.unsplash.com/photo-1582738411706-bfc8e691d1c2?w=800&q=80', alt_text: 'Gift Box', is_primary: true }],
+    images: [{ id: 1, image: redDeliciousGiftBoxImg, alt_text: 'Red Delicious Luxury Gift Box', is_primary: true }],
     category: categories[0], category_slug: 'apples',
     rating: 4.9, review_count: 56, in_stock: true, is_featured: true, is_bestseller: false, is_seasonal: true,
     badges: ['Gift Box'], origin: 'Kinnaur', weight: '2.5 kg', tags: ['gift'],

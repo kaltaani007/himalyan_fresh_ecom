@@ -1,11 +1,15 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, ShoppingBag, Heart, User, Menu, X, ChevronDown } from 'lucide-react';
-import { categories, districts } from '@/data';
+import { Search, ShoppingBag, Heart, User, Menu, X, ChevronDown, Leaf } from 'lucide-react';
+import { useCategories } from '@/hooks/useCategories';
+import { useDistricts } from '@/hooks/useDistricts';
 import { useCartStore, useWishlistStore, useAuthStore } from '@/store';
+import HFLogo from '@/assets/images/logo/himalayan_fresh_logo.png';
 
 export default function Navbar() {
+  const { data: categories = [] } = useCategories();
+  const { data: districts = [] } = useDistricts();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -43,12 +47,15 @@ export default function Navbar() {
     }
   };
 
+  const isHomePage = location.pathname === '/';
+
   const navLinks = [
     { label: 'Home', href: '/' },
     { label: 'Orchard Shop', href: '/products' },
-    { label: 'Categories', href: '/products', hasDropdown: true, dropdownType: 'categories' },
-    { label: 'Districts', href: '/districts', hasDropdown: true, dropdownType: 'districts' },
+    { label: 'Categories', href: '/products' },
+    { label: 'Districts', href: '/districts' },
     { label: 'Harvest Blog', href: '/blogs' },
+    { label: 'Media Studio', href: '/media-manager' },
     { label: 'Our Story', href: '/about' },
     { label: 'Contact', href: '/contact' },
   ];
@@ -58,130 +65,215 @@ export default function Navbar() {
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
-            ? 'bg-white/95 backdrop-blur-md shadow-md border-b border-border-light'
-            : 'bg-white/90 backdrop-blur-sm border-b border-border-light/60'
+            ? 'bg-white/95 backdrop-blur-md shadow-sm border-b border-[#E2ECE0]'
+            : isHomePage
+            ? 'bg-white/40 backdrop-blur-[6px] border-b border-black/[0.04]'
+            : 'bg-white/90 backdrop-blur-sm border-b border-[#E2ECE0]'
         }`}
       >
-        <div className="max-w-container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16 lg:h-20">
-            {/* Logo Emblem */}
-            <Link to="/" className="flex items-center gap-3 group">
-              <div className="w-10 h-10 lg:w-11 lg:h-11 bg-primary rounded-xl flex items-center justify-center shadow-md group-hover:scale-105 transition-transform">
-                <span className="text-white font-bold text-lg font-heading">HF</span>
+        <div className="max-w-container mx-auto px-4 sm:px-6 lg:px-10">
+          <div className="flex items-center justify-between h-16 sm:h-20">
+            {/* 1. BRAND LOGO EMBLEM */}
+            <Link to="/" className="flex items-center gap-3 group shrink-0">
+              <div className="w-10 h-10 sm:w-11 sm:h-11 flex items-center justify-center transition-transform group-hover:scale-105">
+                <img
+                  src={HFLogo}
+                  alt="Himalaya Fresh Logo"
+                  className="w-full h-full object-contain drop-shadow-xs"
+                />
               </div>
-              <div className="leading-tight">
-                <span className="font-heading font-bold text-lg sm:text-xl text-primary block">
+
+              <div className="leading-tight flex flex-col justify-center">
+                <span className="font-heading font-extrabold text-xl sm:text-[22px] text-[#173D29] tracking-tight">
                   Himalaya
                 </span>
-                <span className="font-heading font-bold text-lg sm:text-xl text-text-primary block">
+                <span className="font-heading font-medium text-xs sm:text-[13px] text-[#34593C] tracking-[0.2em] uppercase -mt-0.5">
                   Fresh
                 </span>
               </div>
             </Link>
 
-            {/* Desktop Navigation Links */}
-            <nav className="hidden xl:flex items-center gap-1">
-              {navLinks.map((link) => (
-                <div key={link.href + link.label} className="relative px-2 py-2">
-                  {link.hasDropdown ? (
-                    <button
-                      type="button"
-                      onMouseEnter={() => setActiveDropdown(link.dropdownType || null)}
-                      onMouseLeave={() => setActiveDropdown(null)}
-                      className="flex items-center gap-1 py-1.5 px-3 text-sm font-semibold text-text-primary hover:text-primary transition-colors cursor-pointer"
-                    >
-                      <span>{link.label}</span>
-                      <ChevronDown
-                        className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                          activeDropdown === link.dropdownType ? 'rotate-180' : ''
-                        }`}
-                      />
-                    </button>
-                  ) : (
-                    <Link
-                      to={link.href}
-                      className={`px-3 py-1.5 text-sm font-semibold rounded-lg transition-colors ${
-                        location.pathname === link.href
-                          ? 'text-primary bg-primary/5'
-                          : 'text-text-primary hover:text-primary'
-                      }`}
-                    >
-                      {link.label}
-                    </Link>
-                  )}
-                </div>
-              ))}
+            {/* 2. CENTER FLOATING NAVIGATION BAR */}
+            <nav className="hidden xl:flex items-center gap-6 2xl:gap-8">
+              {/* Active Home Pill Tab */}
+              <Link
+                to="/"
+                className={`inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-sm font-semibold transition-all duration-200 ${
+                  location.pathname === '/'
+                    ? 'bg-[#EAF1E7] text-[#1C422A] shadow-xs'
+                    : 'text-[#2D4536] hover:text-[#173D29] hover:bg-black/5'
+                }`}
+              >
+                <Leaf className="w-3.5 h-3.5 text-[#54823E] fill-[#54823E]" />
+                <span>Home</span>
+              </Link>
+
+              {/* Orchard Shop */}
+              <Link
+                to="/products"
+                className={`text-sm font-semibold transition-colors duration-200 ${
+                  location.pathname === '/products' && !location.search
+                    ? 'text-[#173D29] font-bold'
+                    : 'text-[#2D4536] hover:text-[#173D29]'
+                }`}
+              >
+                Orchard Shop
+              </Link>
+
+              {/* Categories Dropdown */}
+              <div
+                className="relative py-2"
+                onMouseEnter={() => setActiveDropdown('categories')}
+                onMouseLeave={() => setActiveDropdown(null)}
+              >
+                <button
+                  type="button"
+                  className="flex items-center gap-1 text-sm font-semibold text-[#2D4536] hover:text-[#173D29] transition-colors cursor-pointer"
+                >
+                  <span>Categories</span>
+                  <ChevronDown
+                    className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                      activeDropdown === 'categories' ? 'rotate-180 text-[#173D29]' : ''
+                    }`}
+                  />
+                </button>
+              </div>
+
+              {/* Districts Dropdown */}
+              <div
+                className="relative py-2"
+                onMouseEnter={() => setActiveDropdown('districts')}
+                onMouseLeave={() => setActiveDropdown(null)}
+              >
+                <button
+                  type="button"
+                  className="flex items-center gap-1 text-sm font-semibold text-[#2D4536] hover:text-[#173D29] transition-colors cursor-pointer"
+                >
+                  <span>Districts</span>
+                  <ChevronDown
+                    className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                      activeDropdown === 'districts' ? 'rotate-180 text-[#173D29]' : ''
+                    }`}
+                  />
+                </button>
+              </div>
+
+              {/* Harvest Blog */}
+              <Link
+                to="/blogs"
+                className={`text-sm font-semibold transition-colors duration-200 ${
+                  location.pathname === '/blogs'
+                    ? 'text-[#173D29] font-bold'
+                    : 'text-[#2D4536] hover:text-[#173D29]'
+                }`}
+              >
+                Harvest Blog
+              </Link>
+
+              {/* Media Studio */}
+              <Link
+                to="/media-manager"
+                className={`text-sm font-semibold transition-colors duration-200 ${
+                  location.pathname === '/media-manager'
+                    ? 'text-[#173D29] font-bold'
+                    : 'text-[#2D4536] hover:text-[#173D29]'
+                }`}
+              >
+                Media Studio
+              </Link>
+
+              {/* Our Story */}
+              <Link
+                to="/about"
+                className={`text-sm font-semibold transition-colors duration-200 ${
+                  location.pathname === '/about'
+                    ? 'text-[#173D29] font-bold'
+                    : 'text-[#2D4536] hover:text-[#173D29]'
+                }`}
+              >
+                Our Story
+              </Link>
+
+              {/* Contact */}
+              <Link
+                to="/contact"
+                className={`text-sm font-semibold transition-colors duration-200 ${
+                  location.pathname === '/contact'
+                    ? 'text-[#173D29] font-bold'
+                    : 'text-[#2D4536] hover:text-[#173D29]'
+                }`}
+              >
+                Contact
+              </Link>
             </nav>
 
-            {/* Quick Actions (Search, Wishlist, Cart, Profile) */}
-            <div className="flex items-center gap-1.5 sm:gap-2">
+            {/* 3. RIGHT QUICK ACTION ICONS */}
+            <div className="flex items-center gap-3.5 sm:gap-5">
               {/* Search Toggle */}
               <button
                 type="button"
                 onClick={() => setIsSearchOpen(!isSearchOpen)}
-                className="p-2.5 rounded-xl hover:bg-background-tertiary transition-colors text-text-secondary hover:text-primary cursor-pointer"
+                className="p-1 text-[#2C4A35] hover:text-[#173D29] transition-colors cursor-pointer"
                 aria-label="Search produce"
               >
-                <Search className="w-5 h-5" />
+                <Search className="w-5 h-5 stroke-[2.2]" />
               </button>
-
-              {/* Wishlist Link with Live Badge */}
-              <Link
-                to="/wishlist"
-                className="p-2.5 rounded-xl hover:bg-background-tertiary transition-colors text-text-secondary hover:text-primary relative cursor-pointer"
-                aria-label="Wishlist"
-              >
-                <Heart className="w-5 h-5" />
-                {wishlistCount > 0 && (
-                  <span className="absolute -top-1 -right-1 w-5 h-5 bg-accent text-white text-[11px] font-bold rounded-full flex items-center justify-center shadow-sm">
-                    {wishlistCount}
-                  </span>
-                )}
-              </Link>
-
-              {/* Shopping Cart Link with Live Badge */}
-              <Link
-                to="/cart"
-                className="p-2.5 rounded-xl hover:bg-background-tertiary transition-colors text-text-secondary hover:text-primary relative cursor-pointer"
-                aria-label="Shopping Cart"
-              >
-                <ShoppingBag className="w-5 h-5" />
-                {cartCount > 0 && (
-                  <span className="absolute -top-1 -right-1 w-5 h-5 bg-primary text-white text-[11px] font-bold rounded-full flex items-center justify-center shadow-sm animate-pulse">
-                    {cartCount}
-                  </span>
-                )}
-              </Link>
 
               {/* Auth / Account Profile */}
               {isAuthenticated && user ? (
                 <Link
                   to="/profile"
-                  className="hidden sm:flex items-center gap-2 pl-2 pr-3 py-1.5 rounded-xl bg-primary/10 border border-primary/20 text-xs font-semibold text-primary hover:bg-primary/15 transition-all"
+                  className="flex items-center gap-1.5 p-1 text-[#2C4A35] hover:text-[#173D29] transition-colors"
+                  aria-label="Profile"
                 >
-                  <div className="w-6 h-6 rounded-full bg-primary text-white flex items-center justify-center text-xs font-bold">
+                  <div className="w-6 h-6 rounded-full bg-[#173D29] text-white flex items-center justify-center text-xs font-bold">
                     {user.name.charAt(0).toUpperCase()}
                   </div>
-                  <span className="max-w-[80px] truncate">{user.name}</span>
                 </Link>
               ) : (
                 <Link
                   to="/login"
-                  className="hidden sm:flex items-center gap-1.5 px-4 py-2 bg-primary text-white text-xs font-semibold rounded-xl hover:bg-primary-dark transition-all shadow-sm"
+                  className="p-1 text-[#2C4A35] hover:text-[#173D29] transition-colors"
+                  aria-label="Sign In"
                 >
-                  <User className="w-3.5 h-3.5" />
-                  <span>Sign In</span>
+                  <User className="w-5 h-5 stroke-[2.2]" />
                 </Link>
               )}
+
+              {/* Wishlist Link with Live Badge */}
+              <Link
+                to="/wishlist"
+                className="p-1 text-[#2C4A35] hover:text-[#173D29] transition-colors relative cursor-pointer"
+                aria-label="Wishlist"
+              >
+                <Heart className="w-5 h-5 stroke-[2.2]" />
+                {wishlistCount > 0 && (
+                  <span className="absolute -top-1.5 -right-2 w-4 h-4 bg-[#769C51] text-white text-[10px] font-bold rounded-full flex items-center justify-center shadow-xs">
+                    {wishlistCount}
+                  </span>
+                )}
+              </Link>
+
+              {/* Shopping Bag / Cart with Live Dark Badge */}
+              <Link
+                to="/cart"
+                className="p-1 text-[#2C4A35] hover:text-[#173D29] transition-colors relative cursor-pointer"
+                aria-label="Shopping Cart"
+              >
+                <ShoppingBag className="w-5 h-5 stroke-[2.2]" />
+                <span className="absolute -top-1.5 -right-2 min-w-[18px] h-[18px] px-1 bg-[#173D29] text-white text-[10px] font-bold rounded-full flex items-center justify-center shadow-xs">
+                  {cartCount}
+                </span>
+              </Link>
 
               {/* Mobile Menu Hamburger */}
               <button
                 type="button"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="xl:hidden p-2.5 rounded-xl hover:bg-background-tertiary transition-colors text-text-primary cursor-pointer"
+                className="xl:hidden p-1 text-[#173D29] cursor-pointer ml-1"
                 aria-label="Toggle navigation"
               >
-                {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+                {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
               </button>
             </div>
           </div>

@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Clock, ArrowRight } from 'lucide-react';
-import { blogs } from '@/data';
+import { useBlogs } from '@/hooks/useBlogs';
 
 export default function BlogListPage() {
+  const { data: blogs = [], isLoading } = useBlogs();
+
   return (
     <div className="min-h-screen bg-cream-50 py-12">
       <div className="max-w-container mx-auto px-4">
@@ -12,6 +14,13 @@ export default function BlogListPage() {
           <p className="text-charcoal-500 mt-3 max-w-2xl mx-auto">Stories from the mountains, tips for healthy living, and the latest from our farms.</p>
         </div>
 
+        {isLoading ? (
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[...Array(6)].map((_, idx) => (
+              <div key={idx} className="bg-white rounded-3xl h-96 animate-pulse border border-border-light" />
+            ))}
+          </div>
+        ) : (
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {blogs.map((blog, i) => (
             <motion.article key={blog.id} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}>
@@ -40,6 +49,7 @@ export default function BlogListPage() {
             </motion.article>
           ))}
         </div>
+        )}
       </div>
     </div>
   );

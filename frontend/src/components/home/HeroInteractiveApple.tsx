@@ -1,28 +1,13 @@
-import React, { useRef, useState, useEffect, useCallback, Suspense } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
-import { Float, ContactShadows } from '@react-three/drei';
-import * as THREE from 'three';
-import { AppleModel3D, AppleVariety } from '@/components/three';
+import React, { useRef, useState, useEffect, useCallback } from 'react';
+import { AppleVariety } from '@/components/three';
 import { frameUrls, TOTAL_FRAMES } from '@/utils/frameSequence';
+import kinnaurShowcaseImg from '@/assets/images/Kinnaur Royal Red Apple Showcase.png';
+import goldenDeliciousImg from '@/assets/images/products/golden-delicious.jpg';
 
 interface HeroInteractiveAppleProps {
   variety: AppleVariety;
   className?: string;
 }
-
-// 3D Camera Rig that responds smoothly to cursor movement
-const Interactive3DCameraRig: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const groupRef = useRef<THREE.Group>(null);
-
-  useFrame((state) => {
-    if (!groupRef.current) return;
-    const { x, y } = state.pointer;
-    groupRef.current.rotation.y = THREE.MathUtils.lerp(groupRef.current.rotation.y, x * 0.45, 0.08);
-    groupRef.current.rotation.x = THREE.MathUtils.lerp(groupRef.current.rotation.x, -y * 0.35, 0.08);
-  });
-
-  return <group ref={groupRef}>{children}</group>;
-};
 
 export const HeroInteractiveApple: React.FC<HeroInteractiveAppleProps> = ({
   variety = 'royal-red',
@@ -30,40 +15,63 @@ export const HeroInteractiveApple: React.FC<HeroInteractiveAppleProps> = ({
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const imagesRef = useRef<HTMLImageElement[]>([]);
+  const imagesRef = useRef<(HTMLImageElement | null)[]>([]);
   const [isPreloaded, setIsPreloaded] = useState(false);
   const [currentFrameIndex, setCurrentFrameIndex] = useState(0);
 
-  // Drag & cursor physics state
+  // 3D Parallax Tilt state
+  const [tilt, setTilt] = useState({ x: 0, y: 0 });
+  const [isHovered, setIsHovered] = useState(false);
+
+  // Physics & animation references
   const isDraggingRef = useRef(false);
   const startXRef = useRef(0);
   const currentFrameFloatRef = useRef(0);
   const targetFrameFloatRef = useRef(0);
+  const isHoveredRef = useRef(false);
   const animFrameId = useRef<number | null>(null);
 
-  // 1. Preload 198 frames for royal-red
+  // Sync ref
+  useEffect(() => {
+    isHoveredRef.current = isHovered;
+  }, [isHovered]);
+
+  // 1. High-Performance Progressive Preloader
   useEffect(() => {
     let isMounted = true;
     const total = frameUrls.length;
-    const elements: HTMLImageElement[] = new Array(total);
-    let loaded = 0;
+    const elements: (HTMLImageElement | null)[] = new Array(total).fill(null);
+    let loadedCount = 0;
 
+    // Load first frame immediately for instant first paint
+    if (frameUrls[0]) {
+      const firstImg = new Image();
+      firstImg.src = frameUrls[0];
+      firstImg.onload = () => {
+        if (!isMounted) return;
+        elements[0] = firstImg;
+        imagesRef.current = elements;
+        setIsPreloaded(true);
+        drawFrame(0);
+      };
+    }
+
+    // Load remaining frames asynchronously
     frameUrls.forEach((url, i) => {
       const img = new Image();
       img.src = url;
       img.onload = () => {
         if (!isMounted) return;
         elements[i] = img;
-        loaded++;
-        if (loaded >= Math.min(total, 40)) {
-          imagesRef.current = elements;
+        loadedCount++;
+        imagesRef.current = elements;
+        if (!isPreloaded && loadedCount >= 10) {
           setIsPreloaded(true);
         }
       };
       img.onerror = () => {
         if (!isMounted) return;
-        elements[i] = img;
-        loaded++;
+        loadedCount++;
       };
     });
 
@@ -72,14 +80,32 @@ export const HeroInteractiveApple: React.FC<HeroInteractiveAppleProps> = ({
     };
   }, []);
 
-  // 2. Draw canvas frame with cover fit inside card
+  // 2. High-DPI Smooth Frame Drawer with Nearest-Frame Fallback
   const drawFrame = useCallback((frameIdx: number) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    const img = imagesRef.current[frameIdx];
+    // Look for exact frame or nearest loaded neighbor to prevent flickering
+    const loadedImages = imagesRef.current;
+    let img: HTMLImageElement | null = loadedImages[frameIdx] || null;
+
+    if (!img || !img.complete || img.naturalWidth === 0) {
+      for (let offset = 1; offset < 30; offset++) {
+        const prev = loadedImages[(frameIdx - offset + TOTAL_FRAMES) % TOTAL_FRAMES];
+        if (prev && prev.complete && prev.naturalWidth > 0) {
+          img = prev;
+          break;
+        }
+        const next = loadedImages[(frameIdx + offset) % TOTAL_FRAMES];
+        if (next && next.complete && next.naturalWidth > 0) {
+          img = next;
+          break;
+        }
+      }
+    }
+
     if (!img || !img.complete || img.naturalWidth === 0) return;
 
     const cw = canvas.width;
@@ -107,13 +133,18 @@ export const HeroInteractiveApple: React.FC<HeroInteractiveAppleProps> = ({
     ctx.drawImage(img, dx, dy, dw, dh);
   }, []);
 
-  // 3. Smooth animation loop for frame scrubbing
+  // 3. Smooth Lerp Physics Loop with Gentle Idle Auto-Rotation
   useEffect(() => {
-    if (!isPreloaded || variety !== 'royal-red') return;
+    if (variety !== 'royal-red') return;
 
     const loop = () => {
+      // Gentle auto-rotation when user is not actively hovering or dragging
+      if (!isHoveredRef.current && !isDraggingRef.current) {
+        targetFrameFloatRef.current = (targetFrameFloatRef.current + 0.35) % TOTAL_FRAMES;
+      }
+
       const diff = targetFrameFloatRef.current - currentFrameFloatRef.current;
-      currentFrameFloatRef.current += diff * 0.22;
+      currentFrameFloatRef.current += diff * 0.16;
 
       let frame = Math.round(currentFrameFloatRef.current) % TOTAL_FRAMES;
       if (frame < 0) frame += TOTAL_FRAMES;
@@ -129,18 +160,20 @@ export const HeroInteractiveApple: React.FC<HeroInteractiveAppleProps> = ({
     return () => {
       if (animFrameId.current) cancelAnimationFrame(animFrameId.current);
     };
-  }, [isPreloaded, variety, drawFrame]);
+  }, [variety, drawFrame]);
 
-  // 4. Handle resize
+  // 4. Handle Window Resize
   useEffect(() => {
     const handleResize = () => {
       const canvas = canvasRef.current;
       if (!canvas) return;
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       const rect = canvas.getBoundingClientRect();
-      canvas.width = rect.width * dpr;
-      canvas.height = rect.height * dpr;
-      drawFrame(currentFrameIndex);
+      if (rect.width > 0 && rect.height > 0) {
+        canvas.width = rect.width * dpr;
+        canvas.height = rect.height * dpr;
+        drawFrame(currentFrameIndex);
+      }
     };
 
     handleResize();
@@ -148,20 +181,40 @@ export const HeroInteractiveApple: React.FC<HeroInteractiveAppleProps> = ({
     return () => window.removeEventListener('resize', handleResize);
   }, [drawFrame, currentFrameIndex]);
 
-  // 5. Cursor Movements Tracking
+  // 5. Cursor Movements & Tilt Physics
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!containerRef.current || variety !== 'royal-red') return;
+    if (!containerRef.current) return;
     const rect = containerRef.current.getBoundingClientRect();
     const x = e.clientX - rect.left;
-    const progressX = Math.min(1, Math.max(0, x / rect.width));
+    const y = e.clientY - rect.top;
 
-    if (isDraggingRef.current) {
-      const delta = e.clientX - startXRef.current;
-      targetFrameFloatRef.current -= delta * 0.7;
-      startXRef.current = e.clientX;
-    } else {
-      targetFrameFloatRef.current = progressX * (TOTAL_FRAMES - 1);
+    const progressX = Math.min(1, Math.max(0, x / rect.width));
+    const progressY = Math.min(1, Math.max(0, y / rect.height));
+
+    // Dynamic 3D tilt calculation
+    const tiltX = (0.5 - progressY) * 14; // tilts up/down
+    const tiltY = (progressX - 0.5) * 16; // tilts left/right
+    setTilt({ x: tiltX, y: tiltY });
+
+    if (variety === 'royal-red') {
+      if (isDraggingRef.current) {
+        const delta = e.clientX - startXRef.current;
+        targetFrameFloatRef.current -= delta * 0.65;
+        startXRef.current = e.clientX;
+      } else {
+        targetFrameFloatRef.current = progressX * (TOTAL_FRAMES - 1);
+      }
     }
+  };
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+    isDraggingRef.current = false;
+    setTilt({ x: 0, y: 0 });
   };
 
   const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -174,85 +227,77 @@ export const HeroInteractiveApple: React.FC<HeroInteractiveAppleProps> = ({
   };
 
   const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
-    if (!containerRef.current || variety !== 'royal-red') return;
+    if (!containerRef.current) return;
     const touch = e.touches[0];
     const rect = containerRef.current.getBoundingClientRect();
     const x = touch.clientX - rect.left;
     const progressX = Math.min(1, Math.max(0, x / rect.width));
-    targetFrameFloatRef.current = progressX * (TOTAL_FRAMES - 1);
+
+    if (variety === 'royal-red') {
+      targetFrameFloatRef.current = progressX * (TOTAL_FRAMES - 1);
+    }
   };
+
+  // Image assets for alternate varieties (replaces procedural 3D balls with luxury photography)
+  const varietyImageSrc =
+    variety === 'golden'
+      ? goldenDeliciousImg
+      : variety === 'shimla'
+      ? kinnaurShowcaseImg
+      : variety === 'fuji'
+      ? kinnaurShowcaseImg
+      : null;
 
   return (
     <div
       ref={containerRef}
       onMouseMove={handleMouseMove}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
-      onMouseLeave={handleMouseUp}
       onTouchMove={handleTouchMove}
-      className={`relative w-full aspect-[4/5] max-w-[460px] lg:max-w-[500px] mx-auto rounded-3xl overflow-hidden select-none cursor-grab active:cursor-grabbing border border-white/20 shadow-[0_20px_50px_rgba(0,0,0,0.6)] flex items-center justify-center bg-[#0d1c12] ${className}`}
+      className={`relative w-full max-w-[460px] sm:max-w-[500px] lg:max-w-[540px] aspect-[4/5] mx-auto select-none cursor-grab active:cursor-grabbing flex items-center justify-center ${className}`}
     >
-      {variety === 'royal-red' ? (
-        /* ─────────────────────────────────────────────────────────────
-           1. PHOTOREALISTIC APPLE SEQUENCE SCRUBBED VIA CURSOR
-           ───────────────────────────────────────────────────────────── */
-        <div className="relative w-full h-full flex items-center justify-center">
-          <canvas
-            ref={canvasRef}
-            className="w-full h-full block touch-none pointer-events-none"
-          />
-
-          {!isPreloaded && (
-            <div className="absolute inset-0 flex items-center justify-center text-xs font-mono text-accent-light bg-[#0f1f14]">
-              Loading High-Definition Model...
-            </div>
-          )}
-        </div>
-      ) : (
-        /* ─────────────────────────────────────────────────────────────
-           2. 3D APPLE VARIETY MODEL PROPERLY SCALED WITH CURSOR RIG
-           ───────────────────────────────────────────────────────────── */
-        <div className="w-full h-full relative">
-          <Canvas
-            shadows
-            dpr={[1, 2]}
-            camera={{ position: [0, 0.15, 3.8], fov: 40 }}
-            gl={{ antialias: true, alpha: true }}
-          >
-            <Suspense fallback={null}>
-              <ambientLight intensity={0.9} color="#ebf5ed" />
-              <directionalLight position={[4, 6, 4]} intensity={2.0} color="#fffcf5" castShadow />
-              <directionalLight position={[-4, 2, -2]} intensity={0.8} color="#a6d4b2" />
-              <pointLight position={[0, -2, 2]} intensity={0.4} color="#ffffff" />
-
-              <Interactive3DCameraRig>
-                <Float speed={1.5} rotationIntensity={0.2} floatIntensity={0.3}>
-                  <group position={[0, 0, 0]}>
-                    <AppleModel3D
-                      variety={variety}
-                      scale={0.92}
-                      rotationSpeed={0.006}
-                      dewDrops={true}
-                    />
-                    <ContactShadows
-                      position={[0, -1.25, 0]}
-                      opacity={0.6}
-                      scale={3.8}
-                      blur={2.2}
-                      far={3}
-                    />
-                  </group>
-                </Float>
-              </Interactive3DCameraRig>
-            </Suspense>
-          </Canvas>
-        </div>
-      )}
-
-      {/* Floating Interactive Micro-Pill */}
-      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 px-3.5 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-[11px] font-medium text-cream-100 flex items-center gap-2 pointer-events-none shadow-lg whitespace-nowrap">
-        <span className="w-2 h-2 rounded-full bg-accent animate-ping" />
-        <span>Move cursor or drag to rotate 3D model</span>
+      {/* 3D Dynamic Tilt Wrapper */}
+      <div
+        // className="w-full h-full relative rounded-3xl lg:rounded-[2.5rem] overflow-hidden shadow-[0_30px_70px_-20px_rgba(0,0,0,0.7)] border border-white/10 bg-[#0d1a12] transition-transform duration-150 ease-out flex items-center justify-center"
+        className="w-full h-full relative rounded-[2rem] overflow-hidden bg-transparent border-0 shadow-none transition-transform duration-300 ease-out flex items-center justify-center"
+        style={{
+          transform: `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) scale(${
+            isHovered ? 1.02 : 1
+          })`,
+        }}
+      >
+        {variety === 'royal-red' ? (
+          /* ─────────────────────────────────────────────────────────────
+             1. PHOTOREALISTIC 3D APPLE SCRUBBED VIA CURSOR
+             ───────────────────────────────────────────────────────────── */
+          <div className="relative w-full h-full flex items-center justify-center">
+            <canvas
+              ref={canvasRef}
+              className="w-full h-full block touch-none pointer-events-none"
+            />
+          </div>
+        ) : (
+          /* ─────────────────────────────────────────────────────────────
+             2. LUXURY PHOTOREALISTIC EDITORIAL DISPLAY WITH 3D DEPTH
+             ───────────────────────────────────────────────────────────── */
+          <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
+            {varietyImageSrc && (
+              <img
+                src={varietyImageSrc}
+                alt={`${variety} Apple Showcase`}
+                className="w-full h-full object-cover transition-transform duration-300 ease-out"
+                style={{
+                  transform: `scale(${isHovered ? 1.05 : 1}) translate(${tilt.y * 0.4}px, ${-tilt.x * 0.4}px)`,
+                }}
+              />
+            )}
+            {/* Ambient vignette and rim light */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20 pointer-events-none" />
+          </div>
+        )}
       </div>
     </div>
   );

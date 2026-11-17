@@ -52,10 +52,16 @@ class BlogPost(models.Model):
     excerpt = models.TextField(max_length=500)
     content = models.TextField()
     featured_image = models.ImageField(upload_to="blog_posts/", null=True, blank=True)
+    featured_image_url = models.URLField(max_length=500, blank=True)
 
-    author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name="blog_posts")
+    author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name="blog_posts")
+    author_name = models.CharField(max_length=120, blank=True)
+    author_avatar_url = models.URLField(max_length=500, blank=True)
+    author_bio = models.CharField(max_length=255, blank=True)
+    author_role = models.CharField(max_length=80, blank=True)
 
     category = models.ForeignKey(BlogCategory, on_delete=models.SET_NULL, null=True, related_name="posts")
+    district = models.ForeignKey("products.District", on_delete=models.SET_NULL, null=True, blank=True, related_name="blog_posts")
     tags = models.ManyToManyField(BlogTag, related_name="posts", blank=True)
 
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default="draft")
@@ -70,6 +76,7 @@ class BlogPost(models.Model):
     meta_keywords = models.CharField(max_length=255, blank=True)
 
     is_featured = models.BooleanField(default=False)
+    is_trending = models.BooleanField(default=False)
     is_indexable = models.BooleanField(default=True)
     allow_comments = models.BooleanField(default=True)
 
@@ -227,3 +234,23 @@ class NewsletterCampaign(models.Model):
 
     def __str__(self):
         return self.subject
+
+
+class Testimonial(models.Model):
+    name = models.CharField(max_length=120)
+    location = models.CharField(max_length=120)
+    avatar = models.ImageField(upload_to="testimonials/", null=True, blank=True)
+    avatar_url = models.URLField(max_length=500, blank=True)
+    rating = models.IntegerField(default=5)
+    product_name = models.CharField(max_length=150, blank=True)
+    text = models.TextField()
+    is_active = models.BooleanField(default=True)
+    order = models.IntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = "testimonials"
+        ordering = ["order", "-created_at"]
+
+    def __str__(self):
+        return f"{self.name} ({self.location})"

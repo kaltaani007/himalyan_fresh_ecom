@@ -5,34 +5,48 @@ import {
   ArrowRight,
   Star,
   Truck,
-  Award,
   Heart,
   ShoppingBag,
-  Sparkles,
   Mountain,
   ChevronRight,
   Quote,
   Leaf,
   Shield,
   CheckCircle2,
+  Snowflake,
 } from 'lucide-react';
-import { products, categories, districts } from '@/data';
+import { useFeaturedProducts } from '@/hooks/useProducts';
+import { useCategories } from '@/hooks/useCategories';
+import { useDistricts } from '@/hooks/useDistricts';
+import { useTestimonials } from '@/hooks/useTestimonials';
+import { newsletterApi } from '@/services/api';
+import type { Product } from '@/types';
 import { useCartStore, useWishlistStore } from '@/store';
 import { PriceDisplay } from '@/components/ui/PriceDisplay';
 import { MountainTerrain, AppleVariety } from '@/components/three';
 import { HeroInteractiveApple } from '@/components/home/HeroInteractiveApple';
 import toast from 'react-hot-toast';
+// importing the images 
+import himalayanHeroBg from '@/assets/images/homepage/himalayan.png';
 
 export default function HomePage() {
   const [selectedHeroVariety, setSelectedHeroVariety] = useState<AppleVariety>('royal-red');
+  const [newsletterEmail, setNewsletterEmail] = useState('');
+  const [isSubscribing, setIsSubscribing] = useState(false);
+
+  const { data: featuredData = [] } = useFeaturedProducts();
+  const { data: categories = [] } = useCategories();
+  const { data: districts = [] } = useDistricts();
+  const { data: testimonials = [] } = useTestimonials();
+
   const { addItem: addToCart } = useCartStore();
   const { addItem: addToWishlist, isInWishlist, removeItem: removeFromWishlist } = useWishlistStore();
 
-  const featuredProducts = products.filter((p) => p.is_featured).slice(0, 4);
+  const featuredProducts = featuredData.slice(0, 4);
 
-  const handleAddToCart = (product: typeof products[0]) => {
+  const handleAddToCart = (product: Product) => {
     addToCart(product, 1);
-    toast.success(`Added ${product.name} to cart! 🍎`, {
+    toast.success(`Added ${product.name} to cart! `, {
       style: {
         background: '#1e4631',
         color: '#ffffff',
@@ -46,13 +60,28 @@ export default function HomePage() {
     });
   };
 
-  const handleWishlistToggle = (product: typeof products[0]) => {
+  const handleWishlistToggle = (product: Product) => {
     if (isInWishlist(product.id)) {
       removeFromWishlist(product.id);
       toast('Removed from wishlist', { icon: '' });
     } else {
       addToWishlist(product);
       toast.success('Saved to your wishlist! ');
+    }
+  };
+
+  const handleNewsletterSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newsletterEmail.trim()) return;
+    setIsSubscribing(true);
+    try {
+      const res = await newsletterApi.subscribe(newsletterEmail.trim());
+      toast.success(res.data?.message || 'Thank you for subscribing to our harvest dispatch!');
+      setNewsletterEmail('');
+    } catch {
+      toast.error('Could not subscribe right now. Please check your email and try again.');
+    } finally {
+      setIsSubscribing(false);
     }
   };
 
@@ -79,33 +108,6 @@ export default function HomePage() {
     },
   ];
 
-  const testimonials = [
-    {
-      name: 'Priya Sharma',
-      location: 'Mumbai',
-      rating: 5,
-      product: 'Royal Red Delicious',
-      text: 'The Kinnaur apples were crisp, juicy, and completely wax-free. You can immediately smell the fresh mountain orchard aroma the moment you open the box.',
-      image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&h=120&fit=crop',
-    },
-    {
-      name: 'Dr. Rajeev Mehra',
-      location: 'Delhi NCR',
-      rating: 5,
-      product: 'Alpine Cherries',
-      text: 'Incredible authenticity. These taste like the fresh cherries we had during our road trip to Kullu valley. Prompt 2-day delivery and flawless packaging.',
-      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&h=120&fit=crop',
-    },
-    {
-      name: 'Anita Gupta',
-      location: 'Bangalore',
-      rating: 5,
-      product: 'Kinnaur Black Walnuts',
-      text: 'The black walnuts are so rich in omega-3 oil and taste far superior to commercial imported nuts. So happy to support Himalayan farmers directly.',
-      image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=120&h=120&fit=crop',
-    },
-  ];
-
   const marqueeItems = [
     '100% Wax-Free Apples',
     'Harvested at Dawn',
@@ -119,54 +121,74 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-background-primary overflow-x-hidden">
       {/* ─────────────────────────────────────────────────────────────
-          1. HERO SECTION WITH 3D ORCHARD CANVAS
+          1. HERO SECTION WITH SUNLIT HIMALAYAN MOUNTAINS & 3D APPLE
          ───────────────────────────────────────────────────────────── */}
-      <section className="relative min-h-[90vh] lg:min-h-[96vh] flex items-center bg-gradient-to-b from-[#0f1f14] via-[#14281b] to-[#1a3323] text-white pt-20 pb-16 overflow-hidden">
-        {/* Background glow orbs */}
-        <div className="absolute top-1/4 left-10 w-96 h-96 bg-primary/20 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-10 right-10 w-[30rem] h-[30rem] bg-accent/15 rounded-full blur-3xl pointer-events-none" />
+      <section
+        className="relative min-h-[92vh] lg:min-h-[98vh] flex items-center text-[#173D29] pt-24 sm:pt-28 lg:pt-32 pb-20 sm:pb-28 overflow-hidden bg-[#EDF3E5] bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: `url(${himalayanHeroBg})`,
+        }}
+      >
+        {/* Soft daylight gradient overlay for crystal clear typography */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#F7F9F2]/95 via-[#F3F7EC]/70 via-50% to-transparent pointer-events-none" />
 
-        <div className="max-w-container mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
-          <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-            {/* Left Column: Brand Typography & CTAs */}
+        {/* Alpine morning mist & warm mountain sunlight */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#E0EDE0]/50 via-transparent to-white/20 pointer-events-none" />
+
+        <div className="max-w-container mx-auto px-5 sm:px-8 lg:px-10 w-full relative z-10">
+          <div className="grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+            {/* LEFT: Editorial brand hero content */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="lg:col-span-6 space-y-6 text-center lg:text-left"
+              transition={{ duration: 0.85, ease: 'easeOut' }}
+              className="lg:col-span-6 space-y-6 sm:space-y-7 text-center lg:text-left"
             >
-              {/* Alpine Terroir Pill */}
+              {/* Harvest Pill Badge */}
               <motion.div
-                initial={{ opacity: 0, x: -20 }}
+                initial={{ opacity: 0, x: -15 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.2 }}
-                className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-xs sm:text-sm font-medium text-cream-50"
+                transition={{ delay: 0.2, duration: 0.6 }}
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 backdrop-blur-md border border-[#D3E0CA] shadow-xs text-xs sm:text-sm font-medium text-[#294B32]"
               >
-                <Sparkles className="w-4 h-4 text-accent" />
-                <span>Harvest Season 2024 · Kinnaur & Shimla Orchards</span>
+                <Leaf className="w-3.5 h-3.5 text-[#54823E] fill-[#54823E]" />
+                <span>Harvest Season 2024 · Fresh from Himalayas</span>
+                <span className="w-2 h-2 rounded-full bg-[#6CA244] animate-pulse ml-0.5" />
               </motion.div>
 
-              {/* Main Headline */}
-              <h1 className="font-heading text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-[1.08] tracking-tight text-white">
-                From The World’s
-                <span className="block italic text-transparent bg-clip-text bg-gradient-to-r from-accent via-accent-light to-cream-50">
-                  Highest Orchards
+              {/* Main Heading matching Reference Serif Typography */}
+              <motion.h1
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3, duration: 0.8 }}
+                className="font-heading text-5xl sm:text-6xl lg:text-[70px] xl:text-[80px] font-bold leading-[1.04] tracking-[-0.03em] text-[#173D29]"
+              >
+                From The World's{' '}
+                <span className="block italic font-normal text-[#275536]">
+                  Highest Orchards.
                 </span>
-              </h1>
+              </motion.h1>
 
-              {/* Subtitle */}
-              <p className="text-base sm:text-lg text-cream-100/90 max-w-xl mx-auto lg:mx-0 leading-relaxed font-normal">
-                Authentic, wax-free Himalayan apples, organic mountain fruits, and artisanal produce. Handpicked at dawn and shipped cold-chain directly to your doorstep.
-              </p>
+              {/* Editorial Description */}
+              <motion.p
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.45, duration: 0.8 }}
+                className="text-base sm:text-lg lg:text-[19px] text-[#4E6750] max-w-xl mx-auto lg:mx-0 leading-[1.75] font-normal"
+              >
+                Authentic, wax-free Himalayan apples, organic mountain fruits, and
+                artisanal produce. Handpicked at dawn and shipped cold-chain
+                directly to your doorstep.
+              </motion.p>
 
-              {/* 3D Variety Switcher Pills */}
-              <div className="pt-2">
-                <p className="text-xs font-mono uppercase tracking-wider text-cream-200/80 mb-3">
-                  Inspect 3D Variety Model:
+              {/* 3D Variety Selector Pills */}
+              <div className="pt-1">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#768F71] mb-2.5">
+                  Explore 3D Apple Varieties
                 </p>
                 <div className="flex flex-wrap justify-center lg:justify-start gap-2">
                   {[
-                    { id: 'royal-red', label: 'Royal Red Delicious' },
+                    { id: 'royal-red', label: 'Royal Red' },
                     { id: 'golden', label: 'Golden Delicious' },
                     { id: 'shimla', label: 'Shimla Mountain' },
                     { id: 'fuji', label: 'Fuji Striped' },
@@ -175,10 +197,10 @@ export default function HomePage() {
                       key={variety.id}
                       type="button"
                       onClick={() => setSelectedHeroVariety(variety.id as AppleVariety)}
-                      className={`px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all cursor-pointer ${
+                      className={`px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer ${
                         selectedHeroVariety === variety.id
-                          ? 'bg-accent text-white shadow-md scale-105'
-                          : 'bg-white/10 hover:bg-white/20 text-cream-50 border border-white/15'
+                          ? 'bg-[#173D29] text-white shadow-md shadow-[#173D29]/25 scale-[1.03]'
+                          : 'bg-white/75 text-[#35513A] border border-[#D4E2CC] hover:bg-[#EAF1E7]'
                       }`}
                     >
                       {variety.label}
@@ -187,50 +209,156 @@ export default function HomePage() {
                 </div>
               </div>
 
-              {/* Action Buttons */}
-              <div className="flex flex-wrap justify-center lg:justify-start gap-4 pt-4">
-                <Link to="/products" className="btn-accent px-7 py-3.5 text-base flex items-center gap-2">
-                  <span>Shop Collection</span>
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
+              {/* CTA Action Buttons */}
+              <motion.div
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.55, duration: 0.8 }}
+                className="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2"
+              >
                 <Link
-                  to="/districts"
-                  className="btn-ghost px-6 py-3.5 text-base text-white hover:text-accent flex items-center gap-2"
+                  to="/products"
+                  className="rounded-full bg-[#173D29] hover:bg-[#112E1F] text-white px-8 py-4 font-semibold text-sm sm:text-base flex items-center gap-2.5 shadow-lg shadow-[#173D29]/25 hover:-translate-y-0.5 transition-all duration-300"
                 >
-                  <Mountain className="w-4 h-4 text-accent" />
-                  <span>Explore 12 Districts</span>
+                  <span>Shop Premium Apples</span>
+                  <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 transition-transform group-hover:translate-x-1" />
                 </Link>
-              </div>
 
-              {/* Trust Micro-bar */}
-              <div className="grid grid-cols-3 gap-3 pt-6 border-t border-white/15 text-xs text-cream-200/90 text-left">
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-accent shrink-0" />
-                  <span>100% Wax-Free</span>
+                <Link
+                  to="/about"
+                  className="rounded-full border border-[#173D29]/25 bg-white/70 hover:bg-white/95 backdrop-blur-md px-7 py-4 text-[#173D29] font-semibold text-sm sm:text-base flex items-center gap-2.5 hover:-translate-y-0.5 transition-all duration-300 shadow-xs"
+                >
+                  <div className="w-5 h-5 rounded-full bg-[#173D29] flex items-center justify-center text-white">
+                    <svg className="w-2.5 h-2.5 fill-current ml-0.5" viewBox="0 0 10 12">
+                      <polygon points="0,0 10,6 0,12" />
+                    </svg>
+                  </div>
+                  <span>Watch Our Story</span>
+                </Link>
+              </motion.div>
+
+              {/* Trust Indicators: 4 Columns with Divider Borders */}
+              <motion.div
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.65, duration: 0.8 }}
+                className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-0 pt-7 border-t border-[#C7D9BD]/80"
+              >
+                {/* 1. 100% Organic */}
+                <div className="flex items-center gap-3 sm:pr-4 sm:border-r border-[#C7D9BD]/70">
+                  <div className="w-9 h-9 rounded-full bg-white/85 border border-[#D2DEC9] flex items-center justify-center shadow-xs shrink-0">
+                    <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-[#4E7A38]" />
+                  </div>
+                  <div className="text-left">
+                    <p className="text-sm font-bold text-[#1D3E29] leading-tight">100%</p>
+                    <p className="text-xs text-[#5D735F] leading-tight mt-0.5">Organic</p>
+                  </div>
                 </div>
-                <div className="flex items-center gap-2">
-                  <Truck className="w-4 h-4 text-accent shrink-0" />
-                  <span>Free delivery &gt; ₹999</span>
+
+                {/* 2. Cold-Chain Delivery */}
+                <div className="flex items-center gap-3 sm:px-4 sm:border-r border-[#C7D9BD]/70">
+                  <div className="w-9 h-9 rounded-full bg-white/85 border border-[#D2DEC9] flex items-center justify-center shadow-xs shrink-0">
+                    <Snowflake className="w-4 h-4 sm:w-5 sm:h-5 text-[#4E7A38]" />
+                  </div>
+                  <div className="text-left">
+                    <p className="text-sm font-bold text-[#1D3E29] leading-tight">Cold-Chain</p>
+                    <p className="text-xs text-[#5D735F] leading-tight mt-0.5">Delivery</p>
+                  </div>
                 </div>
-                <div className="flex items-center gap-2">
-                  <Award className="w-4 h-4 text-accent shrink-0" />
-                  <span>4.9 / 5 Rating</span>
+
+                {/* 3. Farm Fresh Quality */}
+                <div className="flex items-center gap-3 sm:px-4 sm:border-r border-[#C7D9BD]/70">
+                  <div className="w-9 h-9 rounded-full bg-white/85 border border-[#D2DEC9] flex items-center justify-center shadow-xs shrink-0">
+                    <Shield className="w-4 h-4 sm:w-5 sm:h-5 text-[#4E7A38]" />
+                  </div>
+                  <div className="text-left">
+                    <p className="text-sm font-bold text-[#1D3E29] leading-tight">Farm Fresh</p>
+                    <p className="text-xs text-[#5D735F] leading-tight mt-0.5">Quality</p>
+                  </div>
                 </div>
-              </div>
+
+                {/* 4. Pan-India Shipping */}
+                <div className="flex items-center gap-3 sm:pl-4">
+                  <div className="w-9 h-9 rounded-full bg-white/85 border border-[#D2DEC9] flex items-center justify-center shadow-xs shrink-0">
+                    <Truck className="w-4 h-4 sm:w-5 sm:h-5 text-[#4E7A38]" />
+                  </div>
+                  <div className="text-left">
+                    <p className="text-sm font-bold text-[#1D3E29] leading-tight">Pan-India</p>
+                    <p className="text-xs text-[#5D735F] leading-tight mt-0.5">Shipping</p>
+                  </div>
+                </div>
+              </motion.div>
             </motion.div>
 
-            {/* Right Column: Interactive 3D / Frame Sequence with Cursor Movements */}
+            {/* RIGHT: Optimal 3D interactive apple showcase */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.9, delay: 0.2 }}
-              className="lg:col-span-6 relative flex items-center justify-center"
+              initial={{ opacity: 0, scale: 0.9, x: 30 }}
+              animate={{ opacity: 1, scale: 1, x: 0 }}
+              transition={{ duration: 1, delay: 0.2, ease: 'easeOut' }}
+              className="lg:col-span-6 relative flex items-center justify-center min-h-[460px] sm:min-h-[560px] lg:min-h-[640px]"
             >
-              <HeroInteractiveApple variety={selectedHeroVariety} />
+              {/* Warm ambient orchard glow behind 3D apple */}
+              <div className="absolute inset-8 rounded-full bg-gradient-to-br from-[#B3D397]/40 via-[#DCE8CE]/25 to-transparent blur-[80px] pointer-events-none" />
+
+              {/* Subtle organic concentric rings */}
+              <div className="absolute w-[88%] aspect-square max-w-[540px] rounded-full border border-white/60 pointer-events-none" />
+              <div className="absolute w-[75%] aspect-square max-w-[460px] rounded-full border border-[#A7C396]/25 pointer-events-none" />
+
+              {/* Floating Alpine Leaves */}
+              <motion.div
+                animate={{ y: [0, -14, 0], rotate: [0, 8, 0] }}
+                transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
+                className="absolute top-[12%] right-[10%] text-[#618E41]/45 pointer-events-none z-20"
+              >
+                <Leaf className="w-9 h-9" />
+              </motion.div>
+              <motion.div
+                animate={{ y: [0, 12, 0], rotate: [0, -10, 0] }}
+                transition={{ duration: 8.5, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
+                className="absolute bottom-[20%] left-[6%] text-[#618E41]/35 pointer-events-none z-20"
+              >
+                <Leaf className="w-7 h-7" />
+              </motion.div>
+
+              {/* Main interactive apple component */}
+              <div className="relative z-10 w-full flex items-center justify-center">
+                <HeroInteractiveApple
+                  variety={selectedHeroVariety}
+                  className="!max-w-[520px] drop-shadow-[0_25px_40px_rgba(30,60,30,0.18)]"
+                />
+              </div>
+
+              {/* Interactive Drag Hint Pill */}
+              <div className="absolute bottom-4 z-20 px-4 py-1.5 rounded-full bg-white/75 backdrop-blur-md border border-white/80 shadow-xs text-[11px] font-semibold text-[#305238] flex items-center gap-1.5 pointer-events-none">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#52823C] animate-ping" />
+                <span>Drag or hover to rotate in 3D</span>
+              </div>
             </motion.div>
           </div>
         </div>
+
+        {/* Bottom organic terraced rolling hill curve framing the landscape */}
+        <div className="absolute bottom-0 left-0 right-0 pointer-events-none z-20 overflow-hidden leading-none">
+          <svg
+            viewBox="0 0 1440 96"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className="w-full h-12 sm:h-16 lg:h-20 text-[#1E432A]"
+            preserveAspectRatio="none"
+          >
+            <path
+              d="M0,45 C280,85 520,15 820,55 C1120,85 1300,30 1440,40 L1440,96 L0,96 Z"
+              fill="currentColor"
+              fillOpacity="0.35"
+            />
+            <path
+              d="M0,65 C320,20 620,80 960,45 C1200,18 1360,55 1440,50 L1440,96 L0,96 Z"
+              fill="#1E432A"
+            />
+          </svg>
+        </div>
       </section>
+
 
       {/* ─────────────────────────────────────────────────────────────
           2. INFINITE TICKER / TRUST RIBBON
@@ -572,20 +700,23 @@ export default function HomePage() {
               Receive notifications when seasonal Royal Apples, Kinnaur Walnuts, and high-altitude honey batches are harvested.
             </p>
             <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                toast.success('Thank you for subscribing to our harvest dispatch!');
-              }}
+              onSubmit={handleNewsletterSubmit}
               className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto pt-2"
             >
               <input
                 type="email"
+                value={newsletterEmail}
+                onChange={(e) => setNewsletterEmail(e.target.value)}
                 placeholder="Enter your email address"
                 required
                 className="input-field bg-white text-text-primary px-4 py-3 rounded-xl flex-1 focus:ring-2 focus:ring-accent"
               />
-              <button type="submit" className="btn-accent px-6 py-3 rounded-xl font-bold">
-                Subscribe
+              <button
+                type="submit"
+                disabled={isSubscribing}
+                className="btn-accent px-6 py-3 rounded-xl font-bold disabled:opacity-60"
+              >
+                {isSubscribing ? 'Subscribing...' : 'Subscribe'}
               </button>
             </form>
             <p className="text-xs text-cream-200/70">

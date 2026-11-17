@@ -1,13 +1,21 @@
 from django.contrib import admin
 from .models import (
-    Category, Product, ProductImage, ProductVariant, Inventory,
+    Category, District, Product, ProductImage, ProductVariant, Inventory,
     Review, Banner, Wishlist, Coupon, CategoryAttribute, ProductAttributeValue
 )
 
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ["name", "parent", "is_active", "order"]
+    list_display = ["name", "slug", "parent", "is_active", "order"]
+    prepopulated_fields = {"slug": ("name",)}
+
+
+@admin.register(District)
+class DistrictAdmin(admin.ModelAdmin):
+    list_display = ["name", "slug", "altitude", "climate", "is_active", "order"]
+    list_filter = ["climate", "is_active"]
+    search_fields = ["name", "description"]
     prepopulated_fields = {"slug": ("name",)}
 
 

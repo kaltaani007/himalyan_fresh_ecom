@@ -12,6 +12,7 @@ class Category(models.Model):
     slug = models.SlugField(unique=True)
     description = models.TextField(blank=True)
     image = models.ImageField(upload_to="categories/", null=True, blank=True)
+    image_url = models.URLField(max_length=500, blank=True)
     parent = models.ForeignKey("self", on_delete=models.CASCADE, null=True, blank=True, related_name="children")
     is_active = models.BooleanField(default=True)
     order = models.IntegerField(default=0)
@@ -32,17 +33,52 @@ class Category(models.Model):
         return self.name
 
 
+class District(models.Model):
+    name = models.CharField(max_length=100)
+    slug = models.SlugField(unique=True)
+    description = models.TextField(blank=True)
+    image = models.ImageField(upload_to="districts/", null=True, blank=True)
+    image_url = models.URLField(max_length=500, blank=True)
+    specialties = models.JSONField(default=list, blank=True)
+    altitude = models.CharField(max_length=100, blank=True)
+    population = models.CharField(max_length=100, blank=True)
+    famous_for = models.JSONField(default=list, blank=True)
+    climate = models.CharField(max_length=100, blank=True)
+    is_active = models.BooleanField(default=True)
+    order = models.IntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = "districts"
+        ordering = ["order", "name"]
+
+    def __str__(self):
+        return self.name
+
+
 class Product(models.Model):
     name = models.CharField(max_length=255)
     slug = models.SlugField(unique=True)
     sku = models.CharField(max_length=50, unique=True)
     description = models.TextField()
+    full_description = models.TextField(blank=True)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, related_name="products")
+    district = models.ForeignKey(District, on_delete=models.SET_NULL, null=True, blank=True, related_name="products")
     brand = models.CharField(max_length=100, blank=True)
     base_price = models.DecimalField(max_digits=10, decimal_places=2)
     discount_price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     cost_price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    origin = models.CharField(max_length=100, blank=True)
+    weight = models.CharField(max_length=50, blank=True, default="1 kg")
+    badges = models.JSONField(default=list, blank=True)
+    tags = models.JSONField(default=list, blank=True)
+    nutrition_info = models.JSONField(default=dict, blank=True)
+    farm_info = models.JSONField(default=dict, blank=True)
+    in_stock = models.BooleanField(default=True)
     is_featured = models.BooleanField(default=False)
+    is_bestseller = models.BooleanField(default=False)
+    is_seasonal = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -67,7 +103,8 @@ class Product(models.Model):
 
 class ProductImage(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="images")
-    image = models.ImageField(upload_to="products/")
+    image = models.ImageField(upload_to="products/", null=True, blank=True)
+    image_url = models.URLField(max_length=500, blank=True)
     alt_text = models.CharField(max_length=255, blank=True)
     is_primary = models.BooleanField(default=False)
     order = models.IntegerField(default=0)

@@ -5,7 +5,7 @@ import { KinnaurNavbar } from './KinnaurNavbar';
 import { KinnaurOverlays } from './KinnaurOverlays';
 import { KinnaurHUD } from './KinnaurHUD';
 import { TerroirDossierModal } from './TerroirDossierModal';
-import { products } from '@/data';
+import { useProductBySlug } from '@/hooks/useProducts';
 import { useCartStore } from '@/store';
 import toast from 'react-hot-toast';
 import { Sparkles, Mountain } from 'lucide-react';
@@ -22,7 +22,7 @@ export const KinnaurRoyalExperience: React.FC = () => {
   const { addItem: addToCart } = useCartStore();
 
   // Flagship Kinnaur Apple product reference
-  const flagshipProduct = products[0]; // Royal Red Delicious Apples
+  const { data: flagshipProduct } = useProductBySlug('royal-red-delicious');
 
   // Calculate scroll progress through 450vh track
   const handleScroll = useCallback(() => {
@@ -58,6 +58,7 @@ export const KinnaurRoyalExperience: React.FC = () => {
 
   // Add to cart with celebratory feedback
   const handleReserve = () => {
+    if (!flagshipProduct) return;
     addToCart(flagshipProduct, 1);
     toast.success('🍎 Reserved 2024 Kinnaur Royal Red Harvest Box!', {
       style: {

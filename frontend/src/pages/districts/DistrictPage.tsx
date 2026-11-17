@@ -1,13 +1,31 @@
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { MapPin, TreePine } from 'lucide-react';
-import { districts, products } from '@/data';
+import { useDistricts, useDistrictBySlug, useDistrictProducts } from '@/hooks/useDistricts';
 
 export default function DistrictPage() {
   const { slug } = useParams();
-  const district = slug ? districts.find(d => d.slug === slug) : null;
-  
-  const districtProducts = district ? products.filter(p => p.origin.toLowerCase() === district.name.toLowerCase()) : products.slice(0, 8);
+  const { data: districts = [], isLoading: loadingList } = useDistricts();
+  const { data: districtDetail, isLoading: loadingDetail } = useDistrictBySlug(slug);
+  const { data: districtProducts = [] } = useDistrictProducts(slug);
+
+  const district = slug ? districtDetail || districts.find((d) => d.slug === slug) : null;
+
+  if (slug && loadingDetail && !district) {
+    return (
+      <div className="min-h-screen bg-cream-50 py-20 text-center text-charcoal-500">
+        Loading district terroir...
+      </div>
+    );
+  }
+
+  if (!district && loadingList) {
+    return (
+      <div className="min-h-screen bg-cream-50 py-20 text-center text-charcoal-500">
+        Loading Himachal districts...
+      </div>
+    );
+  }
 
   if (!district) {
     return (

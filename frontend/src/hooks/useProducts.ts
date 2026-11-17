@@ -1,44 +1,28 @@
 import { useQuery } from '@tanstack/react-query';
-import { productsApi } from '@/services/api';
-import { products as mockProducts } from '@/data';
-import type { Product } from '@/types';
+import { productsApi, reviewsApi } from '@/services/api';
+import type { Product, Review } from '@/types';
 
-export function useProducts(params?: { category?: string; search?: string; sort?: string; page?: number }) {
+const unwrapList = <T,>(data: any): T[] => {
+  if (Array.isArray(data)) return data;
+  if (Array.isArray(data?.results)) return data.results;
+  return [];
+};
+
+export function useProducts(params?: {
+  category?: string;
+  district?: string;
+  search?: string;
+  sort?: string;
+  page?: number;
+  is_featured?: boolean;
+}) {
   return useQuery<Product[]>({
-    queryKey: ['products', params],
+    queryKey: ['products', params ?? {}],
     queryFn: async () => {
-      try {
-        const response = await productsApi.getAll(params);
-        if (response.data?.results) {
-          return response.data.results;
-        }
-        if (Array.isArray(response.data)) {
-          return response.data;
-        }
-        return mockProducts;
-      } catch (err) {
-        // Fallback to local high-altitude produce data if backend is offline
-        let filtered = [...mockProducts];
-        if (params?.category) {
-          filtered = filtered.filter((p) => p.category_slug === params.category);
-        }
-        if (params?.search) {
-          const q = params.search.toLowerCase();
-          filtered = filtered.filter((p) =>
-            p.name.toLowerCase().includes(q) || p.description.toLowerCase().includes(q)
-          );
-        }
-        if (params?.sort === 'price-low') {
-          filtered.sort((a, b) => a.price - b.price);
-        } else if (params?.sort === 'price-high') {
-          filtered.sort((a, b) => b.price - a.price);
-        } else if (params?.sort === 'rating') {
-          filtered.sort((a, b) => b.rating - a.rating);
-        }
-        return filtered;
-      }
+      const response = await productsApi.getAll(params);
+      return unwrapList<Product>(response.data);
     },
-    staleTime: 1000 * 60 * 5,
+    staleTime: 1000 * 60 * 2,
   });
 }
 
@@ -46,28 +30,45 @@ export function useFeaturedProducts() {
   return useQuery<Product[]>({
     queryKey: ['products', 'featured'],
     queryFn: async () => {
-      try {
-        const response = await productsApi.getFeatured();
-        return Array.isArray(response.data) ? response.data : mockProducts.filter((p) => p.is_featured);
-      } catch {
-        return mockProducts.filter((p) => p.is_featured);
-      }
+      const response = await productsApi.getFeatured();
+      return unwrapList<Product>(response.data);
     },
+    staleTime: 1000 * 60 * 2,
   });
 }
 
 export function useProductBySlug(slug: string) {
-  return useQuery<Product | undefined>({
+  return useQuery<Product & { reviews?: Review[] }>({
     queryKey: ['product', slug],
     queryFn: async () => {
-      try {
-        const response = await productsApi.getBySlug(slug);
-        return response.data || mockProducts.find((p) => p.slug === slug);
-      } catch {
-        return mockProducts.find((p) => p.slug === slug);
-      }
+      const response = await productsApi.getBySlug(slug);
+      return response.data;
     },
     enabled: !!slug,
+    staleTime: 1000 * 60 * 2,
+  });
+}
+
+export function useRelatedProducts(slug: string) {
+  return useQuery<Product[]>({
+    queryKey: ['product', slug, 'related'],
+    queryFn: async () => {
+      const response = await productsApi.getRelated(slug);
+      return unwrapList<Product>(response.data);
+    },
+    enabled: !!slug,
+    staleTime: 1000 * 60 * 5,
+  });
+}
+
+export function useProductReviews(productId?: number) {
+  return useQuery<Review[]>({
+    queryKey: ['product', productId, 'reviews'],
+    queryFn: async () => {
+      const response = await reviewsApi.getByProduct(productId!);
+      return unwrapList<Review>(response.data);
+    },
+    enabled: !!productId,
   });
 }
 

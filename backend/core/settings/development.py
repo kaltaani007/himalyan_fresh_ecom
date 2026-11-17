@@ -19,3 +19,10 @@ CACHES = {
         "LOCATION": "unique-snowflake-session",
     },
 }
+
+# Prevent django_elasticsearch_dsl post_save signals from failing when local Elasticsearch isn't running
+ELASTICSEARCH_DSL_AUTOSYNC = False
+ELASTICSEARCH_DSL_AUTO_REFRESH = False
+
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True

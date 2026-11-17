@@ -16,6 +16,7 @@ import ProfilePage from '@/pages/profile/ProfilePage';
 import OrdersPage from '@/pages/profile/OrdersPage';
 import AboutPage from '@/pages/about/AboutPage';
 import ContactPage from '@/pages/contact/ContactPage';
+import MediaManagerPage from '@/pages/admin/MediaManagerPage';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -48,6 +49,7 @@ export default function App() {
             <Route path="orders" element={<OrdersPage />} />
             <Route path="about" element={<AboutPage />} />
             <Route path="contact" element={<ContactPage />} />
+            <Route path="media-manager" element={<MediaManagerPage />} />
           </Route>
         </Routes>
       </BrowserRouter>

@@ -12,7 +12,7 @@ import {
   MapPin,
   ImageIcon,
 } from 'lucide-react';
-import { products, reviews } from '@/data';
+import { useProductBySlug, useRelatedProducts } from '@/hooks/useProducts';
 import { useCartStore, useWishlistStore } from '@/store';
 import { PriceDisplay } from '@/components/ui/PriceDisplay';
 import { QuantityStepper } from '@/components/ui/QuantityStepper';
@@ -20,18 +20,42 @@ import { AppleVarietiesShowcase, AppleVariety } from '@/components/three';
 import toast from 'react-hot-toast';
 
 export default function ProductDetailPage() {
-  const { slug } = useParams();
+  const { slug = '' } = useParams();
   const [quantity, setQuantity] = useState(1);
   const [selectedImage, setSelectedImage] = useState(0);
-  const [viewMode, setViewMode] = useState<'3d' | 'photos'>('3d');
+  const [viewMode, setViewMode] = useState<'3d' | 'photos'>('photos');
 
-  const product = products.find((p) => p.slug === slug) || products[0];
+  const { data: product, isLoading, isError } = useProductBySlug(slug);
+  const { data: relatedProducts = [] } = useRelatedProducts(slug);
+
   const { addItem: addToCart } = useCartStore();
   const { addItem: addToWishlist, isInWishlist, removeItem: removeFromWishlist } = useWishlistStore();
 
-  const relatedProducts = products
-    .filter((p) => p.category_slug === product.category_slug && p.id !== product.id)
-    .slice(0, 4);
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-background-secondary py-16">
+        <div className="max-w-container mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-12 gap-12 animate-pulse">
+          <div className="lg:col-span-6 aspect-square bg-white rounded-3xl" />
+          <div className="lg:col-span-6 space-y-4">
+            <div className="h-8 bg-white rounded-xl w-3/4" />
+            <div className="h-6 bg-white rounded-xl w-1/3" />
+            <div className="h-32 bg-white rounded-xl w-full" />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (isError || !product) {
+    return (
+      <div className="min-h-screen bg-background-secondary py-20 text-center">
+        <h2 className="font-heading text-2xl font-bold text-text-primary mb-3">Product not found</h2>
+        <Link to="/products" className="btn-primary inline-flex">Back to Orchard Shop</Link>
+      </div>
+    );
+  }
+
+  const reviews = product.reviews || [];
 
   // Map product slug to 3D variety
   const getVarietyFromSlug = (itemSlug: string): AppleVariety => {

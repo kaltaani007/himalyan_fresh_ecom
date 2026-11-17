@@ -2,7 +2,9 @@ import { useState } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Grid, List, Star, ShoppingBag, Heart, X, RotateCcw } from 'lucide-react';
-import { products, categories } from '@/data';
+import { useProducts } from '@/hooks/useProducts';
+import { useCategories } from '@/hooks/useCategories';
+import type { Product } from '@/types';
 import { useCartStore, useWishlistStore } from '@/store';
 import { PriceDisplay } from '@/components/ui/PriceDisplay';
 import toast from 'react-hot-toast';
@@ -13,45 +15,25 @@ export default function ProductListPage() {
   const searchParam = searchParams.get('search');
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [sortBy, setSortBy] = useState('featured');
-  const [priceRange, setPriceRange] = useState<[number, number]>([0, 2000]);
+  const [priceRange, setPriceRange] = useState<[number, number]>([0, 5000]);
+
+  const { data: products = [], isLoading } = useProducts({
+    category: categoryParam || undefined,
+    search: searchParam || undefined,
+    sort: sortBy !== 'featured' ? sortBy : undefined,
+  });
+  const { data: categories = [] } = useCategories();
 
   const { addItem: addToCart } = useCartStore();
   const { addItem: addToWishlist, isInWishlist, removeItem: removeFromWishlist } = useWishlistStore();
 
-  let filteredProducts = [...products];
-
-  if (categoryParam) {
-    filteredProducts = filteredProducts.filter((p) => p.category_slug === categoryParam);
-  }
-  if (searchParam) {
-    filteredProducts = filteredProducts.filter(
-      (p) =>
-        p.name.toLowerCase().includes(searchParam.toLowerCase()) ||
-        p.description.toLowerCase().includes(searchParam.toLowerCase())
-    );
-  }
-
-  filteredProducts = filteredProducts.filter(
+  const filteredProducts = products.filter(
     (p) => p.price >= priceRange[0] && p.price <= priceRange[1]
   );
 
-  switch (sortBy) {
-    case 'price-low':
-      filteredProducts.sort((a, b) => a.price - b.price);
-      break;
-    case 'price-high':
-      filteredProducts.sort((a, b) => b.price - a.price);
-      break;
-    case 'rating':
-      filteredProducts.sort((a, b) => b.rating - a.rating);
-      break;
-    default:
-      filteredProducts.sort((a, b) => (b.is_featured ? 1 : 0) - (a.is_featured ? 1 : 0));
-  }
-
   const selectedCategory = categories.find((c) => c.slug === categoryParam);
 
-  const handleAddToCart = (product: typeof products[0]) => {
+  const handleAddToCart = (product: Product) => {
     addToCart(product, 1);
     toast.success(`Added ${product.name} to cart! 🍎`, {
       style: {
@@ -62,7 +44,7 @@ export default function ProductListPage() {
     });
   };
 
-  const handleWishlistToggle = (product: typeof products[0]) => {
+  const handleWishlistToggle = (product: Product) => {
     if (isInWishlist(product.id)) {
       removeFromWishlist(product.id);
       toast('Removed from wishlist', { icon: '🤍' });
@@ -74,7 +56,7 @@ export default function ProductListPage() {
 
   const clearAllFilters = () => {
     setSearchParams({});
-    setPriceRange([0, 2000]);
+    setPriceRange([0, 5000]);
     setSortBy('featured');
   };
 
@@ -210,7 +192,17 @@ export default function ProductListPage() {
         {/* ─────────────────────────────────────────────────────────────
             PRODUCT GRID / LIST VIEW
            ───────────────────────────────────────────────────────────── */}
-        {filteredProducts.length === 0 ? (
+        {isLoading ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[...Array(8)].map((_, idx) => (
+              <div key={idx} className="bg-white rounded-2xl border border-border-light p-4 animate-pulse">
+                <div className="aspect-square bg-background-tertiary rounded-xl mb-4" />
+                <div className="h-4 bg-background-tertiary rounded w-3/4 mb-2" />
+                <div className="h-3 bg-background-tertiary rounded w-1/2" />
+              </div>
+            ))}
+          </div>
+        ) : filteredProducts.length === 0 ? (
           <div className="text-center py-20 bg-white rounded-3xl border border-border-light shadow-sm">
             <ShoppingBag className="w-12 h-12 text-text-light mx-auto mb-4" />
             <h3 className="font-heading text-xl font-bold text-text-primary mb-2">
