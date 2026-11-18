@@ -2,7 +2,10 @@
 // Tracks page views, product impressions, cart changes, and checkout milestones
 
 export type TrackingEvent =
-  | { type: 'page_view'; path: string; title: string; timestamp: number }
+  | { type: 'page_view'; path: string; title: string; timestamp?: number }
+  | { type: 'page_dwell'; path: string; seconds: number }
+  | { type: 'scroll_depth'; path: string; percent: number }
+  | { type: 'user_click'; element: string; label: string; path: string; timestamp?: number }
   | { type: 'product_view'; productId: number; slug: string; name: string; price: number }
   | { type: 'add_to_cart'; productId: number; name: string; quantity: number; price: number }
   | { type: 'remove_from_cart'; productId: number }

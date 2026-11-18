@@ -25,10 +25,6 @@ INSTALLED_APPS = [
     "django_filters",
     "djoser",
     "django_redis",
-    "django_celery_beat",
-    "django.contrib.postgres",
-    "django_elasticsearch_dsl",
-    "drf_spectacular",
 
     "apps.accounts",
     "apps.products",
@@ -43,6 +39,18 @@ INSTALLED_APPS = [
     "apps.content",
     "apps.api",
 ]
+
+try:
+    import django_celery_beat
+    INSTALLED_APPS.append("django_celery_beat")
+except ImportError:
+    pass
+
+try:
+    import django_elasticsearch_dsl
+    INSTALLED_APPS.append("django_elasticsearch_dsl")
+except ImportError:
+    pass
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",

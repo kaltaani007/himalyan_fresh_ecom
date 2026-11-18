@@ -5,7 +5,8 @@ import { Grid, List, Star, ShoppingBag, Heart, X, RotateCcw } from 'lucide-react
 import { useProducts } from '@/hooks/useProducts';
 import { useCategories } from '@/hooks/useCategories';
 import type { Product } from '@/types';
-import { useCartStore, useWishlistStore } from '@/store';
+import { useCartStore, useWishlistStore, useAuthStore } from '@/store';
+import { useAuthModalStore } from '@/store/authModalStore';
 import { PriceDisplay } from '@/components/ui/PriceDisplay';
 import toast from 'react-hot-toast';
 
@@ -26,6 +27,8 @@ export default function ProductListPage() {
 
   const { addItem: addToCart } = useCartStore();
   const { addItem: addToWishlist, isInWishlist, removeItem: removeFromWishlist } = useWishlistStore();
+  const { isAuthenticated } = useAuthStore();
+  const { openAuthModal } = useAuthModalStore();
 
   const filteredProducts = products.filter(
     (p) => p.price >= priceRange[0] && p.price <= priceRange[1]
@@ -34,6 +37,18 @@ export default function ProductListPage() {
   const selectedCategory = categories.find((c) => c.slug === categoryParam);
 
   const handleAddToCart = (product: Product) => {
+    if (!isAuthenticated) {
+      openAuthModal({
+        title: 'Sign In to Add to Basket',
+        subtitle: `Sign in to add ${product.name} to your basket and enjoy farm-fresh discounts!`,
+        onSuccess: () => {
+          addToCart(product, 1);
+          toast.success(`Added ${product.name} to cart! 🍎`);
+        },
+      });
+      return;
+    }
+
     addToCart(product, 1);
     toast.success(`Added ${product.name} to cart! 🍎`, {
       style: {
@@ -45,6 +60,18 @@ export default function ProductListPage() {
   };
 
   const handleWishlistToggle = (product: Product) => {
+    if (!isAuthenticated) {
+      openAuthModal({
+        title: 'Sign In for Wishlist',
+        subtitle: 'Sign in to save your favorite orchard harvest.',
+        onSuccess: () => {
+          addToWishlist(product);
+          toast.success('Saved to wishlist! ❤️');
+        },
+      });
+      return;
+    }
+
     if (isInWishlist(product.id)) {
       removeFromWishlist(product.id);
       toast('Removed from wishlist', { icon: '🤍' });

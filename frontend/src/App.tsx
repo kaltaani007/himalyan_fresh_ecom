@@ -12,6 +12,8 @@ import WishlistPage from '@/pages/profile/WishlistPage';
 import CheckoutPage from '@/pages/checkout/CheckoutPage';
 import LoginPage from '@/pages/auth/LoginPage';
 import RegisterPage from '@/pages/auth/RegisterPage';
+import ForgotPasswordPage from '@/pages/auth/ForgotPasswordPage';
+import ProtectedRoute from '@/components/auth/ProtectedRoute';
 import ProfilePage from '@/pages/profile/ProfilePage';
 import OrdersPage from '@/pages/profile/OrdersPage';
 import AboutPage from '@/pages/about/AboutPage';
@@ -40,16 +42,59 @@ export default function App() {
             <Route path="blogs/:slug" element={<BlogDetailPage />} />
             <Route path="districts" element={<DistrictPage />} />
             <Route path="districts/:slug" element={<DistrictPage />} />
-            <Route path="cart" element={<CartPage />} />
-            <Route path="wishlist" element={<WishlistPage />} />
-            <Route path="checkout" element={<CheckoutPage />} />
+            <Route
+              path="cart"
+              element={
+                <ProtectedRoute title="Sign In for Your Basket" subtitle="Please sign in to view and manage items in your orchard cart.">
+                  <CartPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="wishlist"
+              element={
+                <ProtectedRoute title="Sign In for Saved Items" subtitle="Sign in to view your favorite organic harvest and apple varieties.">
+                  <WishlistPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="checkout"
+              element={
+                <ProtectedRoute title="Sign In for Checkout" subtitle="Sign in to proceed with secure cold-chain checkout and delivery.">
+                  <CheckoutPage />
+                </ProtectedRoute>
+              }
+            />
             <Route path="login" element={<LoginPage />} />
             <Route path="register" element={<RegisterPage />} />
-            <Route path="profile" element={<ProfilePage />} />
-            <Route path="orders" element={<OrdersPage />} />
+            <Route path="forgot-password" element={<ForgotPasswordPage />} />
+            <Route
+              path="profile"
+              element={
+                <ProtectedRoute title="Sign In for Account Profile" subtitle="Sign in to manage your orchard addresses and personal information.">
+                  <ProfilePage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="orders"
+              element={
+                <ProtectedRoute title="Sign In for Order Tracking" subtitle="Sign in to view your order history and live cold-chain shipments.">
+                  <OrdersPage />
+                </ProtectedRoute>
+              }
+            />
             <Route path="about" element={<AboutPage />} />
             <Route path="contact" element={<ContactPage />} />
-            <Route path="media-manager" element={<MediaManagerPage />} />
+            <Route
+              path="media-manager"
+              element={
+                <ProtectedRoute title="Sign In for Media Studio" subtitle="Admin and staff authentication required to manage orchard media.">
+                  <MediaManagerPage />
+                </ProtectedRoute>
+              }
+            />
           </Route>
         </Routes>
       </BrowserRouter>

@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, ShoppingBag, Heart, User, Menu, X, ChevronDown, Leaf } from 'lucide-react';
+import { Search, ShoppingBag, Heart, User, Menu, ChevronDown, Leaf } from 'lucide-react';
 import { useCategories } from '@/hooks/useCategories';
 import { useDistricts } from '@/hooks/useDistricts';
 import { useCartStore, useWishlistStore, useAuthStore } from '@/store';
+import { useAuthModalStore } from '@/store/authModalStore';
+import GlobalDrawer from './GlobalDrawer';
 import HFLogo from '@/assets/images/logo/himalayan_fresh_logo.png';
 
 export default function Navbar() {
@@ -12,6 +14,7 @@ export default function Navbar() {
   const { data: districts = [] } = useDistricts();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isGlobalDrawerOpen, setIsGlobalDrawerOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
@@ -22,6 +25,7 @@ export default function Navbar() {
   const { items: cartItems } = useCartStore();
   const { items: wishlistItems } = useWishlistStore();
   const { user, isAuthenticated } = useAuthStore();
+  const { openAuthModal } = useAuthModalStore();
 
   const cartCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
   const wishlistCount = wishlistItems.length;
@@ -73,25 +77,37 @@ export default function Navbar() {
       >
         <div className="max-w-container mx-auto px-4 sm:px-6 lg:px-10">
           <div className="flex items-center justify-between h-16 sm:h-20">
-            {/* 1. BRAND LOGO EMBLEM */}
-            <Link to="/" className="flex items-center gap-3 group shrink-0">
-              <div className="w-10 h-10 sm:w-11 sm:h-11 flex items-center justify-center transition-transform group-hover:scale-105">
-                <img
-                  src={HFLogo}
-                  alt="Himalaya Fresh Logo"
-                  className="w-full h-full object-contain drop-shadow-xs"
-                />
-              </div>
+            {/* 1. BRAND LOGO EMBLEM + GLOBAL AMAZON/FLIPKART DRAWER TRIGGER */}
+            <div className="flex items-center gap-3 sm:gap-4 shrink-0">
+              <button
+                type="button"
+                onClick={() => setIsGlobalDrawerOpen(true)}
+                className="flex items-center gap-1.5 px-2.5 py-1.5 sm:px-3 sm:py-1.5 rounded-xl bg-[#EAF1E7] hover:bg-[#DCE7D8] text-[#173D29] text-xs font-bold transition-all border border-[#D0E2CC] cursor-pointer shadow-xs active:scale-95"
+                title="All Categories &amp; Orchards"
+              >
+                <Menu className="w-4 h-4 stroke-[2.5]" />
+                <span className="hidden sm:inline">All</span>
+              </button>
 
-              <div className="leading-tight flex flex-col justify-center">
-                <span className="font-heading font-extrabold text-xl sm:text-[22px] text-[#173D29] tracking-tight">
-                  Himalaya
-                </span>
-                <span className="font-heading font-medium text-xs sm:text-[13px] text-[#34593C] tracking-[0.2em] uppercase -mt-0.5">
-                  Fresh
-                </span>
-              </div>
-            </Link>
+              <Link to="/" className="flex items-center gap-2.5 sm:gap-3 group">
+                <div className="w-9 h-9 sm:w-11 sm:h-11 flex items-center justify-center transition-transform group-hover:scale-105">
+                  <img
+                    src={HFLogo}
+                    alt="Himalaya Fresh Logo"
+                    className="w-full h-full object-contain drop-shadow-xs"
+                  />
+                </div>
+
+                <div className="leading-tight flex flex-col justify-center">
+                  <span className="font-heading font-extrabold text-xl sm:text-[22px] text-[#173D29] tracking-tight">
+                    Himalaya
+                  </span>
+                  <span className="font-heading font-medium text-xs sm:text-[13px] text-[#34593C] tracking-[0.2em] uppercase -mt-0.5">
+                    Fresh
+                  </span>
+                </div>
+              </Link>
+            </div>
 
             {/* 2. CENTER FLOATING NAVIGATION BAR */}
             <nav className="hidden xl:flex items-center gap-6 2xl:gap-8">
@@ -117,7 +133,7 @@ export default function Navbar() {
                     : 'text-[#2D4536] hover:text-[#173D29]'
                 }`}
               >
-                Orchard Shop
+                Shop
               </Link>
 
               {/* Categories Dropdown */}
@@ -231,13 +247,14 @@ export default function Navbar() {
                   </div>
                 </Link>
               ) : (
-                <Link
-                  to="/login"
-                  className="p-1 text-[#2C4A35] hover:text-[#173D29] transition-colors"
+                <button
+                  type="button"
+                  onClick={() => openAuthModal({ title: 'Sign In to Your Account' })}
+                  className="p-1 text-[#2C4A35] hover:text-[#173D29] transition-colors cursor-pointer"
                   aria-label="Sign In"
                 >
                   <User className="w-5 h-5 stroke-[2.2]" />
-                </Link>
+                </button>
               )}
 
               {/* Wishlist Link with Live Badge */}
@@ -269,11 +286,11 @@ export default function Navbar() {
               {/* Mobile Menu Hamburger */}
               <button
                 type="button"
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                onClick={() => setIsGlobalDrawerOpen(true)}
                 className="xl:hidden p-1 text-[#173D29] cursor-pointer ml-1"
-                aria-label="Toggle navigation"
+                aria-label="Open drawer menu"
               >
-                {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                <Menu className="w-6 h-6" />
               </button>
             </div>
           </div>
@@ -438,6 +455,12 @@ export default function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Global Amazon/Flipkart Style Drawer */}
+      <GlobalDrawer
+        isOpen={isGlobalDrawerOpen}
+        onClose={() => setIsGlobalDrawerOpen(false)}
+      />
     </>
   );
 }

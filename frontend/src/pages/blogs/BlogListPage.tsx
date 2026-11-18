@@ -27,9 +27,16 @@ export default function BlogListPage() {
               <Link to={`/blogs/${blog.slug}`} className="card-premium group block">
                 <div className="relative h-56 overflow-hidden rounded-t-3xl">
                   <img src={blog.image} alt={blog.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                  <div className="absolute top-4 left-4 flex gap-2">
-                    <span className="badge badge-pine">{blog.category.name}</span>
-                    {blog.is_trending && <span className="badge badge-accent">Trending</span>}
+                   <div className="absolute top-4 left-4 flex gap-2">
+                    <span className="badge bg-white text-gray-800 border border-gray-200">
+                      {blog.category.name}
+                    </span>
+
+                    {blog.is_trending && (
+                      <span className="badge bg-white text-gray-800 border border-gray-200">
+                        Trending
+                      </span>
+                    )}
                   </div>
                 </div>
                 <div className="p-6">

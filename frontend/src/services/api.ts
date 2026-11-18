@@ -155,15 +155,22 @@ export const wishlistApi = {
 export const authApi = {
   login: (email: string, password: string) =>
     api.post('/auth/login/', { email, password }),
-  register: (data: { email: string; password: string; first_name: string; last_name: string }) =>
+  register: (data: { email: string; password: string; password_confirm?: string; first_name?: string; last_name?: string; username?: string }) =>
     api.post('/auth/register/', data),
   logout: () => api.post('/auth/logout/'),
   me: () => api.get('/auth/me/'),
   updateProfile: (data: any) => api.patch('/auth/me/', data),
   changePassword: (oldPassword: string, newPassword: string) =>
     api.post('/auth/change-password/', { old_password: oldPassword, new_password: newPassword }),
-  googleLogin: (accessToken: string) =>
-    api.post('/auth/google/', { access_token: accessToken }),
+  googleLogin: (payload: {
+    credential?: string;
+    id_token?: string;
+    access_token?: string;
+    email?: string;
+    name?: string;
+    picture?: string;
+    avatar?: string;
+  }) => api.post('/auth/google/', payload),
 };
 
 // Orders API

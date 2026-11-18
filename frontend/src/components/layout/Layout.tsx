@@ -6,10 +6,16 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 import { Toaster } from 'react-hot-toast';
 import { trackEvent } from '@/lib/analytics';
+import { useActivityTracker } from '@/hooks/useActivityTracker';
+import AuthPromptModal from '@/components/auth/AuthPromptModal';
 import { LiveActivityTicker } from '@/components/ui/LiveActivityTicker';
 
 export default function Layout() {
   const location = useLocation();
+
+  // Global In-Page Activity Tracking Hook
+  useActivityTracker();
+
   const [isAIOpen, setIsAIOpen] = useState(false);
   const [aiMessages, setAiMessages] = useState<{ role: string; content: string }[]>([
     {
@@ -80,6 +86,19 @@ export default function Layout() {
     'Shipping delivery timeline',
     'Best-selling dry fruits',
   ];
+
+  const isAuthPage =
+    location.pathname === '/login' ||
+    location.pathname === '/register' ||
+    location.pathname === '/forgot-password';
+
+  if (isAuthPage) {
+    return (
+      <div className="min-h-screen">
+        <Outlet />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen flex flex-col bg-background-primary">
@@ -237,6 +256,9 @@ export default function Layout() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Global Auth Sign In / Sign Up Modal */}
+      <AuthPromptModal />
 
       <Toaster
         position="bottom-right"

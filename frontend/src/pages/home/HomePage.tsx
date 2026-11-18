@@ -21,7 +21,8 @@ import { useDistricts } from '@/hooks/useDistricts';
 import { useTestimonials } from '@/hooks/useTestimonials';
 import { newsletterApi } from '@/services/api';
 import type { Product } from '@/types';
-import { useCartStore, useWishlistStore } from '@/store';
+import { useCartStore, useWishlistStore, useAuthStore } from '@/store';
+import { useAuthModalStore } from '@/store/authModalStore';
 import { PriceDisplay } from '@/components/ui/PriceDisplay';
 import { MountainTerrain, AppleVariety } from '@/components/three';
 import { HeroInteractiveApple } from '@/components/home/HeroInteractiveApple';
@@ -41,12 +42,26 @@ export default function HomePage() {
 
   const { addItem: addToCart } = useCartStore();
   const { addItem: addToWishlist, isInWishlist, removeItem: removeFromWishlist } = useWishlistStore();
+  const { isAuthenticated } = useAuthStore();
+  const { openAuthModal } = useAuthModalStore();
 
   const featuredProducts = featuredData.slice(0, 4);
 
   const handleAddToCart = (product: Product) => {
+    if (!isAuthenticated) {
+      openAuthModal({
+        title: 'Sign In to Add to Basket',
+        subtitle: `Sign in to add ${product.name} to your basket!`,
+        onSuccess: () => {
+          addToCart(product, 1);
+          toast.success(`Added ${product.name} to cart! 🍎`);
+        },
+      });
+      return;
+    }
+
     addToCart(product, 1);
-    toast.success(`Added ${product.name} to cart! `, {
+    toast.success(`Added ${product.name} to cart! 🍎`, {
       style: {
         background: '#1e4631',
         color: '#ffffff',
@@ -152,7 +167,7 @@ export default function HomePage() {
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 backdrop-blur-md border border-[#D3E0CA] shadow-xs text-xs sm:text-sm font-medium text-[#294B32]"
               >
                 <Leaf className="w-3.5 h-3.5 text-[#54823E] fill-[#54823E]" />
-                <span>Harvest Season 2024 · Fresh from Himalayas</span>
+                <span>Harvest Season 2026 · Fresh from Himalayas</span>
                 <span className="w-2 h-2 rounded-full bg-[#6CA244] animate-pulse ml-0.5" />
               </motion.div>
 
@@ -331,7 +346,6 @@ export default function HomePage() {
               {/* Interactive Drag Hint Pill */}
               <div className="absolute bottom-4 z-20 px-4 py-1.5 rounded-full bg-white/75 backdrop-blur-md border border-white/80 shadow-xs text-[11px] font-semibold text-[#305238] flex items-center gap-1.5 pointer-events-none">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#52823C] animate-ping" />
-                <span>Drag or hover to rotate in 3D</span>
               </div>
             </motion.div>
           </div>
@@ -471,7 +485,7 @@ export default function HomePage() {
                   </button>
                   {/* Origin Terroir Pill */}
                   <div className="absolute bottom-3 left-3 bg-white/95 backdrop-blur-sm px-2.5 py-1 rounded-md text-[11px] font-semibold text-text-primary shadow-sm">
-                    📍 {product.origin} Valley
+                    {product.origin} Valley
                   </div>
                 </div>
 
@@ -689,11 +703,11 @@ export default function HomePage() {
       {/* ─────────────────────────────────────────────────────────────
           8. HARVEST DISPATCH NEWSLETTER
          ───────────────────────────────────────────────────────────── */}
-      <section className="py-20 bg-primary text-white relative overflow-hidden">
+      <section className="py-20 bg-primary-700 text-white relative overflow-hidden">
         <div className="max-w-container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-2xl mx-auto text-center space-y-5">
             <Mountain className="w-12 h-12 text-accent mx-auto" />
-            <h2 className="font-heading text-3xl sm:text-4xl font-bold tracking-tight">
+            <h2 className="font-heading text-3xl sm:text-4xl font-bold tracking-tight text-white">
               Get the Himalayan Harvest Dispatch
             </h2>
             <p className="text-cream-100/90 text-sm sm:text-base leading-relaxed">
@@ -719,9 +733,7 @@ export default function HomePage() {
                 {isSubscribing ? 'Subscribing...' : 'Subscribe'}
               </button>
             </form>
-            <p className="text-xs text-cream-200/70">
-              Zero spam. Unsubscribe anytime with 1 click.
-            </p>
+            
           </div>
         </div>
       </section>

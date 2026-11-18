@@ -13,7 +13,8 @@ import {
   ImageIcon,
 } from 'lucide-react';
 import { useProductBySlug, useRelatedProducts } from '@/hooks/useProducts';
-import { useCartStore, useWishlistStore } from '@/store';
+import { useCartStore, useWishlistStore, useAuthStore } from '@/store';
+import { useAuthModalStore } from '@/store/authModalStore';
 import { PriceDisplay } from '@/components/ui/PriceDisplay';
 import { QuantityStepper } from '@/components/ui/QuantityStepper';
 import { AppleVarietiesShowcase, AppleVariety } from '@/components/three';
@@ -30,6 +31,8 @@ export default function ProductDetailPage() {
 
   const { addItem: addToCart } = useCartStore();
   const { addItem: addToWishlist, isInWishlist, removeItem: removeFromWishlist } = useWishlistStore();
+  const { isAuthenticated } = useAuthStore();
+  const { openAuthModal } = useAuthModalStore();
 
   if (isLoading) {
     return (
@@ -70,6 +73,18 @@ export default function ProductDetailPage() {
   const activeVariety = getVarietyFromSlug(product.slug);
 
   const handleAddToCart = () => {
+    if (!isAuthenticated) {
+      openAuthModal({
+        title: 'Sign In to Add to Basket',
+        subtitle: `Sign in to add ${quantity} × ${product.name} to your basket!`,
+        onSuccess: () => {
+          addToCart(product, quantity);
+          toast.success(`Added ${quantity} × ${product.name} to cart! 🍎`);
+        },
+      });
+      return;
+    }
+
     addToCart(product, quantity);
     toast.success(`Added ${quantity} × ${product.name} to cart! 🍎`, {
       style: {
@@ -81,6 +96,18 @@ export default function ProductDetailPage() {
   };
 
   const handleWishlist = () => {
+    if (!isAuthenticated) {
+      openAuthModal({
+        title: 'Sign In for Wishlist',
+        subtitle: 'Sign in to save this apple harvest to your wishlist.',
+        onSuccess: () => {
+          addToWishlist(product);
+          toast.success('Added to wishlist! ❤️');
+        },
+      });
+      return;
+    }
+
     if (isInWishlist(product.id)) {
       removeFromWishlist(product.id);
       toast('Removed from wishlist', { icon: '🤍' });

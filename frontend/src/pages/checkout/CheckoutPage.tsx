@@ -11,31 +11,41 @@ import {
   Sparkles,
   Lock,
 } from 'lucide-react';
-import { useCartStore } from '@/store';
+import { useCartStore, useAuthStore } from '@/store';
 import { formatPrice } from '@/lib/utils';
 import { trackEvent } from '@/lib/analytics';
+import { QrCode } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 export default function CheckoutPage() {
   const navigate = useNavigate();
   const { items, getTotal, getDiscount, getFinalTotal, appliedCoupon, clearCart } = useCartStore();
+  const { user } = useAuthStore();
 
   const [currentStep, setCurrentStep] = useState<1 | 2 | 3>(1);
   const [isProcessing, setIsProcessing] = useState(false);
   const [timeLeft, setTimeLeft] = useState(900); // 15-minute stock reservation countdown
 
-  // Form states
+  // Form states (Pre-fill with user data if available)
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    phone: '',
+    firstName: user?.first_name || user?.name?.split(' ')[0] || '',
+    lastName: user?.last_name || (user?.name?.split(' ').length ? user?.name?.split(' ').slice(1).join(' ') : '') || '',
+    email: user?.email || '',
+    phone: user?.phone || '',
     address: '',
-    city: '',
+    city: 'Shimla',
     state: 'Himachal Pradesh',
-    pincode: '',
+    pincode: '171001',
     deliveryMethod: 'express',
-    paymentMethod: 'card',
+    paymentMethod: 'upi',
+    // Card inputs
+    cardNumber: '',
+    cardExpiry: '',
+    cardCvv: '',
+    cardHolder: user?.name || '',
+    // UPI inputs
+    upiId: '',
+    showQr: false,
   });
 
   // 15-minute countdown timer effect
@@ -78,10 +88,54 @@ export default function CheckoutPage() {
       trackEvent({ type: 'checkout_step', step: 3, stepName: 'Payment Method', cartTotal: finalTotal });
       setCurrentStep(3);
     } else if (currentStep === 3) {
+      // Validate payment method specifics
+      if (formData.paymentMethod === 'card' && (!formData.cardNumber || !formData.cardExpiry || !formData.cardCvv)) {
+        toast.error('Please enter all credit/debit card details');
+        return;
+      }
+      if (formData.paymentMethod === 'upi' && !formData.showQr && !formData.upiId) {
+        toast.error('Please enter your UPI ID or choose QR code scan');
+        return;
+      }
+
       // Final Order Placement
       setIsProcessing(true);
       setTimeout(() => {
-        const orderNumber = `HF-${Date.now().toString().slice(-6)}`;
+        const orderNumber = `HF-${new Date().getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`;
+        const orderRecord = {
+          id: Date.now(),
+          order_number: orderNumber,
+          date: new Date().toISOString().split('T')[0],
+          total: finalTotal,
+          status: 'processing',
+          items: items.length,
+          itemsList: items.map((i) => ({
+            id: i.product.id,
+            name: i.product.name,
+            quantity: i.quantity,
+            price: i.price,
+            image: i.product.images?.[0]?.image || '',
+          })),
+          shippingAddress: {
+            name: `${formData.firstName} ${formData.lastName}`.trim(),
+            address: formData.address,
+            city: formData.city,
+            state: formData.state,
+            pincode: formData.pincode,
+            phone: formData.phone,
+          },
+          deliveryMethod: formData.deliveryMethod,
+          paymentMethod: formData.paymentMethod,
+        };
+
+        // Persist order in local storage for instant dynamic viewing in OrdersPage
+        try {
+          const existing = JSON.parse(localStorage.getItem('hf_user_orders') || '[]');
+          localStorage.setItem('hf_user_orders', JSON.stringify([orderRecord, ...existing]));
+        } catch (e) {
+          // ignore
+        }
+
         trackEvent({
           type: 'order_placed',
           orderNumber,
@@ -91,11 +145,11 @@ export default function CheckoutPage() {
 
         clearCart();
         setIsProcessing(false);
-        toast.success(`Order #${orderNumber} placed successfully! 🏔️`, {
+        toast.success(`Order #${orderNumber} placed & confirmed! 🏔️`, {
           duration: 5000,
         });
         navigate('/orders');
-      }, 1500);
+      }, 1600);
     }
   };
 
@@ -386,46 +440,141 @@ export default function CheckoutPage() {
                   </h2>
 
                   <div className="space-y-3">
-                    <label className="flex items-center gap-4 p-4 border border-border-medium rounded-2xl cursor-pointer hover:border-primary transition-all">
-                      <input
-                        type="radio"
-                        name="paymentMethod"
-                        value="card"
-                        checked={formData.paymentMethod === 'card'}
-                        onChange={handleInputChange}
-                        className="w-4 h-4 text-primary"
-                      />
-                      <CreditCard className="w-5 h-5 text-primary" />
-                      <div className="flex-1">
-                        <span className="font-bold text-sm text-text-primary block">
-                          Credit / Debit Card (Stripe Encrypted)
-                        </span>
-                        <span className="text-xs text-text-secondary">
-                          Visa, Mastercard, RuPay, Amex accepted.
-                        </span>
-                      </div>
-                    </label>
+                    {/* Card Option */}
+                    <div className="border border-border-medium rounded-2xl p-4 transition-all hover:border-primary">
+                      <label className="flex items-center gap-4 cursor-pointer">
+                        <input
+                          type="radio"
+                          name="paymentMethod"
+                          value="card"
+                          checked={formData.paymentMethod === 'card'}
+                          onChange={handleInputChange}
+                          className="w-4 h-4 text-primary"
+                        />
+                        <CreditCard className="w-5 h-5 text-primary" />
+                        <div className="flex-1">
+                          <span className="font-bold text-sm text-text-primary block">
+                            Credit / Debit Card (Instant Authorization)
+                          </span>
+                          <span className="text-xs text-text-secondary">
+                            Visa, Mastercard, RuPay &amp; Amex with 256-bit encryption.
+                          </span>
+                        </div>
+                      </label>
 
-                    <label className="flex items-center gap-4 p-4 border border-border-medium rounded-2xl cursor-pointer hover:border-primary transition-all">
-                      <input
-                        type="radio"
-                        name="paymentMethod"
-                        value="upi"
-                        checked={formData.paymentMethod === 'upi'}
-                        onChange={handleInputChange}
-                        className="w-4 h-4 text-primary"
-                      />
-                      <Sparkles className="w-5 h-5 text-accent" />
-                      <div className="flex-1">
-                        <span className="font-bold text-sm text-text-primary block">
-                          UPI / Net Banking (Razorpay Instant)
-                        </span>
-                        <span className="text-xs text-text-secondary">
-                          Google Pay, PhonePe, Paytm, BHIM or direct Net Banking.
-                        </span>
-                      </div>
-                    </label>
+                      {formData.paymentMethod === 'card' && (
+                        <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} className="pt-4 mt-3 border-t border-border-light space-y-3">
+                          <div>
+                            <label className="block text-xs font-semibold text-text-secondary mb-1">Card Number</label>
+                            <input
+                              type="text"
+                              name="cardNumber"
+                              value={formData.cardNumber}
+                              onChange={handleInputChange}
+                              placeholder="4111 2222 3333 4444"
+                              maxLength={19}
+                              className="input-field text-sm"
+                            />
+                          </div>
+                          <div className="grid grid-cols-2 gap-3">
+                            <div>
+                              <label className="block text-xs font-semibold text-text-secondary mb-1">Expiry (MM/YY)</label>
+                              <input
+                                type="text"
+                                name="cardExpiry"
+                                value={formData.cardExpiry}
+                                onChange={handleInputChange}
+                                placeholder="12/28"
+                                maxLength={5}
+                                className="input-field text-sm"
+                              />
+                            </div>
+                            <div>
+                              <label className="block text-xs font-semibold text-text-secondary mb-1">CVV</label>
+                              <input
+                                type="password"
+                                name="cardCvv"
+                                value={formData.cardCvv}
+                                onChange={handleInputChange}
+                                placeholder="•••"
+                                maxLength={4}
+                                className="input-field text-sm"
+                              />
+                            </div>
+                          </div>
+                        </motion.div>
+                      )}
+                    </div>
 
+                    {/* UPI Option */}
+                    <div className="border border-border-medium rounded-2xl p-4 transition-all hover:border-primary">
+                      <label className="flex items-center gap-4 cursor-pointer">
+                        <input
+                          type="radio"
+                          name="paymentMethod"
+                          value="upi"
+                          checked={formData.paymentMethod === 'upi'}
+                          onChange={handleInputChange}
+                          className="w-4 h-4 text-primary"
+                        />
+                        <Sparkles className="w-5 h-5 text-accent" />
+                        <div className="flex-1">
+                          <span className="font-bold text-sm text-text-primary block">
+                            UPI &amp; QR Code (Google Pay, PhonePe, Paytm)
+                          </span>
+                          <span className="text-xs text-text-secondary">
+                            Zero surcharge instant payment directly from bank.
+                          </span>
+                        </div>
+                      </label>
+
+                      {formData.paymentMethod === 'upi' && (
+                        <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} className="pt-4 mt-3 border-t border-border-light space-y-3">
+                          <div className="flex items-center gap-3">
+                            <input
+                              type="text"
+                              name="upiId"
+                              value={formData.upiId}
+                              onChange={handleInputChange}
+                              placeholder="Enter UPI ID (e.g. mobile@upi / yourname@okhdfc)"
+                              className="input-field text-sm flex-1"
+                            />
+                            <button
+                              type="button"
+                              onClick={() => setFormData({ ...formData, showQr: !formData.showQr })}
+                              className="px-3 py-2.5 rounded-xl border border-primary/30 text-primary text-xs font-semibold hover:bg-primary/5 flex items-center gap-1.5 cursor-pointer shrink-0"
+                            >
+                              <QrCode className="w-4 h-4" />
+                              <span>{formData.showQr ? 'Hide QR' : 'Show QR'}</span>
+                            </button>
+                          </div>
+
+                          {formData.showQr && (
+                            <div className="p-4 bg-[#F8FAF5] rounded-xl border border-[#E2ECE0] text-center space-y-2">
+                              <div className="w-36 h-36 mx-auto bg-white p-2 rounded-xl border border-gray-200 shadow-xs flex items-center justify-center">
+                                {/* Dynamic QR Code SVG */}
+                                <svg className="w-full h-full" viewBox="0 0 100 100">
+                                  <rect width="100" height="100" fill="white" />
+                                  <path d="M10 10h30v30h-30z M15 15v20h20v-20z M20 20h10v10h-10z" fill="#173D29" />
+                                  <path d="M60 10h30v30h-30z M65 15v20h20v-20z M70 20h10v10h-10z" fill="#173D29" />
+                                  <path d="M10 60h30v30h-30z M15 65v20h20v-20z M20 70h10v10h-10z" fill="#173D29" />
+                                  <rect x="45" y="10" width="10" height="20" fill="#173D29" />
+                                  <rect x="45" y="45" width="20" height="10" fill="#173D29" />
+                                  <rect x="70" y="45" width="10" height="20" fill="#173D29" />
+                                  <rect x="45" y="70" width="15" height="15" fill="#173D29" />
+                                  <rect x="65" y="75" width="20" height="15" fill="#173D29" />
+                                  <circle cx="50" cy="50" r="6" fill="#3D7A4F" />
+                                </svg>
+                              </div>
+                              <p className="text-xs font-semibold text-[#173D29]">Scan with Google Pay, PhonePe, or Paytm</p>
+                              <p className="text-[11px] text-[#6C8170]">UPI ID: himalayanfresh.harvest@icici</p>
+                            </div>
+                          )}
+                        </motion.div>
+                      )}
+                    </div>
+
+                    {/* Cash on Delivery */}
                     <label className="flex items-center gap-4 p-4 border border-border-medium rounded-2xl cursor-pointer hover:border-primary transition-all">
                       <input
                         type="radio"
@@ -441,7 +590,7 @@ export default function CheckoutPage() {
                           Cash on Delivery (COD)
                         </span>
                         <span className="text-xs text-text-secondary">
-                          Pay upon delivery inspection.
+                          Pay upon delivery inspection by cold-chain courier.
                         </span>
                       </div>
                     </label>

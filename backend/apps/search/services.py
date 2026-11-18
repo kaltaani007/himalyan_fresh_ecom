@@ -1,5 +1,9 @@
-from elasticsearch_dsl import Q
-from django_elasticsearch_dsl.search import Search
+try:
+    from elasticsearch_dsl import Q
+    from django_elasticsearch_dsl.search import Search
+except ImportError:
+    Q = None
+    Search = None
 from django.conf import settings
 import logging
 

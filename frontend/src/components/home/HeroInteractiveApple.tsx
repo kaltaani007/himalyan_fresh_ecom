@@ -290,7 +290,7 @@ export const HeroInteractiveApple: React.FC<HeroInteractiveAppleProps> = ({
                 alt={`${variety} Apple Showcase`}
                 className="w-full h-full object-cover transition-transform duration-300 ease-out"
                 style={{
-                  transform: `scale(${isHovered ? 1.05 : 1}) translate(${tilt.y * 0.4}px, ${-tilt.x * 0.4}px)`,
+                  transform: `scale(${isHovered ? 0.05 : 1}) translate(${tilt.y * 0.4}px, ${-tilt.x * 0.4}px)`,
                 }}
               />
             )}

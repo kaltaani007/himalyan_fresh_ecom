@@ -161,10 +161,20 @@ export const useWishlistStore = create<WishlistState>()(
   )
 );
 
+export interface UserData {
+  id: number;
+  email: string;
+  name: string;
+  avatar?: string;
+  first_name?: string;
+  last_name?: string;
+  phone?: string;
+}
+
 interface AuthState {
-  user: { id: number; email: string; name: string; avatar?: string } | null;
+  user: UserData | null;
   isAuthenticated: boolean;
-  login: (user: { id: number; email: string; name: string; avatar?: string }) => void;
+  login: (user: UserData) => void;
   logout: () => void;
 }
 
